@@ -1,0 +1,366 @@
+{
+    "name": "SukanRakyat FC",
+    "badgeEmoji": "⚡",
+    "coach": "Anaz",
+    "nextGame": 
+    {
+        "team": "SR Squad B",
+        "date" : "4 Feb 2026, Rabu (8:30 PM ~ 10:00 PM)",
+        "court" : "Court 7",
+        "participants": 
+        [
+			{ "id": "Matpiko", "rating": 6.0 },
+			{ "id": "Wanzans", "rating": 6.0 },
+            { "id": "Is Kandur", "rating": 6.0 },
+			{ "id": "Din Nger", "rating": 6.0 },
+            { "id": "Wan Akip", "rating": 6.0 },
+			{ "id": "Bin", "rating": 6.0 },
+            { "id": "Najmi", "rating": 6.0 },
+            { "id": "Din Slow", "rating": 6.0 },
+            { "id": "Kunai", "rating": 6.0 },
+            { "id": "Cakiaq", "rating": 6.0 }
+        ]
+    },
+
+    "players": [
+        {
+            "id": "Bin",
+            "name": "Bin",
+            "role": ["GK", "FW"],
+            "versions": {
+                "2026": 
+                {
+                    "image": "futsal/images/players/2026/Bin.png",
+                    "stats": 
+                    {
+                        "reflex": 57,
+                        "handling": 61,
+                        "positioning": 66,
+                        "physical": 40,
+                        "skillmove": 2
+                    },
+                    "style": "Pantang Rebah"
+                }
+            }
+            
+        },
+        {
+            "id": "Wan Akip",
+            "name": "Wan Akip",
+            "role": ["FW", "DEF"],
+                "versions": {
+                "2026": 
+                {
+                    "image": "futsal/images/players/2026/Wan Akip.png",
+                    "stats": 
+                    {
+                        "pace": 64,
+                        "shot": 76,
+                        "pass": 61,
+                        "dribbling": 33,
+                        "physical": 86,
+                        "accuaracy": 69,
+                        "skillmove": 1
+                    },
+                    "style": "Pakar back Heel"
+                }
+            }
+            
+        },
+        {
+            "id": "Din Nger",
+            "name": "Din Nger",
+            "role": ["FW", "MF"],
+            "versions": {
+                "2026": 
+                {
+                    "image": "futsal/images/players/2026/Din Nger.png",
+                    "stats": 
+                    {
+                        "pace": 73,
+                        "shot": 70,
+                        "pass": 67,
+                        "dribbling": 69,
+                        "physical": 71,
+                        "accuaracy": 78,
+                        "skillmove": 2
+                    },
+                    "style": "Kaki Pintas"
+                }
+            }
+            
+        },
+        {
+            "id": "Din Slow",
+            "name": "Din Slow",
+            "role": ["MF"],
+            "versions": {
+                "2026": 
+                {
+                    "image": "futsal/images/players/2026/Din Slow.png",
+                    "ovr": 82,
+                    "stats": 
+                    {
+                        "pace": 72,
+                        "shot": 59,
+                        "pass": 61,
+                        "dribbling": 85,
+                        "physical": 42,
+                        "accuaracy": 56,
+                        "skillmove": 2
+                    },
+                    "style": "Solo Cilaka"
+                }
+            }
+            
+        },
+        {
+            "id": "Aleppo",
+            "name": "Aleppo",
+            "role": ["MF"],
+            "versions": {
+                "2026": 
+                {
+                     "image": "futsal/images/players/2026/Aleppo.png",
+                    "ovr": 81,
+                    "stats": 
+                    {
+                        "pace": 66,
+                        "shot": 73,
+                        "pass": 79,
+                        "dribbling": 74,
+                        "physical": 77,
+                        "accuaracy": 82,
+                        "skillmove": 3
+                    },
+                    "style": "Kodok De Bryune"
+                }
+            }
+            
+        },
+        {
+            "id": "Najmi",
+            "name": "Najmi",
+            "role": ["FW","MF"],
+            "versions": {
+                "2026": 
+                {
+                    "image": "futsal/images/players/2026/Najmi.png",
+                    "stats": 
+                    {
+                        "pace": 89,
+                        "shot": 83,
+                        "pass": 76,
+                        "dribbling": 79,
+                        "physical": 80,
+                        "accuaracy": 86,
+                        "skillmove": 2
+                    },
+                    "style": "Dribbling cilaka"
+                }
+            }
+            
+        },
+        {
+            "id": "Is Kandur",
+            "name": "Is Kandur",
+            "role": ["DEF","MF"],
+            "versions": {
+                "2026": 
+                {
+                    "image": "futsal/images/players/2026/Is Kandur.png",
+                    "stats": 
+                    {
+                        "pace": 88,
+                        "shot": 69,
+                        "pass": 55,
+                        "dribbling": 38,
+                        "physical": 84,
+                        "accuaracy": 47,
+                        "skillmove": 1
+                    },
+                    "style": "King Sliding"
+                }
+            }
+            
+        },
+        {
+            "id": "Wanzans",
+            "name": "Wanzans",
+            "role": ["GK"],
+            "versions": {
+                "2026": 
+                {
+                    "image": "futsal/images/players/2026/Wanzans.png",
+                    "stats": 
+                    {
+                        "reflex": 43,
+                        "handling": 73,
+                        "positioning": 81,
+                        "physical": 83,
+                        "skillmove": 0
+                    },
+                    "style": "JarangOn"
+                }
+            }
+            
+        },
+        {
+            "id": "JatDek",
+            "name": "JatDek",
+            "role": ["FW","MF"],
+            "versions": {
+                "2026": 
+                {
+                    "image": "futsal/images/players/2026/JatDek.png",
+                    "stats": 
+                    {
+                        "pace": 23,
+                        "shot": 60,
+                        "pass": 84,
+                        "dribbling": 62,
+                        "physical": 31,
+                        "accuaracy": 66,
+                        "skillmove": 2
+                    },
+                    "style": "One-touch chaos"
+                }
+            }
+            
+        },
+        {
+            "id": "Anaz",
+            "name": "Anaz",
+            "role": ["Retired"],
+                "versions": {
+                "2026": 
+                {
+                    "image": "futsal/images/players/2026/Anaz.png",
+                    "stats": 
+                    {
+                        "pace": 18,
+                        "shot": 36,
+                        "pass": 34,
+                        "dribbling": 30,
+                        "physical": 87,
+                        "accuaracy": 47,
+                        "skillmove": 0
+                    },
+                    "style": "Penjaga barang"
+                }
+            }
+            
+        },
+        {
+            "id": "Amin Mus",
+            "name": "Amin Mus",
+            "role": ["Retired"],
+                "versions": {
+                "2026": 
+                {
+                    "image": "futsal/images/players/2026/Amin Mus.png",
+                    "ovr": 72,
+                    "stats": 
+                    {
+                        "pace": 44,
+                        "shot": 64,
+                        "pass": 57,
+                        "dribbling": 31,
+                        "physical": 90,
+                        "accuaracy": 29,
+                        "skillmove": 2
+                    },
+                    "style": "retired captain"
+                }
+            }
+            
+        },
+        {
+            "id": "Man Soya",
+            "name": "Man Soya",
+            "role": ["Retired"],
+            "versions": {
+                "2026": 
+                {
+                    "image": "futsal/images/players/2026/Man Soya.png",
+                    "ovr": 69,
+                    "stats": 
+                    {
+                        "pace": 56,
+                        "shot": 41,
+                        "pass": 29,
+                        "dribbling": 37,
+                        "physical": 61,
+                        "accuaracy": 22,
+                        "skillmove": 0
+                    },
+                    "style": "kaki Cangkoi"
+                }
+            }
+            
+        },
+        {
+            "id": "Matpiko",
+            "name": "Matpiko",
+            "role": ["FW", "MF"],
+            "versions": {
+                "2026": 
+                {
+                    "image": "futsal/images/players/2026/Matpiko.png",
+                    "ovr": 69,
+                    "stats": 
+                    {
+                        "pace": 68,
+                        "shot": 74,
+                        "pass": 72,
+                        "dribbling": 69,
+                        "physical": 44,
+                        "accuaracy": 80,
+                        "skillmove": 2
+                    },
+                    "style": "Ketenangan"
+                }
+            }
+            
+        }
+    ],
+
+
+    "matches": [
+        {
+            "team": "Team Counter",
+            "date": "Jan 17, 2026",
+            "ourGoals": 6,
+            "theirGoals": 14,
+            "participants": 
+            [
+                { "id": "Bin", "rating": 6.1 },
+                { "id": "Wan Akip", "rating": 8.0 },
+                { "id": "Din Slow", "rating": 5.7 },
+                { "id": "Najmi", "rating": 8.3 },
+                { "id": "Is Kandur", "rating": 6.4 },
+                { "id": "SyamilMienomi", "rating": 8.9 },
+                { "id": "Amin (adik Is)", "rating": 5.9 },
+                { "id": "Mus'ab (kawan adik is)", "rating": 5.9 }
+            ]
+        },
+		{
+			"team": "Team Junior",
+			"date" : "Jan 24, 2026",
+			"ourGoals": 14,
+            "theirGoals": 7,
+			"participants": 
+			[
+				{ "id": "Is Kandur", "rating": 7.8 },
+				{ "id": "Wan Akip", "rating": 7.7 },
+				{ "id": "Aleppo", "rating": 7.1 },
+				{ "id": "Najmi", "rating": 7.6 },
+				{ "id": "Bin", "rating": 7.9 },
+				{ "id": "Din Nger", "rating": 7.5 },
+				{ "id": "Amin (adik Is)", "rating": 7.2 },
+				{ "id": "LipNajmi (adik wan)", "rating": 8.7 },
+				{ "id": "madan RS", "rating": 8.4 }
+			]
+		}
+    ]
+}
