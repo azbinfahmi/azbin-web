@@ -1,0 +1,29 @@
+
+.show {
+  opacity: 1;
+}
+
+.glow {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 90vw;
+  height: 60vh;
+  /* background: radial-gradient(
+    ellipse at center,
+    rgba(0, 120, 255, 0.25) 10%,
+    rgba(80, 0, 255, 0.15) 100%,
+    transparent 70%
+  ); */
+  /* background: red; */
+  filter: blur(120px);
+  z-index: 1;
+}
+
+
+@media (max-width: 768px) {
+  .glow {
+    filter: blur(120px);
+  }
+}

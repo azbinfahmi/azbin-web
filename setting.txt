@@ -1,0 +1,28 @@
+
+❓ TypeScript?
+
+👉 Yes
+
+❓ ESLint?
+
+👉 Yes
+
+❓ Tailwind CSS?
+
+👉 No
+
+❓ src/ directory?
+
+👉 Yes
+
+❓ App Router?
+
+👉 No
+
+❓ Import alias?
+
+👉 Yes
+
+❓ Customize import alias?
+
+👉 Yes (keep @/*)

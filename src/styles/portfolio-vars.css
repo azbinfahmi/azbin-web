@@ -1,0 +1,30 @@
+body[data-portfolio="true"] {
+  --fg: #e5e7eb;
+  --muted: #9ca3af;
+  --bg-base: #0b0c10;
+  --bg-cool-soft: #0e1320;
+  --bg-cool-faint: #0c111b;
+
+  background:
+    radial-gradient(
+      900px 500px at 15% 8%,
+      var(--bg-cool-soft),
+      transparent 65%
+    ),
+    linear-gradient(
+      180deg,
+      var(--bg-cool-faint),
+      var(--bg-base)
+    );
+
+  color: var(--fg);
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body{
+  position: relative;
+}
