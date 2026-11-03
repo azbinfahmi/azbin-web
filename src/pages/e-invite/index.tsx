@@ -439,6 +439,10 @@ export default function EInvitePage() {
 
       {!opened && (
         <div className={`${styles.splash} ${hiding ? styles.splashHide : ''}`} onClick={open}>
+          <SongketStrip position="left" />
+          <SongketStrip position="right" />
+          <SongketStrip position="top" />
+          <SongketStrip position="bottom" />
           <div className={styles.splashContent}>
             <p className={styles.splashSub}>JEMPUTAN PERKAHWINAN</p>
             <span className={styles.splashMono}>AL</span>
@@ -457,9 +461,6 @@ export default function EInvitePage() {
         {/* ── SECTION 1: cover ── */}
         <div className={styles.cover}>
           <SongketStrip position="left" />
-          <SongketStrip position="right" />
-          <SongketStrip position="top" />
-          <SongketStrip position="bottom" />
           <Ornament size={26} className={`${styles.orn} ${styles.ornT1}`} />
           <Ornament size={22} className={`${styles.orn} ${styles.ornT2}`} />
           <Ornament size={26} className={`${styles.orn} ${styles.ornT3}`} />
