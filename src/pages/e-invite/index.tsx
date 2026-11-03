@@ -436,7 +436,7 @@ export default function EInvitePage() {
         </div>
       )}
 
-      <div className={`${styles.page} ${opened ? styles.pageReveal : ''}`}>
+      <div className={styles.page}>
 
         {/* ── SECTION 1: cover ── */}
         <div className={styles.cover}>
@@ -451,21 +451,21 @@ export default function EInvitePage() {
           <Ornament size={22} className={`${styles.orn} ${styles.ornB3}`} />
 
           <div className={styles.content}>
-            <h2 className={`${styles.majlis} ${styles.coverItem1}`}>MAJLIS</h2>
-            <h2 className={`${styles.perkahwinan} ${styles.coverItem2}`}>PERKAHWINAN</h2>
-            <div className={styles.coverItem3}><Divider /></div>
-            <span className={`${styles.monogramWrap} ${styles.coverItem4}`}>
+            <h2 className={`${styles.majlis} ${opened ? styles.coverItem1 : styles.coverHidden}`}>MAJLIS</h2>
+            <h2 className={`${styles.perkahwinan} ${opened ? styles.coverItem2 : styles.coverHidden}`}>PERKAHWINAN</h2>
+            <div className={opened ? styles.coverItem3 : styles.coverHidden}><Divider /></div>
+            <span className={`${styles.monogramWrap} ${opened ? styles.coverItem4 : styles.coverHidden}`}>
               <span className={styles.monoFirst}>A</span>
               <span className={styles.monoSecond}>L</span>
             </span>
-            <div className={`${styles.namesRow} ${styles.coverItem5}`}>
+            <div className={`${styles.namesRow} ${opened ? styles.coverItem5 : styles.coverHidden}`}>
               <Ornament size={20} className={styles.ornInline} />
               <h1 className={styles.names}>AZBIN &amp; LIN</h1>
             </div>
-            <div className={styles.coverItem6}><Divider /></div>
-            <div className={styles.coverItem7}><SlotDate /></div>
-            <p className={`${styles.hijri} ${styles.coverItem8}`}>30 Rejab 1448H</p>
-            <p className={`${styles.venue} ${styles.coverItem9}`}>Damai Homestay, Sungai Petani</p>
+            <div className={opened ? styles.coverItem6 : styles.coverHidden}><Divider /></div>
+            <div className={opened ? styles.coverItem7 : styles.coverHidden}><SlotDate /></div>
+            <p className={`${styles.hijri} ${opened ? styles.coverItem8 : styles.coverHidden}`}>30 Rejab 1448H</p>
+            <p className={`${styles.venue} ${opened ? styles.coverItem9 : styles.coverHidden}`}>Damai Homestay, Sungai Petani</p>
           </div>
         </div>
 
