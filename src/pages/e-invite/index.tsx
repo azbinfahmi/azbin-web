@@ -473,8 +473,8 @@ export default function EInvitePage() {
             <p className={d.venueName}><span className={d.venuePin}>📍</span>Damai Homestay</p>
             <p className={d.venueAddr}>Lot 843, Jalan Sg Jagong,<br />Sg Layar</p>
           </div>
-          <Countdown />
         </div>
+          <Countdown />
         </div>
 
         {/* ── SECTION 4: map ── */}
