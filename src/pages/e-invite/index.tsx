@@ -382,7 +382,7 @@ export default function EInvitePage() {
   return (
     <>
       <Head>
-        <title>Majlis Perkahwinan – Azbin &amp; Lin</title>
+        <title>Majlis Perkahwinan - Azbin &amp; Lin</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -396,7 +396,6 @@ export default function EInvitePage() {
 
       {!opened && (
         <div className={`${styles.splash} ${hiding ? styles.splashHide : ''}`} onClick={open}>
-          <SongketStrip />
           <div className={styles.splashContent}>
             <p className={styles.splashSub}>JEMPUTAN PERKAHWINAN</p>
             <span className={styles.splashMono}>AL</span>
@@ -410,7 +409,7 @@ export default function EInvitePage() {
         </div>
       )}
 
-      <div className={styles.page}>
+      <div className={`${styles.page} ${opened ? styles.pageReveal : ''}`}>
 
         {/* ── SECTION 1: cover ── */}
         <div className={styles.cover}>
