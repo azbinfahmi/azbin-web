@@ -629,7 +629,7 @@
 /* ---- Door knob ---- */
 .doorKnob {
   position: absolute;
-  right: 28px;
+  right: 0;
   top: 62%;
   transform: translateY(-50%);
   z-index: 3;
@@ -645,7 +645,7 @@
 .splashContent {
   position: absolute;
   left: calc(18% + 16px);
-  right: 96px;
+  right: 68px;
   top: calc(80px + (100% - 172px) / 3);
   transform: translateY(-50%);
   z-index: 2;
