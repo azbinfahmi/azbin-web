@@ -528,10 +528,10 @@ export default function EInvitePage() {
               <span className={styles.splashMono}>AL</span>
               <p className={styles.splashNames}>Azbin &amp; Lin</p>
               <p className={styles.splashDate}>09 . 01 . 2027</p>
-            </div>
-            <div className={styles.splashTapBottom}>
-              <span className={styles.splashTapDot} />
-              sentuh screen untuk masuk
+              <div className={styles.splashTap}>
+                <span className={styles.splashTapDot} />
+                sentuh screen untuk masuk
+              </div>
             </div>
           </div>
         </div>
