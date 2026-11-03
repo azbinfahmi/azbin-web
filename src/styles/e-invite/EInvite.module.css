@@ -556,10 +556,10 @@
   to   { opacity: 0; pointer-events: none; }
 }
 
-@keyframes slideOutLeft   { to { transform: translateX(-100%); } }
-@keyframes slideOutRight  { to { transform: translateX(100%);  } }
-@keyframes slideOutUp     { to { transform: translateY(-100%); } }
-@keyframes slideOutDown   { to { transform: translateY(100%);  } }
+@keyframes doorSwingOpen {
+  0%   { transform: perspective(1400px) rotateY(0deg);    }
+  100% { transform: perspective(1400px) rotateY(-100deg); }
+}
 
 @keyframes splashTapPulse {
   0%, 100% { opacity: 0.5; transform: scale(1); }
@@ -580,10 +580,13 @@
   padding-left: 18%;
   padding-top: 60px;
   padding-bottom: 60px;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .splashHide {
-  animation: splashFadeOut 0.35s ease 0.35s both;
+  transform-origin: 0% 50%;
+  animation: doorSwingOpen 0.75s cubic-bezier(0.4, 0, 0.8, 1) forwards;
 }
 
 /* ---- Door panels ---- */
@@ -662,17 +665,6 @@
   border-top: none;
 }
 
-.splashHide .splashContent,
-.splashHide .doorKnob,
-.splashHide .doorPanels,
-.splashHide .hinge {
-  animation: splashFadeOut 0.25s ease forwards;
-}
-
-.splashHide .songketLeft   { animation: slideOutLeft  0.45s cubic-bezier(0.55, 0, 1, 0.45) forwards; }
-.splashHide .songketRight  { animation: slideOutRight 0.45s cubic-bezier(0.55, 0, 1, 0.45) forwards; }
-.splashHide .songketTop    { animation: slideOutUp    0.45s cubic-bezier(0.55, 0, 1, 0.45) forwards; }
-.splashHide .songketBottom { animation: slideOutDown  0.45s cubic-bezier(0.55, 0, 1, 0.45) forwards; }
 
 .splashContent {
   position: relative;

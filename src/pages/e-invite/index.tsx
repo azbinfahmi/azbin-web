@@ -475,7 +475,7 @@ export default function EInvitePage() {
       audio.currentTime = 12.5;
       audio.play().catch(() => {});
     }
-    setTimeout(() => setOpened(true), 750);
+    setTimeout(() => setOpened(true), 800);
   };
 
   return (
