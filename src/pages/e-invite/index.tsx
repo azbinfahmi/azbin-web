@@ -315,7 +315,7 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      ([entry]) => setVisible(entry.isIntersecting),
       { threshold: 0.12 }
     );
     obs.observe(el);
