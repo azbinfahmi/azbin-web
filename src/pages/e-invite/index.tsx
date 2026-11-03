@@ -155,7 +155,7 @@ function Footer() {
           </button>
         </div>
         <p className={styles.footerCredit}>
-          Create e-invite with <a className={styles.footerCreditLink} href="https://azbinfahmi.com" target="_blank" rel="noreferrer">azbinfahmi</a>
+          e-invite by <a className={styles.footerCreditLink} href="https://azbinfahmi.com" target="_blank" rel="noreferrer">azbinfahmi</a>
         </p>
       </div>
 
@@ -206,7 +206,7 @@ function Footer() {
         <div className={styles.modalOverlay} onClick={() => setShowCal(false)}>
           <div className={styles.calModal} onClick={e => e.stopPropagation()}>
             <button className={styles.modalClose} onClick={() => setShowCal(false)}>✕</button>
-            <p className={styles.calModalTitle}>ADD TO CALENDAR</p>
+            <p className={styles.calModalTitle}>TAMBAH KE KALENDAR</p>
             <div className={styles.calOptions}>
               <button className={styles.calOption} onClick={handleApple}>
                 <svg width="52" height="52" viewBox="0 0 24 24" fill="white">
@@ -323,6 +323,7 @@ export default function EInvitePage() {
         </div>
 
         {/* ── SECTION 3: info grid ── */}
+        <div className={d.infoGridWrapper}>
         <div className={d.infoGrid}>
           <div className={d.infoCol}>
             <p className={d.dayLabel}>SABTU</p>
@@ -341,6 +342,7 @@ export default function EInvitePage() {
             <p className={d.venueName}><span className={d.venuePin}>📍</span>Damai Homestay</p>
             <p className={d.venueAddr}>Lot 843, Jalan Sg Jagong,<br />Sg Layar</p>
           </div>
+        </div>
         </div>
 
         {/* ── SECTION 4: map ── */}

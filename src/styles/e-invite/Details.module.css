@@ -114,17 +114,28 @@
 }
 
 /* ---- Info grid ---- */
+.infoGridWrapper {
+  padding: 20px 16px 24px;
+}
+
 .infoGrid {
   display: grid;
   grid-template-columns: 1fr 1.6fr;
-  background: transparent;
+  background: rgba(255,255,255,0.07);
   color: white;
   min-height: 160px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
 }
 
 .infoCol {
-  padding: 18px 12px;
-  border-right: 1px solid rgba(255,255,255,0.2);
+  padding: 20px 14px;
+  border-right: 1px solid rgba(255,255,255,0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .infoCol:last-child {
@@ -134,7 +145,7 @@
 /* Left: date */
 .dayLabel {
   font-family: 'Cinzel', serif;
-  font-size: clamp(11px, 3vw, 14px);
+  font-size: clamp(13px, 3.5vw, 17px);
   font-weight: 700;
   letter-spacing: 0.1em;
   margin: 0 0 2px;
@@ -142,20 +153,20 @@
 
 .dayNumber {
   font-family: 'Cinzel', serif;
-  font-size: clamp(44px, 12vw, 64px);
+  font-size: clamp(56px, 15vw, 80px);
   font-weight: 700;
   line-height: 1;
   margin: 0;
 }
 
 .monthYear {
-  font-size: clamp(11px, 2.8vw, 13px);
+  font-size: clamp(13px, 3.2vw, 16px);
   margin: 2px 0 0;
   opacity: 0.9;
 }
 
 .hijriSmall {
-  font-size: clamp(10px, 2.4vw, 12px);
+  font-size: clamp(11px, 2.8vw, 14px);
   opacity: 0.7;
   margin: 2px 0 0;
 }
