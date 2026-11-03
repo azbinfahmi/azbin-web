@@ -1,12 +1,8 @@
 import Head from 'next/head';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styles from '@/styles/e-invite/EInvite.module.css';
 import d from '@/styles/e-invite/Details.module.css';
 
-const COUPLES = [
-  { first: 'AZBIN', mono: 'AL' },
-  { first: 'FAHMI', mono: 'FL' },
-];
 
 /* ── cover components ── */
 function Ornament({ size = 28, className }: { size?: number; className?: string }) {
@@ -85,6 +81,61 @@ function SongketStrip() {
   );
 }
 
+/* ── slot machine date ── */
+const SLOT_TARGET = 'SABTU | 09 . 01 . 27';
+const NUM_POOL = '0123456789';
+const ALPHA_POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const STATIC_CHARS = new Set([' ', '|', '.']);
+
+function SlotDate() {
+  const [chars, setChars] = useState<string[]>(Array(SLOT_TARGET.length).fill(' '));
+
+  useEffect(() => {
+    const target = SLOT_TARGET.split('');
+
+    target.forEach((final, idx) => {
+      const staggerDelay = idx * 30;
+
+      if (STATIC_CHARS.has(final)) {
+        setTimeout(() => {
+          setChars(prev => { const n = [...prev]; n[idx] = final; return n; });
+        }, staggerDelay);
+        return;
+      }
+
+      const pool = /[0-9]/.test(final) ? NUM_POOL : ALPHA_POOL;
+      const totalFrames = 8 + idx;
+      let frame = 0;
+
+      setTimeout(() => {
+        const tick = () => {
+          frame++;
+          setChars(prev => {
+            const n = [...prev];
+            n[idx] = frame >= totalFrames
+              ? final
+              : pool[Math.floor(Math.random() * pool.length)];
+            return n;
+          });
+          if (frame < totalFrames) {
+            const progress = frame / totalFrames;
+            setTimeout(tick, 20 + progress * 60);
+          }
+        };
+        tick();
+      }, staggerDelay);
+    });
+  }, []);
+
+  return (
+    <p className={styles.date}>
+      {chars.map((c, i) => (
+        <span key={i} className={styles.slotChar}>{c}</span>
+      ))}
+    </p>
+  );
+}
+
 /* ── footer ── */
 const CONTACTS = [
   { name: 'Hairul', tel: '+60134534504', display: '013-453 4504' },
@@ -97,6 +148,48 @@ function Footer() {
   const [showCal, setShowCal] = useState(false);
   const [showCall, setShowCall] = useState(false);
   const [showMap, setShowMap] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const tryPlay = () => {
+      audio.currentTime = 12.5;
+      audio.play().then(() => setIsPlaying(true)).catch(() => {});
+    };
+
+    tryPlay();
+
+    const unlock = () => {
+      tryPlay();
+      window.removeEventListener('touchend', unlock);
+      window.removeEventListener('click', unlock);
+      window.removeEventListener('scroll', unlock);
+    };
+
+    window.addEventListener('touchend', unlock, { once: true });
+    window.addEventListener('click',    unlock, { once: true });
+    window.addEventListener('scroll',   unlock, { once: true });
+
+    return () => {
+      window.removeEventListener('touchend', unlock);
+      window.removeEventListener('click',    unlock);
+      window.removeEventListener('scroll',   unlock);
+    };
+  }, []);
+
+  const togglePlay = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      audio.play().then(() => setIsPlaying(true)).catch(() => {});
+    }
+  };
 
   const VENUE_QUERY = 'Damai+Homestay+Sungai+Petani';
   const wazeUrl = `https://waze.com/ul?q=${VENUE_QUERY}&navigate=yes`;
@@ -133,6 +226,8 @@ function Footer() {
 
   return (
     <>
+      <audio ref={audioRef} src="/e-invite/Selamat Pengantin Baru.mp3" loop preload="auto" />
+
       <div className={styles.footer}>
         <div className={styles.footerBtns}>
           <button className={styles.footerBtn} onClick={() => setShowCal(true)}>
@@ -154,6 +249,18 @@ function Footer() {
             <span className={styles.footerBtnLabel}>MAP</span>
           </button>
         </div>
+        <button className={styles.musicIconBtn} onClick={togglePlay} aria-label={isPlaying ? 'Pause' : 'Play'}>
+          {isPlaying ? (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+              <rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>
+            </svg>
+          ) : (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            </svg>
+          )}
+        </button>
+
         <p className={styles.footerCredit}>
           e-invite by <a className={styles.footerCreditLink} href="https://azbinfahmi.com" target="_blank" rel="noreferrer">azbinfahmi</a>
         </p>
@@ -245,17 +352,6 @@ function ArchDivider() {
 
 /* ── main page ── */
 export default function EInvitePage() {
-  const [idx, setIdx] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setIdx(prev => (prev + 1) % COUPLES.length);
-    }, 2500);
-    return () => clearInterval(timer);
-  }, []);
-
-  const { first, mono } = COUPLES[idx];
-
   return (
     <>
       <Head>
@@ -287,16 +383,16 @@ export default function EInvitePage() {
             <h2 className={styles.majlis}>MAJLIS</h2>
             <h2 className={styles.perkahwinan}>PERKAHWINAN</h2>
             <Divider />
-            <span key={`mono-${idx}`} className={styles.monogram}>{mono}</span>
+            <span className={styles.monogramWrap}>
+              <span className={styles.monoFirst}>A</span>
+              <span className={styles.monoSecond}>L</span>
+            </span>
             <div className={styles.namesRow}>
               <Ornament size={20} className={styles.ornInline} />
-              <h1 className={styles.names}>
-                <span key={`name-${idx}`} className={styles.firstName}>{first}</span>
-                {' & LIN'}
-              </h1>
+              <h1 className={styles.names}>AZBIN &amp; LIN</h1>
             </div>
             <Divider />
-            <p className={styles.date}>SABTU | 09 . 01 . 27</p>
+            <SlotDate />
             <p className={styles.hijri}>30 Rejab 1448H</p>
             <p className={styles.venue}>Damai Homestay, Sungai Petani</p>
           </div>
@@ -353,7 +449,9 @@ export default function EInvitePage() {
         {/* ── SECTION 5: doa ── */}
         <div className={d.doaSection}>
           <p className={d.doaText}>
-            Ya Allah, kurniakanlah kepada kedua mempelai ini rumah tangga yang sakinah, mawaddah dan warahmah. Satukanlah hati mereka dalam kasih yang Engkau redhai, teguhkanlah mereka dalam kesetiaan, dan jadikanlah mereka pelindung serta penyejuk hati buat satu sama lain. Amin.
+            Ya Allah, kurniakanlah kepada kedua mempelai ini rumah tangga yang sakinah, mawaddah dan warahmah. 
+            Satukanlah hati mereka dalam kasih yang Engkau redhai, teguhkanlah mereka dalam kesetiaan, 
+            dan jadikanlah mereka pelindung serta penyejuk hati buat satu sama lain. Amin.
           </p>
         </div>
 
