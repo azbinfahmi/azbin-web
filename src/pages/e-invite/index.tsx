@@ -41,28 +41,46 @@ function Divider() {
 function DoorKnob() {
   return (
     <div className={styles.doorKnob}>
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <svg width="64" height="110" viewBox="0 0 64 110" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <radialGradient id="kg" cx="38%" cy="32%" r="60%">
-            <stop offset="0%"   stopColor="#ffffff" />
-            <stop offset="35%"  stopColor="#e8e4e0" />
-            <stop offset="70%"  stopColor="#bdb8b4" />
-            <stop offset="100%" stopColor="#8a8480" />
-          </radialGradient>
-          <radialGradient id="ks" cx="32%" cy="26%" r="38%">
-            <stop offset="0%"  stopColor="rgba(255,255,255,0.85)" />
-            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
-          </radialGradient>
+          <linearGradient id="plate" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stopColor="#8a8a8a" />
+            <stop offset="25%"  stopColor="#e0e0e0" />
+            <stop offset="50%"  stopColor="#f5f5f5" />
+            <stop offset="75%"  stopColor="#d0d0d0" />
+            <stop offset="100%" stopColor="#909090" />
+          </linearGradient>
+          <linearGradient id="lever" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stopColor="#c8c8c8" />
+            <stop offset="30%"  stopColor="#f8f8f8" />
+            <stop offset="70%"  stopColor="#e0e0e0" />
+            <stop offset="100%" stopColor="#a0a0a0" />
+          </linearGradient>
+          <linearGradient id="leverSide" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stopColor="#b0b0b0" />
+            <stop offset="50%"  stopColor="#f0f0f0" />
+            <stop offset="100%" stopColor="#b0b0b0" />
+          </linearGradient>
         </defs>
-        <circle cx="18" cy="18" r="17" fill="url(#kg)" />
-        <circle cx="18" cy="18" r="17" fill="url(#ks)" />
-        <circle cx="18" cy="18" r="17" stroke="rgba(0,0,0,0.3)" strokeWidth="1" />
+
+        {/* escutcheon / backplate */}
+        <rect x="22" y="0" width="20" height="110" rx="4" fill="url(#plate)" stroke="rgba(0,0,0,0.25)" strokeWidth="0.8" />
+        <rect x="24" y="2" width="16" height="106" rx="3" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="0.5" />
+
+        {/* lever arm — horizontal, pointing left */}
+        <rect x="0" y="36" width="42" height="10" rx="5" fill="url(#leverSide)" stroke="rgba(0,0,0,0.2)" strokeWidth="0.5" />
+        <rect x="1" y="37.5" width="40" height="7" rx="4" fill="url(#lever)" />
+        {/* lever tip curve */}
+        <ellipse cx="3" cy="41" rx="3" ry="5" fill="url(#leverSide)" stroke="rgba(0,0,0,0.2)" strokeWidth="0.5" />
+
+        {/* lever rose (collar where lever meets plate) */}
+        <ellipse cx="32" cy="41" rx="8" ry="8" fill="url(#plate)" stroke="rgba(0,0,0,0.2)" strokeWidth="0.8" />
+        <ellipse cx="32" cy="41" rx="5" ry="5" fill="#d8d8d8" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
+
+        {/* keyhole */}
+        <circle cx="32" cy="80" r="4.5" fill="rgba(0,0,0,0.5)" />
+        <path d="M29.8 84 L32 93 L34.2 84 Z" fill="rgba(0,0,0,0.5)" />
       </svg>
-      {/* keyhole */}
-      <div className={styles.keyhole}>
-        <div className={styles.keyholeCircle} />
-        <div className={styles.keyholeSlot} />
-      </div>
     </div>
   );
 }
