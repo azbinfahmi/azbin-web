@@ -353,9 +353,10 @@ function Countdown() {
     };
   };
 
-  const [time, setTime] = useState(calc);
+  const [time, setTime] = useState({ hari: 0, jam: 0, minit: 0, saat: 0 });
 
   useEffect(() => {
+    setTime(calc());
     const id = setInterval(() => setTime(calc()), 1000);
     return () => clearInterval(id);
   }, []);
