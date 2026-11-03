@@ -344,31 +344,40 @@ const WEDDING_DATE = new Date('2027-01-09T11:00:00+08:00');
 function Countdown() {
   const calc = () => {
     const diff = WEDDING_DATE.getTime() - Date.now();
-    if (diff <= 0) return { hari: 0, jam: 0 };
+    if (diff <= 0) return { hari: 0, jam: 0, minit: 0, saat: 0 };
     return {
-      hari: Math.floor(diff / (1000 * 60 * 60 * 24)),
-      jam:  Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+      hari:  Math.floor(diff / (1000 * 60 * 60 * 24)),
+      jam:   Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+      minit: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
+      saat:  Math.floor((diff % (1000 * 60)) / 1000),
     };
   };
 
   const [time, setTime] = useState(calc);
 
   useEffect(() => {
-    const id = setInterval(() => setTime(calc()), 60000);
+    const id = setInterval(() => setTime(calc()), 1000);
     return () => clearInterval(id);
   }, []);
 
+  const units = [
+    { val: time.hari,  label: 'HARI',  pad: 3 },
+    { val: time.jam,   label: 'JAM',   pad: 2 },
+    { val: time.minit, label: 'MINIT', pad: 2 },
+    { val: time.saat,  label: 'SAAT',  pad: 2 },
+  ];
+
   return (
     <div className={d.countdown}>
-      <div className={d.countdownItem}>
-        <span className={d.countdownNum}>{String(time.hari).padStart(3, '0')}</span>
-        <span className={d.countdownLabel}>HARI</span>
-      </div>
-      <span className={d.countdownSep}>:</span>
-      <div className={d.countdownItem}>
-        <span className={d.countdownNum}>{String(time.jam).padStart(2, '0')}</span>
-        <span className={d.countdownLabel}>JAM</span>
-      </div>
+      {units.map(({ val, label, pad }, i) => (
+        <>
+          <div key={label} className={d.countdownItem}>
+            <span className={d.countdownNum}>{String(val).padStart(pad, '0')}</span>
+            <span className={d.countdownLabel}>{label}</span>
+          </div>
+          {i < units.length - 1 && <span key={`sep-${i}`} className={d.countdownSep}>:</span>}
+        </>
+      ))}
     </div>
   );
 }
@@ -473,8 +482,10 @@ export default function EInvitePage() {
             <p className={d.venueName}><span className={d.venuePin}>📍</span>Damai Homestay</p>
             <p className={d.venueAddr}>Lot 843, Jalan Sg Jagong,<br />Sg Layar</p>
           </div>
+          <div className={d.countdownRow}>
+            <Countdown />
+          </div>
         </div>
-          <Countdown />
         </div>
 
         {/* ── SECTION 4: map ── */}
