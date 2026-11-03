@@ -41,27 +41,57 @@ function Divider() {
 function DoorKnob() {
   return (
     <div className={styles.doorKnob}>
-      <svg width="44" height="70" viewBox="0 0 44 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
         <defs>
-          <radialGradient id="knobGrad" cx="38%" cy="32%" r="60%">
+          <radialGradient id="kg" cx="38%" cy="32%" r="60%">
             <stop offset="0%"   stopColor="#fff8d6" />
             <stop offset="30%"  stopColor="#e8c96a" />
             <stop offset="70%"  stopColor="#b8942a" />
             <stop offset="100%" stopColor="#7a5c10" />
           </radialGradient>
-          <radialGradient id="knobShine" cx="35%" cy="28%" r="40%">
-            <stop offset="0%" stopColor="rgba(255,255,255,0.55)" />
+          <radialGradient id="ks" cx="35%" cy="28%" r="40%">
+            <stop offset="0%"  stopColor="rgba(255,255,255,0.6)" />
             <stop offset="100%" stopColor="rgba(255,255,255,0)" />
           </radialGradient>
         </defs>
-        {/* knob circle */}
-        <circle cx="22" cy="22" r="20" fill="url(#knobGrad)" />
-        <circle cx="22" cy="22" r="20" fill="url(#knobShine)" />
-        <circle cx="22" cy="22" r="20" stroke="rgba(0,0,0,0.25)" strokeWidth="1" />
-        {/* keyhole */}
-        <circle cx="22" cy="52" r="5" fill="rgba(0,0,0,0.55)" />
-        <path d="M19.5 57 L22 67 L24.5 57 Z" fill="rgba(0,0,0,0.55)" />
+        <circle cx="18" cy="18" r="17" fill="url(#kg)" />
+        <circle cx="18" cy="18" r="17" fill="url(#ks)" />
+        <circle cx="18" cy="18" r="17" stroke="rgba(0,0,0,0.3)" strokeWidth="1" />
       </svg>
+      {/* keyhole */}
+      <div className={styles.keyhole}>
+        <div className={styles.keyholeCircle} />
+        <div className={styles.keyholeSlot} />
+      </div>
+    </div>
+  );
+}
+
+function DoorHinge({ position }: { position: 'top' | 'bottom' }) {
+  return (
+    <div className={`${styles.hinge} ${position === 'top' ? styles.hingeTop : styles.hingeBottom}`}>
+      <svg width="20" height="48" viewBox="0 0 20 48" fill="none">
+        <defs>
+          <linearGradient id="hg" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stopColor="#7a5c10" />
+            <stop offset="40%"  stopColor="#e8c96a" />
+            <stop offset="100%" stopColor="#b8942a" />
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="18" height="46" rx="2" fill="url(#hg)" stroke="rgba(0,0,0,0.3)" strokeWidth="1" />
+        <circle cx="10" cy="8"  r="3" fill="rgba(0,0,0,0.25)" />
+        <circle cx="10" cy="24" r="3" fill="rgba(0,0,0,0.25)" />
+        <circle cx="10" cy="40" r="3" fill="rgba(0,0,0,0.25)" />
+      </svg>
+    </div>
+  );
+}
+
+function DoorPanels() {
+  return (
+    <div className={styles.doorPanels}>
+      <div className={styles.doorPanelTop} />
+      <div className={styles.doorPanelBottom} />
     </div>
   );
 }
@@ -468,6 +498,9 @@ export default function EInvitePage() {
           <SongketStrip position="left" />
           <SongketStrip position="top" />
           <SongketStrip position="bottom" />
+          <DoorPanels />
+          <DoorHinge position="top" />
+          <DoorHinge position="bottom" />
           <DoorKnob />
           <div className={styles.splashContent}>
             <p className={styles.splashSub}>JEMPUTAN PERKAHWINAN</p>
