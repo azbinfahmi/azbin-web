@@ -667,7 +667,7 @@
 
 .splashMono {
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(96px, 24vw, 150px);
+  font-size: clamp(72px, 18vw, 110px);
   color: #ffffff;
   line-height: 1;
 }
@@ -697,6 +697,23 @@
   letter-spacing: 0.1em;
   color: rgba(255,255,255,0.55);
   animation: splashTapPulse 2s ease-in-out infinite;
+}
+
+.splashTapBottom {
+  position: absolute;
+  left: calc(18% + 16px);
+  right: 68px;
+  bottom: calc(60px + (100% - 120px) * 0.17);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: system-ui, sans-serif;
+  font-size: clamp(11px, 2.8vw, 13px);
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.55);
+  animation: splashTapPulse 2s ease-in-out infinite;
+  z-index: 2;
 }
 
 .splashTapDot {
