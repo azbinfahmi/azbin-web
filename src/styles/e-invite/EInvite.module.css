@@ -644,8 +644,8 @@
 
 .splashContent {
   position: absolute;
-  left: calc(18% + 16px);
-  right: 68px;
+  left: 18%;
+  right: 0;
   top: calc(60px + (100% - 120px) * 0.325);
   transform: translateY(-50%);
   z-index: 2;
