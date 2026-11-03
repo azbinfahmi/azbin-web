@@ -646,13 +646,12 @@
   position: absolute;
   left: calc(18% + 16px);
   right: 68px;
-  top: 60px;
-  height: calc((100% - 120px) * 0.65);
+  top: calc(60px + (100% - 120px) * 0.325);
+  transform: translateY(-50%);
   z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 6px;
   text-align: center;
 }
