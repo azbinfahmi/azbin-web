@@ -4,7 +4,6 @@ import { WhatIBuild } from '@/features/homepage/WhatIBuild';
 import { SelectedSystems  } from '@/features/homepage/SelectedSystems';
 import { AboutSection } from "@/features/homepage/AboutSection";
 import { SkillsSection } from "@/features/homepage/SkillsSection";
-import { ContactSection } from "@/features/homepage/ContactSection";
 
 import { Footer  } from '@/features/homepage/Footer';
 
