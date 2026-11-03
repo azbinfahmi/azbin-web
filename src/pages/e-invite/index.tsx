@@ -338,6 +338,41 @@ function Footer() {
   );
 }
 
+/* ── countdown ── */
+const WEDDING_DATE = new Date('2027-01-09T11:00:00+08:00');
+
+function Countdown() {
+  const calc = () => {
+    const diff = WEDDING_DATE.getTime() - Date.now();
+    if (diff <= 0) return { hari: 0, jam: 0 };
+    return {
+      hari: Math.floor(diff / (1000 * 60 * 60 * 24)),
+      jam:  Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+    };
+  };
+
+  const [time, setTime] = useState(calc);
+
+  useEffect(() => {
+    const id = setInterval(() => setTime(calc()), 60000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className={d.countdown}>
+      <div className={d.countdownItem}>
+        <span className={d.countdownNum}>{String(time.hari).padStart(3, '0')}</span>
+        <span className={d.countdownLabel}>HARI</span>
+      </div>
+      <span className={d.countdownSep}>:</span>
+      <div className={d.countdownItem}>
+        <span className={d.countdownNum}>{String(time.jam).padStart(2, '0')}</span>
+        <span className={d.countdownLabel}>JAM</span>
+      </div>
+    </div>
+  );
+}
+
 /* ── details components ── */
 function ArchDivider() {
   return (
@@ -438,6 +473,7 @@ export default function EInvitePage() {
             <p className={d.venueName}><span className={d.venuePin}>📍</span>Damai Homestay</p>
             <p className={d.venueAddr}>Lot 843, Jalan Sg Jagong,<br />Sg Layar</p>
           </div>
+          <Countdown />
         </div>
         </div>
 
