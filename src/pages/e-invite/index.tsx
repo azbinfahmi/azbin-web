@@ -494,36 +494,32 @@ export default function EInvitePage() {
         </div>
 
         {/* ── SECTION 3: info grid ── */}
-        <div className={d.infoGridWrapper}>
-        <div className={d.infoGrid}>
-          <Reveal>
-          <div className={d.infoCol}>
-            <p className={d.dayLabel}>SABTU</p>
-            <p className={d.dayNumber}>09</p>
-            <p className={d.monthYear}>Januari 2027</p>
-            <p className={d.hijriSmall}>30 Rejab 1448H</p>
-          </div>
-          </Reveal>
-          <Reveal delay={120}>
-          <div className={d.infoCol}>
-            <div className={d.midTop}>
-              <p className={d.infoLabel}>Aturcara Majlis</p>
-              <p className={d.infoValue}>
-                <span className={d.infoValueBold}>11.00 pagi</span> hingga <span className={d.infoValueBold}>5.00 petang</span>
-              </p>
+        <Reveal>
+          <div className={d.infoGridWrapper}>
+            <div className={d.infoGrid}>
+              <div className={d.infoCol}>
+                <p className={d.dayLabel}>SABTU</p>
+                <p className={d.dayNumber}>09</p>
+                <p className={d.monthYear}>Januari 2027</p>
+                <p className={d.hijriSmall}>30 Rejab 1448H</p>
+              </div>
+              <div className={d.infoCol}>
+                <div className={d.midTop}>
+                  <p className={d.infoLabel}>Aturcara Majlis</p>
+                  <p className={d.infoValue}>
+                    <span className={d.infoValueBold}>11.00 pagi</span> hingga <span className={d.infoValueBold}>5.00 petang</span>
+                  </p>
+                </div>
+                <p className={d.infoLabel}>Lokasi</p>
+                <p className={d.venueName}><span className={d.venuePin}>📍</span>Damai Homestay</p>
+                <p className={d.venueAddr}>Lot 843, Jalan Sg Jagong,<br />Sg Layar</p>
+              </div>
+              <div className={d.countdownRow}>
+                <Countdown />
+              </div>
             </div>
-            <p className={d.infoLabel}>Lokasi</p>
-            <p className={d.venueName}><span className={d.venuePin}>📍</span>Damai Homestay</p>
-            <p className={d.venueAddr}>Lot 843, Jalan Sg Jagong,<br />Sg Layar</p>
           </div>
-          </Reveal>
-          <Reveal delay={240}>
-          <div className={d.countdownRow}>
-            <Countdown />
-          </div>
-          </Reveal>
-        </div>
-        </div>
+        </Reveal>
 
         {/* ── SECTION 4: map ── */}
         {/* <div className={d.mapSection}>
