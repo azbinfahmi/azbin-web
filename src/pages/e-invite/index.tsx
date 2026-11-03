@@ -306,6 +306,33 @@ function Footer({ audioRef }: { audioRef: React.RefObject<HTMLAudioElement> }) {
   );
 }
 
+/* ── reveal on scroll ── */
+function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold: 0.12 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`${styles.reveal} ${visible ? styles.revealVisible : ''}`}
+      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+    >
+      {children}
+    </div>
+  );
+}
+
 /* ── countdown ── */
 const WEDDING_DATE = new Date('2027-01-09T11:00:00+08:00');
 
@@ -403,7 +430,7 @@ export default function EInvitePage() {
             <p className={styles.splashDate}>09 . 01 . 2027</p>
             <div className={styles.splashTap}>
               <span className={styles.splashTapDot} />
-              Ketuk untuk buka
+              sentuh screen untuk masuk
             </div>
           </div>
         </div>
@@ -424,45 +451,50 @@ export default function EInvitePage() {
           <Ornament size={22} className={`${styles.orn} ${styles.ornB3}`} />
 
           <div className={styles.content}>
-            <h2 className={styles.majlis}>MAJLIS</h2>
-            <h2 className={styles.perkahwinan}>PERKAHWINAN</h2>
-            <Divider />
-            <span className={styles.monogramWrap}>
+            <h2 className={`${styles.majlis} ${styles.coverItem1}`}>MAJLIS</h2>
+            <h2 className={`${styles.perkahwinan} ${styles.coverItem2}`}>PERKAHWINAN</h2>
+            <div className={styles.coverItem3}><Divider /></div>
+            <span className={`${styles.monogramWrap} ${styles.coverItem4}`}>
               <span className={styles.monoFirst}>A</span>
               <span className={styles.monoSecond}>L</span>
             </span>
-            <div className={styles.namesRow}>
+            <div className={`${styles.namesRow} ${styles.coverItem5}`}>
               <Ornament size={20} className={styles.ornInline} />
               <h1 className={styles.names}>AZBIN &amp; LIN</h1>
             </div>
-            <Divider />
-            <SlotDate />
-            <p className={styles.hijri}>30 Rejab 1448H</p>
-            <p className={styles.venue}>Damai Homestay, Sungai Petani</p>
+            <div className={styles.coverItem6}><Divider /></div>
+            <div className={styles.coverItem7}><SlotDate /></div>
+            <p className={`${styles.hijri} ${styles.coverItem8}`}>30 Rejab 1448H</p>
+            <p className={`${styles.venue} ${styles.coverItem9}`}>Damai Homestay, Sungai Petani</p>
           </div>
         </div>
 
         {/* ── SECTION 2: details ── */}
         <div className={d.navyBg}>
           <div className={d.arch}>
-            <p className={d.walimatul}>Walimatul Urus</p>
-            <ArchDivider />
-            <p className={d.parentNames}>
-              Hairul Faizal Bin Osmat<br />&amp;<br />Rosidah Binti Che Me
-            </p>
-            <p className={d.inviteText}>
-              Dengan segala hormatnya kami ingin mempersilakan<br />
-              Dato&apos;/Datin/Tuan/Puan/Encik/Cik sekeluarga
-            </p>
-            <hr className={d.dottedLine} />
-            <p className={d.toMajlis}>ke Majlis Perkahwinan Putera kami yang disayangi</p>
-            <p className={d.groomName}>Muhammad Azbin Fahmi Bin Hairul Faizal</p>
-            <p className={d.dan}>dan pasangannya</p>
-            <p className={d.brideName}>Norfadlin Nasoha binti Muhammad Zain</p>
+            <Reveal><p className={d.walimatul}>Walimatul Urus</p></Reveal>
+            <Reveal delay={100}><ArchDivider /></Reveal>
+            <Reveal delay={150}>
+              <p className={d.parentNames}>
+                Hairul Faizal Bin Osmat<br />&amp;<br />Rosidah Binti Che Me
+              </p>
+            </Reveal>
+            <Reveal delay={200}>
+              <p className={d.inviteText}>
+                Dengan segala hormatnya kami ingin mempersilakan<br />
+                Dato&apos;/Datin/Tuan/Puan/Encik/Cik sekeluarga
+              </p>
+            </Reveal>
+            <Reveal delay={250}><hr className={d.dottedLine} /></Reveal>
+            <Reveal delay={300}><p className={d.toMajlis}>ke Majlis Perkahwinan Putera kami yang disayangi</p></Reveal>
+            <Reveal delay={350}><p className={d.groomName}>Muhammad Azbin Fahmi Bin Hairul Faizal</p></Reveal>
+            <Reveal delay={400}><p className={d.dan}>dan pasangannya</p></Reveal>
+            <Reveal delay={450}><p className={d.brideName}>Norfadlin Nasoha binti Muhammad Zain</p></Reveal>
           </div>
         </div>
 
         {/* ── SECTION 3: info grid ── */}
+        <Reveal>
         <div className={d.infoGridWrapper}>
         <div className={d.infoGrid}>
           <div className={d.infoCol}>
@@ -487,6 +519,7 @@ export default function EInvitePage() {
           </div>
         </div>
         </div>
+        </Reveal>
 
         {/* ── SECTION 4: map ── */}
         {/* <div className={d.mapSection}>
@@ -495,15 +528,21 @@ export default function EInvitePage() {
 
         {/* ── SECTION 5: doa ── */}
         <div className={d.doaSection}>
+          <Reveal>
           <div className={d.doaContainer}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/e-invite/bismillah.png" alt="Bismillah" className={d.bismillah} />
-            <p className={d.doaText}>
-              Ya Allah, kurniakanlah kepada kedua mempelai ini rumah tangga yang sakinah, mawaddah dan warahmah.
-              Satukanlah hati mereka dalam kasih yang Engkau redhai, teguhkanlah mereka dalam kesetiaan,
-              dan jadikanlah mereka pelindung serta penyejuk hati buat satu sama lain. Amin.
-            </p>
+            <Reveal delay={100}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/e-invite/bismillah.png" alt="Bismillah" className={d.bismillah} />
+            </Reveal>
+            <Reveal delay={200}>
+              <p className={d.doaText}>
+                Ya Allah, kurniakanlah kepada kedua mempelai ini rumah tangga yang sakinah, mawaddah dan warahmah.
+                Satukanlah hati mereka dalam kasih yang Engkau redhai, teguhkanlah mereka dalam kesetiaan,
+                dan jadikanlah mereka pelindung serta penyejuk hati buat satu sama lain. Amin.
+              </p>
+            </Reveal>
           </div>
+          </Reveal>
         </div>
 
         <div className={styles.pageBottomPad} />
