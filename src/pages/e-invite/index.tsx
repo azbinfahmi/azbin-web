@@ -44,13 +44,13 @@ function DoorKnob() {
       <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
         <defs>
           <radialGradient id="kg" cx="38%" cy="32%" r="60%">
-            <stop offset="0%"   stopColor="#fff8d6" />
-            <stop offset="30%"  stopColor="#e8c96a" />
-            <stop offset="70%"  stopColor="#b8942a" />
-            <stop offset="100%" stopColor="#7a5c10" />
+            <stop offset="0%"   stopColor="#ffffff" />
+            <stop offset="35%"  stopColor="#e8e4e0" />
+            <stop offset="70%"  stopColor="#bdb8b4" />
+            <stop offset="100%" stopColor="#8a8480" />
           </radialGradient>
-          <radialGradient id="ks" cx="35%" cy="28%" r="40%">
-            <stop offset="0%"  stopColor="rgba(255,255,255,0.6)" />
+          <radialGradient id="ks" cx="32%" cy="26%" r="38%">
+            <stop offset="0%"  stopColor="rgba(255,255,255,0.85)" />
             <stop offset="100%" stopColor="rgba(255,255,255,0)" />
           </radialGradient>
         </defs>
@@ -73,9 +73,9 @@ function DoorHinge({ position }: { position: 'top' | 'bottom' }) {
       <svg width="20" height="48" viewBox="0 0 20 48" fill="none">
         <defs>
           <linearGradient id="hg" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%"   stopColor="#7a5c10" />
-            <stop offset="40%"  stopColor="#e8c96a" />
-            <stop offset="100%" stopColor="#b8942a" />
+            <stop offset="0%"   stopColor="#8a8480" />
+            <stop offset="40%"  stopColor="#f0ede8" />
+            <stop offset="100%" stopColor="#bdb8b4" />
           </linearGradient>
         </defs>
         <rect x="1" y="1" width="18" height="46" rx="2" fill="url(#hg)" stroke="rgba(0,0,0,0.3)" strokeWidth="1" />
