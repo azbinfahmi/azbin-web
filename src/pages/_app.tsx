@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
     } else if (isEInvite) {
       document.body.removeAttribute("data-portfolio");
       document.body.removeAttribute("data-futsal");
-      document.body.style.background = "radial-gradient(ellipse at 60% 35%, #2a3acc 0%, #0d0d6a 55%, #080850 100%)";
+      document.body.style.background = "radial-gradient(ellipse at 60% 35%, #7a3a10 0%, #3d1a06 55%, #2a1005 100%)";
       document.body.style.margin = "0";
     } else {
       document.body.style.background = "";

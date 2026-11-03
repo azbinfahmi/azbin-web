@@ -18,7 +18,7 @@ function Ornament({ size = 28, className }: { size?: number; className?: string 
         <ellipse cx="-6.4" cy="6.4" rx="2.5" ry="5" opacity="0.75" transform="rotate(-45 -6.4 6.4)" />
         <ellipse cx="-6.4" cy="-6.4" rx="2.5" ry="5" opacity="0.75" transform="rotate(45 -6.4 -6.4)" />
         <circle r="5" opacity="0.95" />
-        <circle r="2.5" fill="#1a1a8a" opacity="0.9" />
+        <circle r="2.5" fill="#3d1a06" opacity="0.9" />
         <polygon points="0,-17 1.5,-14 0,-11 -1.5,-14" opacity="0.75" />
         <polygon points="17,0 14,1.5 11,0 14,-1.5" opacity="0.75" />
         <polygon points="0,17 1.5,14 0,11 -1.5,14" opacity="0.75" />
@@ -38,9 +38,9 @@ function Divider() {
   );
 }
 
-function DoorKnob() {
+function DoorKnob({ pressed, onClick }: { pressed: boolean; onClick: () => void }) {
   return (
-    <div className={styles.doorKnob}>
+    <div className={`${styles.doorKnob} ${pressed ? styles.doorKnobPressed : ''}`} onClick={onClick}>
       <svg width="64" height="110" viewBox="0 0 64 110" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="plate" x1="0" y1="0" x2="1" y2="0">
@@ -63,23 +63,20 @@ function DoorKnob() {
           </linearGradient>
         </defs>
 
-        {/* escutcheon / backplate */}
+        {/* static: escutcheon / backplate + keyhole */}
         <rect x="22" y="0" width="20" height="110" rx="4" fill="url(#plate)" stroke="rgba(0,0,0,0.25)" strokeWidth="0.8" />
         <rect x="24" y="2" width="16" height="106" rx="3" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="0.5" />
-
-        {/* lever arm — horizontal, pointing left */}
-        <rect x="0" y="36" width="42" height="10" rx="5" fill="url(#leverSide)" stroke="rgba(0,0,0,0.2)" strokeWidth="0.5" />
-        <rect x="1" y="37.5" width="40" height="7" rx="4" fill="url(#lever)" />
-        {/* lever tip curve */}
-        <ellipse cx="3" cy="41" rx="3" ry="5" fill="url(#leverSide)" stroke="rgba(0,0,0,0.2)" strokeWidth="0.5" />
-
-        {/* lever rose (collar where lever meets plate) */}
-        <ellipse cx="32" cy="41" rx="8" ry="8" fill="url(#plate)" stroke="rgba(0,0,0,0.2)" strokeWidth="0.8" />
-        <ellipse cx="32" cy="41" rx="5" ry="5" fill="#d8d8d8" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
-
-        {/* keyhole */}
         <circle cx="32" cy="80" r="4.5" fill="rgba(0,0,0,0.5)" />
         <path d="M29.8 84 L32 93 L34.2 84 Z" fill="rgba(0,0,0,0.5)" />
+
+        {/* lever — rotates around rose pivot (32,41) */}
+        <g className={styles.leverArm} style={{ transformOrigin: '32px 41px' }}>
+          <rect x="0" y="36" width="42" height="10" rx="5" fill="url(#leverSide)" stroke="rgba(0,0,0,0.2)" strokeWidth="0.5" />
+          <rect x="1" y="37.5" width="40" height="7" rx="4" fill="url(#lever)" />
+          <ellipse cx="3" cy="41" rx="3" ry="5" fill="url(#leverSide)" stroke="rgba(0,0,0,0.2)" strokeWidth="0.5" />
+          <ellipse cx="32" cy="41" rx="8" ry="8" fill="url(#plate)" stroke="rgba(0,0,0,0.2)" strokeWidth="0.8" />
+          <ellipse cx="32" cy="41" rx="5" ry="5" fill="#d8d8d8" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
+        </g>
       </svg>
     </div>
   );
@@ -114,7 +111,9 @@ function DoorPanels() {
   );
 }
 
-function SongketStrip({ position = 'left' }: { position?: SongketPos }) {
+type SongketPos = 'left' | 'right' | 'top' | 'bottom';
+
+function SongketStrip({ position = 'left', className }: { position?: SongketPos; className?: string }) {
   const posClass = {
     left:   styles.songketLeft,
     right:  styles.songketRight,
@@ -130,7 +129,7 @@ function SongketStrip({ position = 'left' }: { position?: SongketPos }) {
   }[position];
 
   return (
-    <div className={`${styles.songket} ${posClass}`}>
+    <div className={`${styles.songket} ${posClass} ${className ?? ''}`}>
       <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
           <pattern id="sg1" width="12" height="12" patternUnits="userSpaceOnUse">
@@ -150,7 +149,7 @@ function SongketStrip({ position = 'left' }: { position?: SongketPos }) {
             <line x1="24" y1="16" x2="24" y2="32" stroke="rgba(255,255,255,0.2)" strokeWidth="0.6" />
             <line x1="16" y1="24" x2="32" y2="24" stroke="rgba(255,255,255,0.2)" strokeWidth="0.6" />
             <circle cx="24" cy="24" r="4"   fill="rgba(255,255,255,0.5)" />
-            <circle cx="24" cy="24" r="2.2" fill="#1a1a8a" />
+            <circle cx="24" cy="24" r="2.2" fill="#3d1a06" />
             <circle cx="24" cy="24" r="1"   fill="rgba(255,255,255,0.6)" />
             <polygon points="24,6 25.5,10 24,14 22.5,10" fill="rgba(255,255,255,0.35)" />
             <polygon points="42,24 38,25.5 34,24 38,22.5" fill="rgba(255,255,255,0.35)" />
@@ -234,21 +233,29 @@ const CONTACTS = [
   { name: 'Fahmi', tel: '+601156516348', display: '011-565 16348' },
 ];
 
-function Footer({ audioRef }: { audioRef: React.RefObject<HTMLAudioElement> }) {
+function Footer({ audioRef, opened }: { audioRef: React.RefObject<HTMLAudioElement | null>; opened: boolean }) {
   const [showCal, setShowCal] = useState(false);
   const [showCall, setShowCall] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    const onPlay  = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+    audio.addEventListener('play',  onPlay);
+    audio.addEventListener('pause', onPause);
+    return () => {
+      audio.removeEventListener('play',  onPlay);
+      audio.removeEventListener('pause', onPause);
+    };
+  }, []);
+
   const togglePlay = () => {
     const audio = audioRef.current;
     if (!audio) return;
-    if (isPlaying) {
-      audio.pause();
-      setIsPlaying(false);
-    } else {
-      audio.play().then(() => setIsPlaying(true)).catch(() => {});
-    }
+    if (isPlaying) { audio.pause(); } else { audio.play().catch(() => {}); }
   };
 
   const VENUE_QUERY = 'Damai+Homestay+Sungai+Petani';
@@ -286,7 +293,22 @@ function Footer({ audioRef }: { audioRef: React.RefObject<HTMLAudioElement> }) {
 
   return (
     <>
-      <div className={styles.footer}>
+      <button className={`${styles.musicFloatBtn} ${opened ? styles.footerReveal : styles.footerHidden}`} onClick={togglePlay} aria-label={isPlaying ? 'Mute' : 'Unmute'}>
+        {isPlaying ? (
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          </svg>
+        ) : (
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <line x1="23" y1="9" x2="17" y2="15"/>
+            <line x1="17" y1="9" x2="23" y2="15"/>
+          </svg>
+        )}
+      </button>
+      <div className={`${styles.footer} ${opened ? styles.footerReveal : styles.footerHidden}`}>
         <div className={styles.footerBtns}>
           <button className={styles.footerBtn} onClick={() => setShowCal(true)}>
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -307,17 +329,6 @@ function Footer({ audioRef }: { audioRef: React.RefObject<HTMLAudioElement> }) {
             <span className={styles.footerBtnLabel}>MAP</span>
           </button>
         </div>
-        <button className={styles.musicIconBtn} onClick={togglePlay} aria-label={isPlaying ? 'Pause' : 'Play'}>
-          {isPlaying ? (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-              <rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>
-            </svg>
-          ) : (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-            </svg>
-          )}
-        </button>
 
         <p className={styles.footerCredit}>
           e-invite by <a className={styles.footerCreditLink} href="https://azbinfahmi.com" target="_blank" rel="noreferrer">azbinfahmi</a>
@@ -406,7 +417,7 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
     if (!el) return;
     const obs = new IntersectionObserver(
       ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0, rootMargin: '0px 0px -120px 0px' }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -484,16 +495,21 @@ function ArchDivider() {
 export default function EInvitePage() {
   const [opened, setOpened] = useState(false);
   const [hiding, setHiding] = useState(false);
+  const [knobPressed, setKnobPressed] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const open = () => {
-    setHiding(true);
+  useEffect(() => {
+    document.body.style.overflow = opened ? '' : 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, [opened]);
+
+  const handleKnobClick = () => {
+    if (knobPressed) return;
+    setKnobPressed(true);
     const audio = audioRef.current;
-    if (audio) {
-      audio.currentTime = 12.5;
-      audio.play().catch(() => {});
-    }
-    setTimeout(() => setOpened(true), 800);
+    if (audio) { audio.currentTime = 0; audio.play().catch(() => {}); }
+    setTimeout(() => setHiding(true), 1000);
+    setTimeout(() => setOpened(true), 1000 + 800);
   };
 
   return (
@@ -512,17 +528,14 @@ export default function EInvitePage() {
       <audio ref={audioRef} src="/e-invite/Selamat Pengantin Baru.mp3" loop preload="auto" />
 
       {!opened && (
-        <div className={styles.splash} onClick={open}>
-          {/* frame — stays fixed */}
-          <SongketStrip position="left" />
+        <div className={styles.splash}>
+          <div className={styles.splashInner}>
           {/* door — swings inward */}
           <div className={`${styles.door} ${hiding ? styles.doorHide : ''}`}>
-            <SongketStrip position="top" />
-            <SongketStrip position="bottom" />
             <DoorPanels />
             <DoorHinge position="top" />
             <DoorHinge position="bottom" />
-            <DoorKnob />
+            <DoorKnob pressed={knobPressed} onClick={handleKnobClick} />
             <div className={styles.splashContent}>
               <p className={styles.splashSub}>JEMPUTAN PERKAHWINAN</p>
               <span className={styles.splashMono}>AL</span>
@@ -530,9 +543,10 @@ export default function EInvitePage() {
               <p className={styles.splashDate}>09 . 01 . 2027</p>
               <div className={styles.splashTap}>
                 <span className={styles.splashTapDot} />
-                sentuh screen untuk masuk
+                tekan tombol pintu untuk masuk
               </div>
             </div>
+          </div>
           </div>
         </div>
       )}
@@ -541,7 +555,6 @@ export default function EInvitePage() {
 
         {/* ── SECTION 1: cover ── */}
         <div className={styles.cover}>
-          <SongketStrip position="left" />
           <Ornament size={26} className={`${styles.orn} ${styles.ornT1}`} />
           <Ornament size={22} className={`${styles.orn} ${styles.ornT2}`} />
           <Ornament size={26} className={`${styles.orn} ${styles.ornT3}`} />
@@ -595,32 +608,32 @@ export default function EInvitePage() {
         </div>
 
         {/* ── SECTION 3: info grid ── */}
-        <Reveal>
-          <div className={d.infoGridWrapper}>
-            <div className={d.infoGrid}>
-              <div className={d.infoCol}>
-                <p className={d.dayLabel}>SABTU</p>
-                <p className={d.dayNumber}>09</p>
-                <p className={d.monthYear}>Januari 2027</p>
-                <p className={d.hijriSmall}>30 Rejab 1448H</p>
-              </div>
-              <div className={d.infoCol}>
+        <div className={d.infoGridWrapper}>
+          <div className={d.infoGrid}>
+            <div className={d.infoCol}>
+              <Reveal><p className={d.dayLabel}>SABTU</p></Reveal>
+              <Reveal delay={80}><p className={d.dayNumber}>09</p></Reveal>
+              <Reveal delay={160}><p className={d.monthYear}>Januari 2027</p></Reveal>
+              <Reveal delay={220}><p className={d.hijriSmall}>30 Rejab 1448H</p></Reveal>
+            </div>
+            <div className={d.infoCol}>
+              <Reveal>
                 <div className={d.midTop}>
                   <p className={d.infoLabel}>Aturcara Majlis</p>
                   <p className={d.infoValue}>
                     <span className={d.infoValueBold}>11.00 pagi</span> hingga <span className={d.infoValueBold}>5.00 petang</span>
                   </p>
                 </div>
-                <p className={d.infoLabel}>Lokasi</p>
-                <p className={d.venueName}><span className={d.venuePin}>📍</span>Damai Homestay</p>
-                <p className={d.venueAddr}>Lot 843, Jalan Sg Jagong,<br />Sg Layar</p>
-              </div>
-              <div className={d.countdownRow}>
-                <Countdown />
-              </div>
+              </Reveal>
+              <Reveal delay={100}><p className={d.infoLabel}>Lokasi</p></Reveal>
+              <Reveal delay={160}><p className={d.venueName}><span className={d.venuePin}>📍</span>Damai Homestay</p></Reveal>
+              <Reveal delay={220}><p className={d.venueAddr}>Lot 843, Jalan Sg Jagong,<br />Sg Layar</p></Reveal>
+            </div>
+            <div className={d.countdownRow}>
+              <Reveal><Countdown /></Reveal>
             </div>
           </div>
-        </Reveal>
+        </div>
 
         {/* ── SECTION 4: map ── */}
         {/* <div className={d.mapSection}>
@@ -649,7 +662,7 @@ export default function EInvitePage() {
         <div className={styles.pageBottomPad} />
       </div>
 
-      <Footer audioRef={audioRef} />
+      <Footer audioRef={audioRef} opened={opened} />
     </>
   );
 }

@@ -6,12 +6,12 @@
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
-  background: #1a1a8a;
-  color: #1a1a7a;
+  background: #3d1a06;
+  color: #4a2508;
   overflow-x: hidden;
 }
 
-/* ---- Navy pattern background (reuse songket feel) ---- */
+/* ---- Brown pattern background ---- */
 .navyBg {
   background-color: transparent;
   background-image:
@@ -31,7 +31,7 @@
 .walimatul {
   font-family: 'Great Vibes', cursive;
   font-size: clamp(28px, 7vw, 40px);
-  color: #1a1a7a;
+  color: #4a2508;
   margin: 0 0 4px;
 }
 
@@ -46,7 +46,7 @@
 .archDivLine {
   flex: 1;
   height: 1px;
-  background: #1a1a7a;
+  background: #4a2508;
   opacity: 0.35;
   display: block;
 }
@@ -54,14 +54,14 @@
 .archDots {
   font-size: 6px;
   letter-spacing: 4px;
-  color: #1a1a7a;
+  color: #4a2508;
   opacity: 0.6;
 }
 
 .parentNames {
   font-size: clamp(13px, 3.5vw, 16px);
   font-weight: 700;
-  color: #1a1a7a;
+  color: #4a2508;
   line-height: 1.6;
   margin: 0 0 14px;
 }
@@ -91,7 +91,7 @@
   font-size: clamp(20px, 5.2vw, 28px);
   font-style: italic;
   font-weight: 600;
-  color: #1a1a7a;
+  color: #4a2508;
   line-height: 1.35;
   margin: 0 0 6px;
 }
@@ -108,7 +108,7 @@
   font-size: clamp(20px, 5.2vw, 28px);
   font-style: italic;
   font-weight: 600;
-  color: #1a1a7a;
+  color: #4a2508;
   line-height: 1.35;
   margin: 0;
 }
