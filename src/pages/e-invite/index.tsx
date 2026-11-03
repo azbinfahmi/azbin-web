@@ -494,22 +494,26 @@ export default function EInvitePage() {
       <audio ref={audioRef} src="/e-invite/Selamat Pengantin Baru.mp3" loop preload="auto" />
 
       {!opened && (
-        <div className={`${styles.splash} ${hiding ? styles.splashHide : ''}`} onClick={open}>
+        <div className={styles.splash} onClick={open}>
+          {/* frame — stays fixed */}
           <SongketStrip position="left" />
-          <SongketStrip position="top" />
-          <SongketStrip position="bottom" />
-          <DoorPanels />
-          <DoorHinge position="top" />
-          <DoorHinge position="bottom" />
-          <DoorKnob />
-          <div className={styles.splashContent}>
-            <p className={styles.splashSub}>JEMPUTAN PERKAHWINAN</p>
-            <span className={styles.splashMono}>AL</span>
-            <p className={styles.splashNames}>Azbin &amp; Lin</p>
-            <p className={styles.splashDate}>09 . 01 . 2027</p>
-            <div className={styles.splashTap}>
-              <span className={styles.splashTapDot} />
-              sentuh screen untuk masuk
+          {/* door — swings inward */}
+          <div className={`${styles.door} ${hiding ? styles.doorHide : ''}`}>
+            <SongketStrip position="top" />
+            <SongketStrip position="bottom" />
+            <DoorPanels />
+            <DoorHinge position="top" />
+            <DoorHinge position="bottom" />
+            <DoorKnob />
+            <div className={styles.splashContent}>
+              <p className={styles.splashSub}>JEMPUTAN PERKAHWINAN</p>
+              <span className={styles.splashMono}>AL</span>
+              <p className={styles.splashNames}>Azbin &amp; Lin</p>
+              <p className={styles.splashDate}>09 . 01 . 2027</p>
+              <div className={styles.splashTap}>
+                <span className={styles.splashTapDot} />
+                sentuh screen untuk masuk
+              </div>
             </div>
           </div>
         </div>

@@ -570,22 +570,28 @@
   position: fixed;
   inset: 0;
   z-index: 999;
+  cursor: pointer;
+  overflow: hidden;
+  perspective: 1400px;
+}
+
+.door {
+  position: absolute;
+  inset: 0;
   background: radial-gradient(ellipse at 60% 35%, #2a3acc 0%, #0d0d6a 55%, #080850 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  overflow: hidden;
   padding-left: 18%;
   padding-top: 60px;
   padding-bottom: 60px;
+  transform-origin: 0% 50%;
   transform-style: preserve-3d;
   backface-visibility: hidden;
 }
 
-.splashHide {
-  transform-origin: 0% 50%;
+.doorHide {
   animation: doorSwingOpen 0.75s cubic-bezier(0.4, 0, 0.8, 1) forwards;
 }
 
