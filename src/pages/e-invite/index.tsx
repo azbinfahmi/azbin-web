@@ -440,7 +440,6 @@ export default function EInvitePage() {
       {!opened && (
         <div className={`${styles.splash} ${hiding ? styles.splashHide : ''}`} onClick={open}>
           <SongketStrip position="left" />
-          <SongketStrip position="right" />
           <SongketStrip position="top" />
           <SongketStrip position="bottom" />
           <div className={styles.splashContent}>
