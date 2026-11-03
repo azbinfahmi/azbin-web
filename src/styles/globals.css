@@ -23,3 +23,6 @@ body {
 main {
   min-height: 100vh;
 }
+section {
+  scroll-margin-top: 72px; /* match your actual header height */
+}

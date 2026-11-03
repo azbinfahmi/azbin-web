@@ -18,7 +18,6 @@ export default function HomePage() {
       <AboutSection />
       <SelectedSystems/>
       <SkillsSection />
-      <ContactSection />
       <Footer/>
     </main>
   )

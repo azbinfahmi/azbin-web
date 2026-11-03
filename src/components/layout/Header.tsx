@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "@/styles/layout/Header.module.css";
 
 const navItems = [
@@ -12,44 +12,42 @@ const navItems = [
 export function Header() {
   const [activeSection, setActiveSection] = useState("home");
   const [open, setOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const sectionIds = ["home", ...navItems.map((item) => item.id)];
+  const sectionIds = ["home", ...navItems.map((item) => item.id)];
+  const sections = sectionIds
+    .map((id) => document.getElementById(id))
+    .filter(Boolean) as HTMLElement[];
 
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter(Boolean) as HTMLElement[];
+  const handleScroll = () => {
+    const headerHeight = headerRef.current?.offsetHeight ?? 64;
+    const buffer = headerHeight + 10;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleSections = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    let current = sections[0]?.id ?? "home";
 
-        if (visibleSections.length > 0) {
-          setActiveSection(visibleSections[0].target.id);
-        }
-      },
-      {
-        threshold: [0.3, 0.6, 0.9],
+    for (const section of sections) {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= buffer) {
+        current = section.id;
       }
-    );
+    }
 
-    sections.forEach((section) => observer.observe(section));
+    setActiveSection(current);
+  };
 
-    return () => observer.disconnect();
-  }, []);
-
+  handleScroll();
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
 
   return (
-    <header className={styles.header}>
+    <header ref={headerRef} className={styles.header}>
       <div className={styles.inner}>
-        {/* Left: Name */}
         <Link href="#home" className={styles.brand}>
           Azbin Fahmi
         </Link>
 
-        {/* Right: Desktop Nav */}
         <nav className={styles.nav}>
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
@@ -57,9 +55,7 @@ export function Header() {
               <Link
                 key={item.id}
                 href={item.href}
-                className={`${styles.link} ${
-                  isActive ? styles.active : ""
-                }`}
+                className={`${styles.link} ${isActive ? styles.active : ""}`}
               >
                 {item.label}
               </Link>
@@ -67,7 +63,6 @@ export function Header() {
           })}
         </nav>
 
-        {/* Mobile menu button */}
         <button
           className={styles.menuButton}
           onClick={() => setOpen((v) => !v)}
@@ -77,7 +72,6 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {open && (
         <div className={styles.mobileMenu}>
           {navItems.map((item) => (

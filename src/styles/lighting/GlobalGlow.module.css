@@ -10,15 +10,16 @@
 
   width: 90vw;
   height: 60vh;
-  /* background: radial-gradient(
+  background: radial-gradient(
     ellipse at center,
     rgba(0, 120, 255, 0.25) 10%,
-    rgba(80, 0, 255, 0.15) 100%,
-    transparent 70%
-  ); */
+    rgba(80, 0, 255, 0.15) 10%,
+    transparent 20%
+  );
   /* background: red; */
   filter: blur(120px);
   z-index: 1;
+  pointer-events: none;
 }
 
 
