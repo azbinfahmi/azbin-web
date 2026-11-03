@@ -38,9 +38,25 @@ function Divider() {
   );
 }
 
-function SongketStrip() {
+type SongketPos = 'left' | 'right' | 'top' | 'bottom';
+
+function SongketStrip({ position = 'left' }: { position?: SongketPos }) {
+  const posClass = {
+    left:   styles.songketLeft,
+    right:  styles.songketRight,
+    top:    styles.songketTop,
+    bottom: styles.songketBottom,
+  }[position];
+
+  const borderClass = {
+    left:   styles.songketBorderRight,
+    right:  styles.songketBorderLeft,
+    top:    styles.songketBorderBottom,
+    bottom: styles.songketBorderTop,
+  }[position];
+
   return (
-    <div className={styles.songket}>
+    <div className={`${styles.songket} ${posClass}`}>
       <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
           <pattern id="sg1" width="12" height="12" patternUnits="userSpaceOnUse">
@@ -76,7 +92,7 @@ function SongketStrip() {
         <rect width="100%" height="100%" fill="url(#sg2)" />
         <rect width="100%" height="100%" fill="url(#sg3)" opacity="0.85" />
       </svg>
-      <div className={styles.songketBorder} />
+      <div className={borderClass} />
     </div>
   );
 }
@@ -440,7 +456,10 @@ export default function EInvitePage() {
 
         {/* ── SECTION 1: cover ── */}
         <div className={styles.cover}>
-          <SongketStrip />
+          <SongketStrip position="left" />
+          <SongketStrip position="right" />
+          <SongketStrip position="top" />
+          <SongketStrip position="bottom" />
           <Ornament size={26} className={`${styles.orn} ${styles.ornT1}`} />
           <Ornament size={22} className={`${styles.orn} ${styles.ornT2}`} />
           <Ornament size={26} className={`${styles.orn} ${styles.ornT3}`} />
