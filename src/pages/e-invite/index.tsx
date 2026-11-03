@@ -496,13 +496,15 @@ export default function EInvitePage() {
 
         {/* ── SECTION 5: doa ── */}
         <div className={d.doaSection}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/e-invite/bismillah.png" alt="Bismillah" className={d.bismillah} />
-          <p className={d.doaText}>
-            Ya Allah, kurniakanlah kepada kedua mempelai ini rumah tangga yang sakinah, mawaddah dan warahmah. 
-            Satukanlah hati mereka dalam kasih yang Engkau redhai, teguhkanlah mereka dalam kesetiaan, 
-            dan jadikanlah mereka pelindung serta penyejuk hati buat satu sama lain. Amin.
-          </p>
+          <div className={d.doaContainer}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/e-invite/bismillah.png" alt="Bismillah" className={d.bismillah} />
+            <p className={d.doaText}>
+              Ya Allah, kurniakanlah kepada kedua mempelai ini rumah tangga yang sakinah, mawaddah dan warahmah.
+              Satukanlah hati mereka dalam kasih yang Engkau redhai, teguhkanlah mereka dalam kesetiaan,
+              dan jadikanlah mereka pelindung serta penyejuk hati buat satu sama lain. Amin.
+            </p>
+          </div>
         </div>
 
         <div className={styles.pageBottomPad} />

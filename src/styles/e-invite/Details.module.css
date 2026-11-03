@@ -291,8 +291,15 @@
 
 /* ---- Doa section ---- */
 .doaSection {
-  padding: 36px 32px 48px;
+  padding: 24px 16px 48px;
   text-align: center;
+}
+
+.doaContainer {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 28px 24px 32px;
 }
 
 .bismillah {
