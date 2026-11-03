@@ -361,7 +361,7 @@ function Countdown() {
   }, []);
 
   const units = [
-    { val: time.hari,  label: 'HARI',  pad: 3 },
+    { val: time.hari,  label: 'HARI',  pad: 2 },
     { val: time.jam,   label: 'JAM',   pad: 2 },
     { val: time.minit, label: 'MINIT', pad: 2 },
     { val: time.saat,  label: 'SAAT',  pad: 2 },
