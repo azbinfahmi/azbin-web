@@ -144,41 +144,11 @@ const CONTACTS = [
   { name: 'Fahmi', tel: '+601156516348', display: '011-565 16348' },
 ];
 
-function Footer() {
+function Footer({ audioRef }: { audioRef: React.RefObject<HTMLAudioElement> }) {
   const [showCal, setShowCal] = useState(false);
   const [showCall, setShowCall] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const tryPlay = () => {
-      audio.currentTime = 12.5;
-      audio.play().then(() => setIsPlaying(true)).catch(() => {});
-    };
-
-    tryPlay();
-
-    const unlock = () => {
-      tryPlay();
-      window.removeEventListener('touchend', unlock);
-      window.removeEventListener('click', unlock);
-      window.removeEventListener('scroll', unlock);
-    };
-
-    window.addEventListener('touchend', unlock, { once: true });
-    window.addEventListener('click',    unlock, { once: true });
-    window.addEventListener('scroll',   unlock, { once: true });
-
-    return () => {
-      window.removeEventListener('touchend', unlock);
-      window.removeEventListener('click',    unlock);
-      window.removeEventListener('scroll',   unlock);
-    };
-  }, []);
 
   const togglePlay = () => {
     const audio = audioRef.current;
@@ -226,8 +196,6 @@ function Footer() {
 
   return (
     <>
-      <audio ref={audioRef} src="/e-invite/Selamat Pengantin Baru.mp3" loop preload="auto" />
-
       <div className={styles.footer}>
         <div className={styles.footerBtns}>
           <button className={styles.footerBtn} onClick={() => setShowCal(true)}>
@@ -397,6 +365,20 @@ function ArchDivider() {
 
 /* ── main page ── */
 export default function EInvitePage() {
+  const [opened, setOpened] = useState(false);
+  const [hiding, setHiding] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  const open = () => {
+    setHiding(true);
+    const audio = audioRef.current;
+    if (audio) {
+      audio.currentTime = 12.5;
+      audio.play().catch(() => {});
+    }
+    setTimeout(() => setOpened(true), 600);
+  };
+
   return (
     <>
       <Head>
@@ -409,6 +391,24 @@ export default function EInvitePage() {
           rel="stylesheet"
         />
       </Head>
+
+      <audio ref={audioRef} src="/e-invite/Selamat Pengantin Baru.mp3" loop preload="auto" />
+
+      {!opened && (
+        <div className={`${styles.splash} ${hiding ? styles.splashHide : ''}`} onClick={open}>
+          <SongketStrip />
+          <div className={styles.splashContent}>
+            <p className={styles.splashSub}>JEMPUTAN PERKAHWINAN</p>
+            <span className={styles.splashMono}>AL</span>
+            <p className={styles.splashNames}>Azbin &amp; Lin</p>
+            <p className={styles.splashDate}>09 . 01 . 2027</p>
+            <div className={styles.splashTap}>
+              <span className={styles.splashTapDot} />
+              Ketuk untuk buka
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className={styles.page}>
 
@@ -510,7 +510,7 @@ export default function EInvitePage() {
         <div className={styles.pageBottomPad} />
       </div>
 
-      <Footer />
+      <Footer audioRef={audioRef} />
     </>
   );
 }
