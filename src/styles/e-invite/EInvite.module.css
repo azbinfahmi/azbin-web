@@ -577,6 +577,9 @@
   justify-content: center;
   cursor: pointer;
   overflow: hidden;
+  padding-left: 18%;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .splashHide {
