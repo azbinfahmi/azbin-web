@@ -557,8 +557,8 @@
 }
 
 @keyframes doorSwingOpen {
-  0%   { transform: perspective(1400px) rotateY(0deg);    }
-  100% { transform: perspective(1400px) rotateY(-100deg); }
+  0%   { transform: perspective(1400px) rotateY(0deg);   }
+  100% { transform: perspective(1400px) rotateY(100deg); }
 }
 
 @keyframes splashTapPulse {
