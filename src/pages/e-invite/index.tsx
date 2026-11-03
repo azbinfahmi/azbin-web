@@ -316,7 +316,7 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
     if (!el) return;
     const obs = new IntersectionObserver(
       ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.12 }
+      { threshold: 0, rootMargin: '0px 0px -40px 0px' }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -494,15 +494,17 @@ export default function EInvitePage() {
         </div>
 
         {/* ── SECTION 3: info grid ── */}
-        <Reveal>
         <div className={d.infoGridWrapper}>
         <div className={d.infoGrid}>
+          <Reveal>
           <div className={d.infoCol}>
             <p className={d.dayLabel}>SABTU</p>
             <p className={d.dayNumber}>09</p>
             <p className={d.monthYear}>Januari 2027</p>
             <p className={d.hijriSmall}>30 Rejab 1448H</p>
           </div>
+          </Reveal>
+          <Reveal delay={120}>
           <div className={d.infoCol}>
             <div className={d.midTop}>
               <p className={d.infoLabel}>Aturcara Majlis</p>
@@ -514,12 +516,14 @@ export default function EInvitePage() {
             <p className={d.venueName}><span className={d.venuePin}>📍</span>Damai Homestay</p>
             <p className={d.venueAddr}>Lot 843, Jalan Sg Jagong,<br />Sg Layar</p>
           </div>
+          </Reveal>
+          <Reveal delay={240}>
           <div className={d.countdownRow}>
             <Countdown />
           </div>
+          </Reveal>
         </div>
         </div>
-        </Reveal>
 
         {/* ── SECTION 4: map ── */}
         {/* <div className={d.mapSection}>
