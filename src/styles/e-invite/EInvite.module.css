@@ -586,7 +586,17 @@
   animation: splashFadeOut 0.35s ease 0.35s both;
 }
 
-.splashHide .splashContent {
+.doorKnob {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+}
+
+.splashHide .splashContent,
+.splashHide .doorKnob {
   animation: splashFadeOut 0.25s ease forwards;
 }
 

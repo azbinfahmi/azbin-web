@@ -38,7 +38,33 @@ function Divider() {
   );
 }
 
-type SongketPos = 'left' | 'right' | 'top' | 'bottom';
+function DoorKnob() {
+  return (
+    <div className={styles.doorKnob}>
+      <svg width="44" height="70" viewBox="0 0 44 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="knobGrad" cx="38%" cy="32%" r="60%">
+            <stop offset="0%"   stopColor="#fff8d6" />
+            <stop offset="30%"  stopColor="#e8c96a" />
+            <stop offset="70%"  stopColor="#b8942a" />
+            <stop offset="100%" stopColor="#7a5c10" />
+          </radialGradient>
+          <radialGradient id="knobShine" cx="35%" cy="28%" r="40%">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.55)" />
+            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+          </radialGradient>
+        </defs>
+        {/* knob circle */}
+        <circle cx="22" cy="22" r="20" fill="url(#knobGrad)" />
+        <circle cx="22" cy="22" r="20" fill="url(#knobShine)" />
+        <circle cx="22" cy="22" r="20" stroke="rgba(0,0,0,0.25)" strokeWidth="1" />
+        {/* keyhole */}
+        <circle cx="22" cy="52" r="5" fill="rgba(0,0,0,0.55)" />
+        <path d="M19.5 57 L22 67 L24.5 57 Z" fill="rgba(0,0,0,0.55)" />
+      </svg>
+    </div>
+  );
+}
 
 function SongketStrip({ position = 'left' }: { position?: SongketPos }) {
   const posClass = {
@@ -442,6 +468,7 @@ export default function EInvitePage() {
           <SongketStrip position="left" />
           <SongketStrip position="top" />
           <SongketStrip position="bottom" />
+          <DoorKnob />
           <div className={styles.splashContent}>
             <p className={styles.splashSub}>JEMPUTAN PERKAHWINAN</p>
             <span className={styles.splashMono}>AL</span>
