@@ -326,7 +326,7 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
     <div
       ref={ref}
       className={`${styles.reveal} ${visible ? styles.revealVisible : ''}`}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+      style={delay ? { animationDelay: `${delay}ms` } : undefined}
     >
       {children}
     </div>
