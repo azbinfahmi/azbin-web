@@ -364,3 +364,196 @@
   margin: 8px 0 0;
 }
 
+/* ---- Buku Tetamu section ---- */
+.bukuSection {
+  padding: 32px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.bukuTitle {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(32px, 8vw, 44px);
+  color: #3d1a06;
+  margin: 0;
+  text-align: center;
+}
+
+.bukuSubtitle {
+  font-size: clamp(11px, 2.8vw, 13px);
+  color: rgba(61,26,6,0.6);
+  font-family: system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  margin: 0;
+  text-align: center;
+}
+
+.bukuList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+.bukuEmpty {
+  font-size: clamp(12px, 3vw, 14px);
+  color: rgba(61,26,6,0.45);
+  font-family: system-ui, sans-serif;
+  font-style: italic;
+  text-align: center;
+  padding: 24px 0;
+  margin: 0;
+}
+
+.bukuCard {
+  background: rgba(90,40,8,0.06);
+  border: 1px solid rgba(90,40,8,0.15);
+  border-radius: 10px;
+  padding: 14px 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bukuCardName {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(12px, 3vw, 14px);
+  font-weight: 700;
+  color: #3d1a06;
+  margin: 0 0 6px;
+}
+
+.bukuCardMsg {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(13px, 3.2vw, 15px);
+  font-style: italic;
+  color: rgba(61,26,6,0.85);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.bukuBtn {
+  margin-top: 8px;
+  padding: 12px 36px;
+  background: #3d1a06;
+  color: #e6ccaa;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(12px, 3vw, 14px);
+  letter-spacing: 0.15em;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.bukuBtn:active {
+  transform: scale(0.97);
+  background: #5a2508;
+}
+
+/* ---- Ucapan modal ---- */
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+.ucapanOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 200;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.ucapanModal {
+  background: #ecdcb8;
+  width: 100%;
+  max-width: 480px;
+  padding: 28px 24px 36px;
+  border-radius: 0 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: slideDown 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+}
+
+.ucapanClose {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: rgba(61,26,6,0.1);
+  border: none;
+  color: #3d1a06;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.ucapanModalTitle {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(12px, 3vw, 14px);
+  letter-spacing: 0.2em;
+  color: rgba(61,26,6,0.55);
+  margin: 0;
+  text-align: center;
+}
+
+.ucapanInput,
+.ucapanTextarea {
+  width: 100%;
+  background: rgba(90,40,8,0.06);
+  border: 1px solid rgba(90,40,8,0.2);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-family: system-ui, sans-serif;
+  font-size: clamp(13px, 3.2vw, 15px);
+  color: #3d1a06;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.ucapanInput::placeholder,
+.ucapanTextarea::placeholder {
+  color: rgba(61,26,6,0.4);
+}
+
+.ucapanInput:focus,
+.ucapanTextarea:focus {
+  border-color: rgba(90,40,8,0.45);
+}
+
+.ucapanTextarea {
+  resize: none;
+}
+
+.ucapanSubmit {
+  padding: 12px;
+  background: #3d1a06;
+  color: #e6ccaa;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(12px, 3vw, 14px);
+  letter-spacing: 0.15em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.ucapanSubmit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ucapanSubmit:not(:disabled):active {
+  background: #5a2508;
+}

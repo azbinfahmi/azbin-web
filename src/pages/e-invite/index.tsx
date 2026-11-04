@@ -538,6 +538,40 @@ export default function EInvitePage() {
   const [showMap, setShowMap] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
+  const [ucapanList, setUcapanList] = useState<{ id: number; name: string; message: string; created_at: string }[]>([]);
+  const [showUcapan, setShowUcapan] = useState(false);
+  const [ucapanName, setUcapanName] = useState('');
+  const [ucapanMsg, setUcapanMsg] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/e-invite/ucapan')
+      .then(r => r.json())
+      .then(data => { if (Array.isArray(data)) setUcapanList(data); })
+      .catch(() => {});
+  }, []);
+
+  const handleUcapanSubmit = async () => {
+    if (!ucapanName.trim() || !ucapanMsg.trim()) return;
+    setSubmitting(true);
+    try {
+      const res = await fetch('/api/e-invite/ucapan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: ucapanName, message: ucapanMsg }),
+      });
+      if (res.ok) {
+        const newItem = await res.json();
+        setUcapanList(prev => [newItem, ...prev]);
+        setUcapanName('');
+        setUcapanMsg('');
+        setShowUcapan(false);
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   useEffect(() => {
     document.body.style.overflow = opened ? '' : 'hidden';
     return () => { document.body.style.overflow = ''; };
@@ -702,8 +736,67 @@ export default function EInvitePage() {
           </Reveal>
         </div>
 
+        {/* ── SECTION 6: buku tetamu ── */}
+        <div className={d.bukuSection}>
+          <Reveal><p className={d.bukuTitle}>Buku Tetamu</p></Reveal>
+          <Reveal delay={100}><p className={d.bukuSubtitle}>Tinggalkan ucapan anda untuk pengantin</p></Reveal>
+
+          <div className={d.bukuList}>
+            {ucapanList.length === 0 ? (
+              <p className={d.bukuEmpty}>Belum ada ucapan. Jadilah yang pertama!</p>
+            ) : (
+              ucapanList.map(u => (
+                <Reveal key={u.id}>
+                  <div className={d.bukuCard}>
+                    <p className={d.bukuCardName}>{u.name}</p>
+                    <p className={d.bukuCardMsg}>{u.message}</p>
+                  </div>
+                </Reveal>
+              ))
+            )}
+          </div>
+
+          <Reveal>
+            <button className={d.bukuBtn} onClick={() => setShowUcapan(true)}>
+              Beri Ucapan
+            </button>
+          </Reveal>
+        </div>
+
         <div className={styles.pageBottomPad} />
       </div>
+
+      {/* ── MODAL: beri ucapan ── */}
+      {showUcapan && (
+        <div className={d.ucapanOverlay} onClick={() => setShowUcapan(false)}>
+          <div className={d.ucapanModal} onClick={e => e.stopPropagation()}>
+            <button className={d.ucapanClose} onClick={() => setShowUcapan(false)}>✕</button>
+            <p className={d.ucapanModalTitle}>BERI UCAPAN</p>
+            <input
+              className={d.ucapanInput}
+              placeholder="Nama anda"
+              value={ucapanName}
+              onChange={e => setUcapanName(e.target.value)}
+              maxLength={60}
+            />
+            <textarea
+              className={d.ucapanTextarea}
+              placeholder="Tulis ucapan anda..."
+              value={ucapanMsg}
+              onChange={e => setUcapanMsg(e.target.value)}
+              maxLength={300}
+              rows={4}
+            />
+            <button
+              className={d.ucapanSubmit}
+              onClick={handleUcapanSubmit}
+              disabled={submitting || !ucapanName.trim() || !ucapanMsg.trim()}
+            >
+              {submitting ? 'Menghantar...' : 'Hantar Ucapan'}
+            </button>
+          </div>
+        </div>
+      )}
 
       <Footer audioRef={audioRef} opened={opened} showMap={showMap} setShowMap={setShowMap} />
     </>
