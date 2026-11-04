@@ -433,18 +433,22 @@
 }
 
 /* ---- Calendar modal ---- */
-@keyframes slideUp {
+@keyframes calSlideUp {
   from { transform: translateY(100%); }
   to   { transform: translateY(0); }
 }
 
-@keyframes slideDown {
+@keyframes calSlideDown {
   from { transform: translateY(0); }
   to   { transform: translateY(100%); }
 }
 
+.calModalOpen {
+  animation: calSlideUp 0.28s ease-out;
+}
+
 .calModalClose {
-  animation: slideDown 0.28s ease-in forwards;
+  animation: calSlideDown 0.28s ease-in forwards;
 }
 
 .modalOverlay {
@@ -467,7 +471,6 @@
   flex-direction: column;
   align-items: center;
   gap: 24px;
-  animation: slideUp 0.28s ease-out;
   position: relative;
 }
 
