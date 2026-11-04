@@ -237,6 +237,13 @@ function Footer({ audioRef, opened, showMap, setShowMap }: { audioRef: React.Ref
   const [showCal, setShowCal] = useState(false);
   const [showCall, setShowCall] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [calClosing, setCalClosing] = useState(false);
+  const [callClosing, setCallClosing] = useState(false);
+  const [mapClosing, setMapClosing] = useState(false);
+
+  const closeCal  = () => { setCalClosing(true);  setTimeout(() => { setShowCal(false);       setCalClosing(false);  }, 260); };
+  const closeCall = () => { setCallClosing(true); setTimeout(() => { setShowCall(false);      setCallClosing(false); }, 260); };
+  const closeMap  = () => { setMapClosing(true);  setTimeout(() => { setShowMap(false);       setMapClosing(false);  }, 260); };
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -276,7 +283,7 @@ function Footer({ audioRef, opened, showMap, setShowMap }: { audioRef: React.Ref
     const a = document.createElement('a');
     a.href = url; a.download = 'majlis-perkahwinan.ics'; a.click();
     URL.revokeObjectURL(url);
-    setShowCal(false);
+    closeCal();
   };
 
   const handleGoogle = () => {
@@ -287,7 +294,7 @@ function Footer({ audioRef, opened, showMap, setShowMap }: { audioRef: React.Ref
       '&location=Damai+Homestay%2C+Sungai+Petani',
       '_blank'
     );
-    setShowCal(false);
+    closeCal();
   };
 
   return (
@@ -335,17 +342,17 @@ function Footer({ audioRef, opened, showMap, setShowMap }: { audioRef: React.Ref
       </div>
 
       {showMap && (
-        <div className={styles.modalOverlay} onClick={() => setShowMap(false)}>
-          <div className={styles.calModal} onClick={e => e.stopPropagation()}>
-            <button className={styles.modalClose} onClick={() => setShowMap(false)}>✕</button>
+        <div className={styles.modalOverlay} onClick={closeMap}>
+          <div className={`${styles.calModal} ${mapClosing ? styles.calModalClose : ''}`} onClick={e => e.stopPropagation()}>
+            <button className={styles.modalClose} onClick={closeMap}>✕</button>
             <p className={styles.calModalTitle}>BUKA DENGAN</p>
             <div className={styles.calOptions}>
-              <a className={styles.calOption} href={wazeUrl} target="_blank" rel="noreferrer" onClick={() => setShowMap(false)}>
+              <a className={styles.calOption} href={wazeUrl} target="_blank" rel="noreferrer" onClick={closeMap}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/e-invite/waze.png" alt="Waze" className={styles.mapAppIcon} />
                 <span className={styles.calOptionLabel}>WAZE</span>
               </a>
-              <a className={styles.calOption} href={googleMapsUrl} target="_blank" rel="noreferrer" onClick={() => setShowMap(false)}>
+              <a className={styles.calOption} href={googleMapsUrl} target="_blank" rel="noreferrer" onClick={closeMap}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/e-invite/google-maps.png" alt="Google Maps" className={styles.mapAppIcon} />
                 <span className={styles.calOptionLabel}>GOOGLE MAPS</span>
@@ -356,9 +363,9 @@ function Footer({ audioRef, opened, showMap, setShowMap }: { audioRef: React.Ref
       )}
 
       {showCall && (
-        <div className={styles.modalOverlay} onClick={() => setShowCall(false)}>
-          <div className={styles.calModal} onClick={e => e.stopPropagation()}>
-            <button className={styles.modalClose} onClick={() => setShowCall(false)}>✕</button>
+        <div className={styles.modalOverlay} onClick={closeCall}>
+          <div className={`${styles.calModal} ${callClosing ? styles.calModalClose : ''}`} onClick={e => e.stopPropagation()}>
+            <button className={styles.modalClose} onClick={closeCall}>✕</button>
             <p className={styles.calModalTitle}>HUBUNGI KAMI</p>
             <div className={styles.callList}>
               {CONTACTS.map(c => (
@@ -378,9 +385,9 @@ function Footer({ audioRef, opened, showMap, setShowMap }: { audioRef: React.Ref
       )}
 
       {showCal && (
-        <div className={styles.modalOverlay} onClick={() => setShowCal(false)}>
-          <div className={styles.calModal} onClick={e => e.stopPropagation()}>
-            <button className={styles.modalClose} onClick={() => setShowCal(false)}>✕</button>
+        <div className={styles.modalOverlay} onClick={closeCal}>
+          <div className={`${styles.calModal} ${calClosing ? styles.calModalClose : ''}`} onClick={e => e.stopPropagation()}>
+            <button className={styles.modalClose} onClick={closeCal}>✕</button>
             <p className={styles.calModalTitle}>TAMBAH KE KALENDAR</p>
             <div className={styles.calOptions}>
               <button className={styles.calOption} onClick={handleApple}>
