@@ -545,6 +545,8 @@ export default function EInvitePage() {
   const [showMap, setShowMap] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
+  useEffect(() => { window.scrollTo(0, 0); }, []);
+
   const [ucapanList, setUcapanList] = useState<{ id: number; name: string; message: string; created_at: string }[]>([]);
   const [showUcapan, setShowUcapan] = useState(false);
   const [ucapanClosing, setUcapanClosing] = useState(false);
