@@ -37,8 +37,6 @@
 
 @keyframes coverBgZoomIn {
   0%   { opacity: 0; transform: scale(1.55); }
-  40%  { opacity: 1; transform: scale(1.07); }
-  65%  { opacity: 1; transform: scale(1.07); }
   100% { opacity: 1; transform: scale(1); }
 }
 
@@ -48,7 +46,7 @@
 }
 
 .coverBgReveal {
-  animation: coverBgZoomIn 1.6s ease forwards;
+  animation: coverBgZoomIn 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 /* ---- Songket strip ---- */
