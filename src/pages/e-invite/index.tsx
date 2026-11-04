@@ -435,7 +435,7 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 }
 
 /* ── countdown ── */
-const WEDDING_DATE = new Date('2027-01-09T11:00:00+08:00');
+const WEDDING_DATE = new Date('2027-01-09T11:30:00+08:00');
 
 function Countdown() {
   const calc = () => {
@@ -658,7 +658,7 @@ export default function EInvitePage() {
                 <div className={d.midTop}>
                   <p className={d.infoLabel}>Aturcara Majlis</p>
                   <p className={d.infoValue}>
-                    <span className={d.infoValueBold}>11.00 pagi</span> hingga <span className={d.infoValueBold}>5.00 petang</span>
+                    <span className={d.infoValueBold}>11.30 pagi</span> hingga <span className={d.infoValueBold}>5.00 petang</span>
                   </p>
                 </div>
               </Reveal>
