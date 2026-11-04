@@ -233,10 +233,9 @@ const CONTACTS = [
   { name: 'Fahmi', tel: '+601156516348', display: '011-565 16348' },
 ];
 
-function Footer({ audioRef, opened }: { audioRef: React.RefObject<HTMLAudioElement | null>; opened: boolean }) {
+function Footer({ audioRef, opened, showMap, setShowMap }: { audioRef: React.RefObject<HTMLAudioElement | null>; opened: boolean; showMap: boolean; setShowMap: (v: boolean) => void }) {
   const [showCal, setShowCal] = useState(false);
   const [showCall, setShowCall] = useState(false);
-  const [showMap, setShowMap] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
@@ -536,6 +535,7 @@ export default function EInvitePage() {
   const [opened, setOpened] = useState(false);
   const [hiding, setHiding] = useState(false);
   const [knobPressed, setKnobPressed] = useState(false);
+  const [showMap, setShowMap] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -663,8 +663,12 @@ export default function EInvitePage() {
                 </div>
               </Reveal>
               <Reveal delay={100}><p className={d.infoLabel}>Lokasi</p></Reveal>
-              <Reveal delay={160}><p className={d.venueName}><span className={d.venuePin}>📍</span>Damai Homestay</p></Reveal>
-              <Reveal delay={220}><p className={d.venueAddr}>Lot 843, Jalan Sg Jagong,<br />Sg Layar</p></Reveal>
+              <Reveal delay={160}>
+                <div onClick={() => setShowMap(true)} style={{ cursor: 'pointer' }}>
+                  <p className={d.venueName}><span className={d.venuePin}>📍</span><span style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>Damai Homestay</span></p>
+                  <p className={d.venueAddr} style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>Lot 843, Jalan Sg Jagong,<br />Sg Layar</p>
+                </div>
+              </Reveal>
             </div>
             <div className={d.countdownRow}>
               <Reveal><Countdown /></Reveal>
@@ -681,31 +685,27 @@ export default function EInvitePage() {
         <div className={d.doaSection} style={{ position: 'relative', overflow: 'hidden' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/e-invite/template_bunga/4.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'fill', zIndex: 0, pointerEvents: 'none' }} />
-          <Reveal>
-          <div className={d.doaContainer}>
-            <Reveal delay={100}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/e-invite/bismillah.png" alt="Bismillah" className={d.bismillah} />
-            </Reveal>
-            <Reveal delay={200}>
-              <p className={d.doaArabic}>
-                وَأَنكِحُوا الْأَيَامَىٰ مِنكُمْ وَالصَّالِحِينَ مِنْ عِبَادِكُمْ وَإِمَائِكُمْ ۚ إِن يَكُونُوا فُقَرَاءَ يُغْنِهِمُ اللَّهُ مِن فَضْلِهِ ۗ وَاللَّهُ وَاسِعٌ عَلِيمٌ
-              </p>
-              <p className={d.doaText}>
-                Dan kahwinkanlah orang-orang bujang (lelaki dan perempuan) dalam kalangan kamu, dan orang-orang yang soleh daripada hamba-hamba kamu, lelaki dan perempuan.
-                Jika mereka miskin, Allah akan memberi kekayaan kepada mereka daripada limpah kurnia-Nya.
-                Dan Allah Maha Luas (rahmat-Nya dan pemberian-Nya), lagi Maha Mengetahui.
-              </p>
-              <p className={d.doaSource}>An-Nur (24:32)</p>
-            </Reveal>
-          </div>
+          <Reveal delay={100}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/e-invite/bismillah.png" alt="Bismillah" className={d.bismillah} />
+          </Reveal>
+          <Reveal delay={200}>
+            <p className={d.doaArabic}>
+              وَأَنكِحُوا الْأَيَامَىٰ مِنكُمْ وَالصَّالِحِينَ مِنْ عِبَادِكُمْ وَإِمَائِكُمْ ۚ إِن يَكُونُوا فُقَرَاءَ يُغْنِهِمُ اللَّهُ مِن فَضْلِهِ ۗ وَاللَّهُ وَاسِعٌ عَلِيمٌ
+            </p>
+            <p className={d.doaText}>
+              Dan kahwinkanlah orang-orang bujang (lelaki dan perempuan) dalam kalangan kamu, dan orang-orang yang soleh daripada hamba-hamba kamu, lelaki dan perempuan.
+              Jika mereka miskin, Allah akan memberi kekayaan kepada mereka daripada limpah kurnia-Nya.
+              Dan Allah Maha Luas (rahmat-Nya dan pemberian-Nya), lagi Maha Mengetahui.
+            </p>
+            <p className={d.doaSource}>An-Nur (24:32)</p>
           </Reveal>
         </div>
 
         <div className={styles.pageBottomPad} />
       </div>
 
-      <Footer audioRef={audioRef} opened={opened} />
+      <Footer audioRef={audioRef} opened={opened} showMap={showMap} setShowMap={setShowMap} />
     </>
   );
 }
