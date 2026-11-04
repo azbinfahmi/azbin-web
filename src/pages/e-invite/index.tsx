@@ -38,7 +38,7 @@ function Divider() {
   );
 }
 
-function DoorKnob({ pressed, onClick }: { pressed: boolean; onClick: () => void }) {
+function DoorKnob({ pressed, onClick }: { pressed: boolean; onClick: (e: React.MouseEvent) => void }) {
   return (
     <div className={`${styles.doorKnob} ${pressed ? styles.doorKnobPressed : ''}`} onClick={onClick}>
       <svg width="64" height="110" viewBox="0 0 64 110" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -544,6 +544,14 @@ export default function EInvitePage() {
   const [knobPressed, setKnobPressed] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const knockRef = useRef<HTMLAudioElement>(null);
+
+  const playKnock = () => {
+    const a = knockRef.current;
+    if (!a) return;
+    a.currentTime = 0;
+    a.play().catch(() => {});
+  };
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -680,16 +688,17 @@ export default function EInvitePage() {
       </Head>
 
       <audio ref={audioRef} src="/e-invite/Selamat Pengantin Baru.mp3" loop preload="auto" />
+      <audio ref={knockRef} src="/e-invite/knock.mp3" preload="auto" />
 
       {!opened && (
         <div className={styles.splash}>
           <div className={styles.splashInner}>
           {/* door — swings inward */}
-          <div className={`${styles.door} ${hiding ? styles.doorHide : ''}`}>
+          <div className={`${styles.door} ${hiding ? styles.doorHide : ''}`} onClick={playKnock}>
             <DoorPanels />
             <DoorHinge position="top" />
             <DoorHinge position="bottom" />
-            <DoorKnob pressed={knobPressed} onClick={handleKnobClick} />
+            <DoorKnob pressed={knobPressed} onClick={e => { e.stopPropagation(); handleKnobClick(); }} />
             <div className={styles.splashContent}>
               <p className={styles.splashSub}>JEMPUTAN PERKAHWINAN</p>
               <span className={styles.splashMono}>AL</span>
