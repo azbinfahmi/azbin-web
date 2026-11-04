@@ -241,9 +241,9 @@ function Footer({ audioRef, opened, showMap, setShowMap }: { audioRef: React.Ref
   const [callClosing, setCallClosing] = useState(false);
   const [mapClosing, setMapClosing] = useState(false);
 
-  const closeCal  = () => { setCalClosing(true);  setTimeout(() => { setShowCal(false);       setCalClosing(false);  }, 260); };
-  const closeCall = () => { setCallClosing(true); setTimeout(() => { setShowCall(false);      setCallClosing(false); }, 260); };
-  const closeMap  = () => { setMapClosing(true);  setTimeout(() => { setShowMap(false);       setMapClosing(false);  }, 260); };
+  const closeCal  = () => { if (!calClosing)  setCalClosing(true); };
+  const closeCall = () => { if (!callClosing) setCallClosing(true); };
+  const closeMap  = () => { if (!mapClosing)  setMapClosing(true); };
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -341,9 +341,9 @@ function Footer({ audioRef, opened, showMap, setShowMap }: { audioRef: React.Ref
         </p>
       </div>
 
-      {showMap && (
+      {(showMap || mapClosing) && (
         <div className={styles.modalOverlay} onClick={closeMap}>
-          <div className={`${styles.calModal} ${mapClosing ? styles.calModalClose : ''}`} onClick={e => e.stopPropagation()}>
+          <div className={`${styles.calModal} ${mapClosing ? styles.calModalClose : ''}`} onClick={e => e.stopPropagation()} onAnimationEnd={() => { if (mapClosing) { setShowMap(false); setMapClosing(false); } }}>
             <button className={styles.modalClose} onClick={closeMap}>✕</button>
             <p className={styles.calModalTitle}>BUKA DENGAN</p>
             <div className={styles.calOptions}>
@@ -362,9 +362,9 @@ function Footer({ audioRef, opened, showMap, setShowMap }: { audioRef: React.Ref
         </div>
       )}
 
-      {showCall && (
+      {(showCall || callClosing) && (
         <div className={styles.modalOverlay} onClick={closeCall}>
-          <div className={`${styles.calModal} ${callClosing ? styles.calModalClose : ''}`} onClick={e => e.stopPropagation()}>
+          <div className={`${styles.calModal} ${callClosing ? styles.calModalClose : ''}`} onClick={e => e.stopPropagation()} onAnimationEnd={() => { if (callClosing) { setShowCall(false); setCallClosing(false); } }}>
             <button className={styles.modalClose} onClick={closeCall}>✕</button>
             <p className={styles.calModalTitle}>HUBUNGI KAMI</p>
             <div className={styles.callList}>
@@ -384,9 +384,9 @@ function Footer({ audioRef, opened, showMap, setShowMap }: { audioRef: React.Ref
         </div>
       )}
 
-      {showCal && (
+      {(showCal || calClosing) && (
         <div className={styles.modalOverlay} onClick={closeCal}>
-          <div className={`${styles.calModal} ${calClosing ? styles.calModalClose : ''}`} onClick={e => e.stopPropagation()}>
+          <div className={`${styles.calModal} ${calClosing ? styles.calModalClose : ''}`} onClick={e => e.stopPropagation()} onAnimationEnd={() => { if (calClosing) { setShowCal(false); setCalClosing(false); } }}>
             <button className={styles.modalClose} onClick={closeCal}>✕</button>
             <p className={styles.calModalTitle}>TAMBAH KE KALENDAR</p>
             <div className={styles.calOptions}>
