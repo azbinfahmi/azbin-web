@@ -540,9 +540,20 @@ export default function EInvitePage() {
 
   const [ucapanList, setUcapanList] = useState<{ id: number; name: string; message: string; created_at: string }[]>([]);
   const [showUcapan, setShowUcapan] = useState(false);
+  const [ucapanClosing, setUcapanClosing] = useState(false);
   const [ucapanName, setUcapanName] = useState('');
   const [ucapanMsg, setUcapanMsg] = useState('');
   const [submitting, setSubmitting] = useState(false);
+
+  const scrollRef      = useRef<HTMLDivElement>(null);
+  const yOffsetRef     = useRef(0);
+  const isDraggingRef  = useRef(false);
+  const dragStartY     = useRef(0);
+  const dragStartOff   = useRef(0);
+  const animFrameRef   = useRef<number>(0);
+  const lastTimeRef    = useRef<number>(0);
+  const wrapRef        = useRef<HTMLDivElement>(null);
+  const [scrollNeeded, setScrollNeeded] = useState(false);
 
   useEffect(() => {
     fetch('/api/e-invite/ucapan')
@@ -550,6 +561,66 @@ export default function EInvitePage() {
       .then(data => { if (Array.isArray(data)) setUcapanList(data); })
       .catch(() => {});
   }, []);
+
+  useEffect(() => {
+    if (ucapanList.length === 0) { setScrollNeeded(false); return; }
+    // measure after DOM settles; fall back to count > 3 if measure fails
+    const id = setTimeout(() => {
+      if (scrollRef.current) {
+        const contentH = scrollRef.current.scrollHeight;
+        setScrollNeeded(contentH > 272 || ucapanList.length >= 3);
+      } else {
+        setScrollNeeded(ucapanList.length > 3);
+      }
+    }, 100);
+    return () => clearTimeout(id);
+  }, [ucapanList]);
+
+  useEffect(() => {
+    if (!scrollNeeded || ucapanList.length === 0) return;
+    const pxPerSec = 30;
+    const animate = (timestamp: number) => {
+      if (lastTimeRef.current === 0) lastTimeRef.current = timestamp;
+      const delta = timestamp - lastTimeRef.current;
+      lastTimeRef.current = timestamp;
+
+      if (!isDraggingRef.current && scrollRef.current) {
+        const half = scrollRef.current.scrollHeight / 2;
+        yOffsetRef.current = (yOffsetRef.current + (delta / 1000) * pxPerSec) % half;
+        scrollRef.current.style.transform = `translate3d(0, -${yOffsetRef.current}px, 0)`;
+      }
+      animFrameRef.current = requestAnimationFrame(animate);
+    };
+    animFrameRef.current = requestAnimationFrame(animate);
+    return () => { cancelAnimationFrame(animFrameRef.current); lastTimeRef.current = 0; };
+  }, [ucapanList, scrollNeeded]);
+
+  const onDragStart = (clientY: number) => {
+    isDraggingRef.current = true;
+    dragStartY.current   = clientY;
+    dragStartOff.current = yOffsetRef.current;
+  };
+
+  const onDragMove = (clientY: number) => {
+    if (!isDraggingRef.current || !scrollRef.current) return;
+    const half  = scrollRef.current.scrollHeight / 2;
+    let offset  = dragStartOff.current + (dragStartY.current - clientY);
+    offset = ((offset % half) + half) % half;
+    yOffsetRef.current = offset;
+    scrollRef.current.style.transform = `translate3d(0, -${offset}px, 0)`;
+  };
+
+  const onDragEnd = () => { isDraggingRef.current = false; };
+
+  const closeUcapan = () => {
+    setUcapanClosing(true);
+    setTimeout(() => { setShowUcapan(false); setUcapanClosing(false); }, 320);
+  };
+
+  useEffect(() => {
+    document.body.style.overflow = showUcapan ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [showUcapan]);
 
   const handleUcapanSubmit = async () => {
     if (!ucapanName.trim() || !ucapanMsg.trim()) return;
@@ -565,7 +636,7 @@ export default function EInvitePage() {
         setUcapanList(prev => [newItem, ...prev]);
         setUcapanName('');
         setUcapanMsg('');
-        setShowUcapan(false);
+        closeUcapan();
       }
     } finally {
       setSubmitting(false);
@@ -737,24 +808,37 @@ export default function EInvitePage() {
         </div>
 
         {/* ── SECTION 6: buku tetamu ── */}
-        <div className={d.bukuSection}>
+        <div className={d.bukuSection} style={{ position: 'relative', overflow: 'hidden' }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/e-invite/template_bunga/5.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'fill', zIndex: 0, pointerEvents: 'none' }} />
           <Reveal><p className={d.bukuTitle}>Buku Tetamu</p></Reveal>
           <Reveal delay={100}><p className={d.bukuSubtitle}>Tinggalkan ucapan anda untuk pengantin</p></Reveal>
 
-          <div className={d.bukuList}>
-            {ucapanList.length === 0 ? (
-              <p className={d.bukuEmpty}>Belum ada ucapan. Jadilah yang pertama!</p>
-            ) : (
-              ucapanList.map(u => (
-                <Reveal key={u.id}>
-                  <div className={d.bukuCard}>
+          {ucapanList.length === 0 ? (
+            <p className={d.bukuEmpty}>Belum ada ucapan. Jadilah yang pertama!</p>
+          ) : (
+            <div
+              ref={wrapRef}
+              className={`${d.bukuListWrap} ${!scrollNeeded ? d.bukuListWrapStatic : ''}`}
+              onMouseDown={scrollNeeded ? e => onDragStart(e.clientY) : undefined}
+              onMouseMove={scrollNeeded ? e => onDragMove(e.clientY) : undefined}
+              onMouseUp={scrollNeeded ? onDragEnd : undefined}
+              onMouseLeave={scrollNeeded ? onDragEnd : undefined}
+              onTouchStart={scrollNeeded ? e => onDragStart(e.touches[0].clientY) : undefined}
+              onTouchMove={scrollNeeded ? e => { e.preventDefault(); onDragMove(e.touches[0].clientY); } : undefined}
+              onTouchEnd={scrollNeeded ? onDragEnd : undefined}
+              style={{ touchAction: scrollNeeded ? 'none' : 'auto' }}
+            >
+              <div ref={scrollRef} className={d.bukuListScroll}>
+                {(scrollNeeded ? [...ucapanList, ...ucapanList] : ucapanList).map((u, i) => (
+                  <div key={`${u.id}-${i}`} className={d.bukuCard}>
                     <p className={d.bukuCardName}>{u.name}</p>
                     <p className={d.bukuCardMsg}>{u.message}</p>
                   </div>
-                </Reveal>
-              ))
-            )}
-          </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           <Reveal>
             <button className={d.bukuBtn} onClick={() => setShowUcapan(true)}>
@@ -768,9 +852,9 @@ export default function EInvitePage() {
 
       {/* ── MODAL: beri ucapan ── */}
       {showUcapan && (
-        <div className={d.ucapanOverlay} onClick={() => setShowUcapan(false)}>
-          <div className={d.ucapanModal} onClick={e => e.stopPropagation()}>
-            <button className={d.ucapanClose} onClick={() => setShowUcapan(false)}>✕</button>
+        <div className={d.ucapanOverlay} onClick={closeUcapan}>
+          <div className={`${d.ucapanModal} ${ucapanClosing ? d.ucapanModalClose : ''}`} onClick={e => e.stopPropagation()}>
+            <button className={d.ucapanClose} onClick={closeUcapan}>✕</button>
             <p className={d.ucapanModalTitle}>BERI UCAPAN</p>
             <input
               className={d.ucapanInput}
@@ -779,14 +863,19 @@ export default function EInvitePage() {
               onChange={e => setUcapanName(e.target.value)}
               maxLength={60}
             />
-            <textarea
-              className={d.ucapanTextarea}
-              placeholder="Tulis ucapan anda..."
-              value={ucapanMsg}
-              onChange={e => setUcapanMsg(e.target.value)}
-              maxLength={300}
-              rows={4}
-            />
+            <div className={d.ucapanTextareaWrap}>
+              <textarea
+                className={d.ucapanTextarea}
+                placeholder="Tulis ucapan anda..."
+                value={ucapanMsg}
+                onChange={e => setUcapanMsg(e.target.value)}
+                maxLength={100}
+                rows={4}
+              />
+              <span className={`${d.ucapanCounter} ${ucapanMsg.length >= 100 ? d.ucapanCounterFull : ''}`}>
+                {ucapanMsg.length}/100
+              </span>
+            </div>
             <button
               className={d.ucapanSubmit}
               onClick={handleUcapanSubmit}
