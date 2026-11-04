@@ -491,6 +491,46 @@ function ArchDivider() {
 }
 
 
+/* ── floral corner ── */
+function FlowerCorner({ corner }: { corner: 'tl' | 'tr' | 'bl' | 'br' }) {
+  const transforms: Record<string, string> = {
+    tl: 'scale(1,1)',
+    tr: 'scale(-1,1)',
+    bl: 'scale(1,-1)',
+    br: 'scale(-1,-1)',
+  };
+  return (
+    <div className={`${d.flowerCorner} ${d['flower' + corner.toUpperCase()]}`}>
+      <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg"
+        style={{ transform: transforms[corner], transformOrigin: '50% 50%' }}>
+        {/* stem */}
+        <path d="M10 80 Q30 60 45 45" stroke="#5a2d0c" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+        {/* leaf 1 */}
+        <path d="M20 68 Q10 50 28 48 Q32 62 20 68Z" fill="#6b3a10" opacity="0.85"/>
+        {/* leaf 2 */}
+        <path d="M35 55 Q22 42 38 36 Q44 50 35 55Z" fill="#7a4015" opacity="0.8"/>
+        {/* small bud */}
+        <circle cx="48" cy="42" r="5" fill="#8b4513"/>
+        <path d="M44 40 Q48 34 52 40 Q56 46 48 48 Q40 46 44 40Z" fill="#9c5220"/>
+        {/* main flower petals */}
+        <ellipse cx="18" cy="25" rx="11" ry="7" transform="rotate(-30 18 25)" fill="#8b4513" opacity="0.9"/>
+        <ellipse cx="30" cy="14" rx="11" ry="7" transform="rotate(15 30 14)" fill="#9c5220" opacity="0.9"/>
+        <ellipse cx="8"  cy="38" rx="9"  ry="6" transform="rotate(-60 8 38)"  fill="#7a3a10" opacity="0.85"/>
+        <ellipse cx="42" cy="18" rx="9"  ry="6" transform="rotate(45 42 18)"  fill="#8b4513" opacity="0.85"/>
+        <ellipse cx="10" cy="15" rx="9"  ry="6" transform="rotate(-15 10 15)" fill="#6b3010" opacity="0.8"/>
+        {/* flower center */}
+        <circle cx="22" cy="24" r="8" fill="#c8842a"/>
+        <circle cx="22" cy="24" r="5" fill="#e8a030"/>
+        <circle cx="22" cy="24" r="2.5" fill="#c87020"/>
+        {/* gold accent dots */}
+        <circle cx="35" cy="12" r="2" fill="#c8a84b" opacity="0.8"/>
+        <circle cx="6"  cy="44" r="1.5" fill="#c8a84b" opacity="0.7"/>
+        <circle cx="50" cy="36" r="1.5" fill="#c8a84b" opacity="0.7"/>
+      </svg>
+    </div>
+  );
+}
+
 /* ── main page ── */
 export default function EInvitePage() {
   const [opened, setOpened] = useState(false);
@@ -555,14 +595,8 @@ export default function EInvitePage() {
 
         {/* ── SECTION 1: cover ── */}
         <div className={styles.cover}>
-          <Ornament size={26} className={`${styles.orn} ${styles.ornT1}`} />
-          <Ornament size={22} className={`${styles.orn} ${styles.ornT2}`} />
-          <Ornament size={26} className={`${styles.orn} ${styles.ornT3}`} />
-          <Ornament size={24} className={`${styles.orn} ${styles.ornMR}`} />
-          <Ornament size={22} className={`${styles.orn} ${styles.ornML}`} />
-          <Ornament size={24} className={`${styles.orn} ${styles.ornB1}`} />
-          <Ornament size={26} className={`${styles.orn} ${styles.ornB2}`} />
-          <Ornament size={22} className={`${styles.orn} ${styles.ornB3}`} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/e-invite/template_bunga/1.png" alt="" className={`${styles.coverBg} ${opened ? styles.coverBgReveal : styles.coverBgHidden}`} aria-hidden="true" />
 
           <div className={styles.content}>
             <h2 className={`${styles.majlis} ${opened ? styles.coverItem1 : styles.coverHidden}`}>MAJLIS</h2>
@@ -573,7 +607,6 @@ export default function EInvitePage() {
               <span className={styles.monoSecond}>L</span>
             </span>
             <div className={`${styles.namesRow} ${opened ? styles.coverItem5 : styles.coverHidden}`}>
-              <Ornament size={20} className={styles.ornInline} />
               <h1 className={styles.names}>AZBIN &amp; LIN</h1>
             </div>
             <div className={opened ? styles.coverItem6 : styles.coverHidden}><Divider /></div>
@@ -585,6 +618,8 @@ export default function EInvitePage() {
 
         {/* ── SECTION 2: details ── */}
         <div className={d.navyBg}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/e-invite/template_bunga/2.png" alt="" className={d.archBg} aria-hidden="true" />
           <div className={d.arch}>
             <Reveal><p className={d.walimatul}>Walimatul Urus</p></Reveal>
             <Reveal delay={100}><ArchDivider /></Reveal>
@@ -608,7 +643,9 @@ export default function EInvitePage() {
         </div>
 
         {/* ── SECTION 3: info grid ── */}
-        <div className={d.infoGridWrapper}>
+        <div className={d.infoGridWrapper} style={{ position: 'relative', overflow: 'hidden' }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/e-invite/template_bunga/3.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'fill', zIndex: 0, pointerEvents: 'none' }} />
           <div className={d.infoGrid}>
             <div className={d.infoCol}>
               <Reveal><p className={d.dayLabel}>SABTU</p></Reveal>
@@ -641,7 +678,9 @@ export default function EInvitePage() {
         </div> */}
 
         {/* ── SECTION 5: doa ── */}
-        <div className={d.doaSection}>
+        <div className={d.doaSection} style={{ position: 'relative', overflow: 'hidden' }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/e-invite/template_bunga/4.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'fill', zIndex: 0, pointerEvents: 'none' }} />
           <Reveal>
           <div className={d.doaContainer}>
             <Reveal delay={100}>
@@ -649,11 +688,15 @@ export default function EInvitePage() {
               <img src="/e-invite/bismillah.png" alt="Bismillah" className={d.bismillah} />
             </Reveal>
             <Reveal delay={200}>
-              <p className={d.doaText}>
-                Ya Allah, kurniakanlah kepada kedua mempelai ini rumah tangga yang sakinah, mawaddah dan warahmah.
-                Satukanlah hati mereka dalam kasih yang Engkau redhai, teguhkanlah mereka dalam kesetiaan,
-                dan jadikanlah mereka pelindung serta penyejuk hati buat satu sama lain. Amin.
+              <p className={d.doaArabic}>
+                وَأَنكِحُوا الْأَيَامَىٰ مِنكُمْ وَالصَّالِحِينَ مِنْ عِبَادِكُمْ وَإِمَائِكُمْ ۚ إِن يَكُونُوا فُقَرَاءَ يُغْنِهِمُ اللَّهُ مِن فَضْلِهِ ۗ وَاللَّهُ وَاسِعٌ عَلِيمٌ
               </p>
+              <p className={d.doaText}>
+                Dan kahwinkanlah orang-orang bujang (lelaki dan perempuan) dalam kalangan kamu, dan orang-orang yang soleh daripada hamba-hamba kamu, lelaki dan perempuan.
+                Jika mereka miskin, Allah akan memberi kekayaan kepada mereka daripada limpah kurnia-Nya.
+                Dan Allah Maha Luas (rahmat-Nya dan pemberian-Nya), lagi Maha Mengetahui.
+              </p>
+              <p className={d.doaSource}>An-Nur (24:32)</p>
             </Reveal>
           </div>
           </Reveal>
