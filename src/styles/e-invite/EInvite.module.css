@@ -669,15 +669,14 @@
     ),
     /* base wood */
     linear-gradient(175deg,
-      #3d1a06 0%,
-      #7a3a10 12%,
-      #5a2508 28%,
-      #8b4513 42%,
-      #5a2508 58%,
-      #7a3a10 74%,
-      #3d1a06 100%
+      #4e3220 0%,
+      #7a5a38 12%,
+      #5a3e22 28%,
+      #836040 42%,
+      #5a3e22 58%,
+      #7a5a38 74%,
+      #4e3220 100%
     );
-  /* left edge highlight, right edge shadow for 3D thickness */
   box-shadow:
     inset 4px 0 8px rgba(255,255,255,0.12),
     inset -6px 0 12px rgba(0,0,0,0.5),
