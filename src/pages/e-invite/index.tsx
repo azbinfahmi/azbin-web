@@ -742,7 +742,7 @@ export default function EInvitePage() {
         {/* ── SECTION 2: details ── */}
         <div className={d.navyBg}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/e-invite/template_bunga/2.png" alt="" className={d.archBg} aria-hidden="true" />
+          <img src="/e-invite/template_bunga/2_.png" alt="" className={d.archBg} aria-hidden="true" />
           <div className={d.arch}>
             <Reveal><p className={d.walimatul}>Walimatul Urus</p></Reveal>
             <Reveal delay={100}><ArchDivider /></Reveal>
@@ -766,35 +766,40 @@ export default function EInvitePage() {
         </div>
 
         {/* ── SECTION 3: info grid ── */}
-        <div className={d.infoGridWrapper} style={{ position: 'relative', overflow: 'hidden' }}>
+        <div className={d.infoGridWrapper}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/e-invite/template_bunga/3.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'fill', zIndex: 0, pointerEvents: 'none' }} />
-          <div className={d.infoGrid}>
-            <div className={d.infoCol}>
-              <Reveal><p className={d.dayLabel}>SABTU</p></Reveal>
-              <Reveal delay={80}><p className={d.dayNumber}>09</p></Reveal>
-              <Reveal delay={160}><p className={d.monthYear}>Januari 2027</p></Reveal>
-              <Reveal delay={220}><p className={d.hijriSmall}>30 Rejab 1448H</p></Reveal>
-            </div>
-            <div className={d.infoCol}>
-              <Reveal>
-                <div className={d.midTop}>
+          <img src="/e-invite/template_bunga/3_.png" alt="" aria-hidden="true" style={{ display: 'block', width: '100%', pointerEvents: 'none' }} />
+          <div className={d.infoGridOverlay}>
+            <div className={d.infoGrid}>
+              {/* Row 1: Date — full width */}
+              <div className={d.infoDateRow}>
+                <Reveal><p className={d.dayLabel}>SABTU</p></Reveal>
+                <Reveal delay={80}><p className={d.dayNumber}>09</p></Reveal>
+                <Reveal delay={160}><p className={d.monthYear}>Januari 2027</p></Reveal>
+                <Reveal delay={220}><p className={d.hijriSmall}>30 Rejab 1448H</p></Reveal>
+              </div>
+              {/* Row 2: Aturcara | Lokasi */}
+              <div className={d.infoCol}>
+                <Reveal>
                   <p className={d.infoLabel}>Aturcara Majlis</p>
                   <p className={d.infoValue}>
                     <span className={d.infoValueBold}>11.30 pagi</span> hingga <span className={d.infoValueBold}>5.00 petang</span>
                   </p>
-                </div>
-              </Reveal>
-              <Reveal delay={100}><p className={d.infoLabel}>Lokasi</p></Reveal>
-              <Reveal delay={160}>
-                <div onClick={() => setShowMap(true)} style={{ cursor: 'pointer' }}>
-                  <p className={d.venueName}><span className={d.venuePin}>📍</span><span style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>Damai Homestay</span></p>
-                  <p className={d.venueAddr} style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>Lot 843, Jalan Sg Jagong,<br />Sg Layar</p>
-                </div>
-              </Reveal>
-            </div>
-            <div className={d.countdownRow}>
-              <Reveal><Countdown /></Reveal>
+                </Reveal>
+              </div>
+              <div className={`${d.infoCol} ${d.infoColRight}`}>
+                <Reveal delay={100}><p className={d.infoLabel}>Lokasi</p></Reveal>
+                <Reveal delay={160}>
+                  <div onClick={() => setShowMap(true)} style={{ cursor: 'pointer' }}>
+                    <p className={d.venueName}><span className={d.venuePin}>📍</span><span style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>Damai Homestay</span></p>
+                    <p className={d.venueAddr} style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>Lot 843, Jalan Sg Jagong,<br />Sg Layar</p>
+                  </div>
+                </Reveal>
+              </div>
+              {/* Row 3: Countdown — full width */}
+              <div className={d.countdownRow}>
+                <Reveal><Countdown /></Reveal>
+              </div>
             </div>
           </div>
         </div>
@@ -816,6 +821,8 @@ export default function EInvitePage() {
             <p className={d.doaArabic}>
               وَأَنكِحُوا الْأَيَامَىٰ مِنكُمْ وَالصَّالِحِينَ مِنْ عِبَادِكُمْ وَإِمَائِكُمْ ۚ إِن يَكُونُوا فُقَرَاءَ يُغْنِهِمُ اللَّهُ مِن فَضْلِهِ ۗ وَاللَّهُ وَاسِعٌ عَلِيمٌ
             </p>
+          </Reveal>
+          <Reveal delay={500}>
             <p className={d.doaText}>
               Dan kahwinkanlah orang-orang bujang (lelaki dan perempuan) dalam kalangan kamu, dan orang-orang yang soleh daripada hamba-hamba kamu, lelaki dan perempuan.
               Jika mereka miskin, Allah akan memberi kekayaan kepada mereka daripada limpah kurnia-Nya.
@@ -887,11 +894,11 @@ export default function EInvitePage() {
                 placeholder="Tulis ucapan anda..."
                 value={ucapanMsg}
                 onChange={e => setUcapanMsg(e.target.value)}
-                maxLength={100}
+                maxLength={1000}
                 rows={4}
               />
-              <span className={`${d.ucapanCounter} ${ucapanMsg.length >= 100 ? d.ucapanCounterFull : ''}`}>
-                {ucapanMsg.length}/100
+              <span className={`${d.ucapanCounter} ${ucapanMsg.length >= 1000 ? d.ucapanCounterFull : ''}`}>
+                {ucapanMsg.length}/1000
               </span>
             </div>
             <button
