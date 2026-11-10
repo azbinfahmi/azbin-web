@@ -669,7 +669,7 @@ export default function EInvitePage() {
     if (knobPressed) return;
     setKnobPressed(true);
     const audio = audioRef.current;
-    if (audio) { audio.currentTime = 0; audio.play().catch(() => {}); }
+    if (audio) { audio.currentTime = 4; audio.play().catch(() => {}); }
     setTimeout(() => setHiding(true), 1000);
     setTimeout(() => setOpened(true), 1000 + 800);
   };
@@ -687,7 +687,7 @@ export default function EInvitePage() {
         />
       </Head>
 
-      <audio ref={audioRef} src="/e-invite/Selamat Pengantin Baru.mp3" loop preload="auto" />
+      <audio ref={audioRef} src="/e-invite/fall in love.mp3" loop preload="auto" />
       <audio ref={knockRef} src="/e-invite/knock.mp3" preload="auto" />
 
       {!opened && (
@@ -718,6 +718,7 @@ export default function EInvitePage() {
 
         {/* ── SECTION 1: cover ── */}
         <div className={styles.cover}>
+
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/e-invite/template_bunga_purple/1.png" alt="" className={`${styles.coverBg} ${opened ? styles.coverBgReveal : styles.coverBgHidden}`} aria-hidden="true" />
 
@@ -725,17 +726,24 @@ export default function EInvitePage() {
             <h2 className={`${styles.majlis} ${opened ? styles.coverItem1 : styles.coverHidden}`}>MAJLIS</h2>
             <h2 className={`${styles.perkahwinan} ${opened ? styles.coverItem2 : styles.coverHidden}`}>PERKAHWINAN</h2>
             <div className={opened ? styles.coverItem3 : styles.coverHidden}><Divider /></div>
-            <span className={`${styles.monogramWrap} ${opened ? styles.coverItem4 : styles.coverHidden}`}>
-              <span className={styles.monoFirst}>L</span>
-              <span className={styles.monoSecond}>A</span>
-            </span>
-            <div className={`${styles.namesRow} ${opened ? styles.coverItem5 : styles.coverHidden}`}>
-              <h1 className={styles.names}>AZBIN &amp; LIN</h1>
+
+            <div className={`${styles.monoNamesRow} ${opened ? styles.coverItem4 : styles.coverHidden}`}>
+              <div className={styles.monoGroup}>
+                <span className={styles.monoFirst}>L</span>
+                <span className={styles.monoSecond}>A</span>
+              </div>
+              <div className={styles.monoNamesDivider} />
+              <div className={styles.monoNamesStack}>
+                <span className={styles.monoNameBig}>Lin</span>
+                <span className={styles.monoNameAmp}>&amp;</span>
+                <span className={styles.monoNameBig}>Azbin</span>
+              </div>
             </div>
-            <div className={opened ? styles.coverItem6 : styles.coverHidden}><Divider /></div>
-            <div className={opened ? styles.coverItem7 : styles.coverHidden}><SlotDate /></div>
-            <p className={`${styles.hijri} ${opened ? styles.coverItem8 : styles.coverHidden}`}>24 Rejab 1448H</p>
-            <p className={`${styles.venue} ${opened ? styles.coverItem9 : styles.coverHidden}`}>Rumah Abang Jamil, Ipoh</p>
+
+            <div className={opened ? styles.coverItem5 : styles.coverHidden}><Divider /></div>
+            <div className={opened ? styles.coverItem6 : styles.coverHidden}><SlotDate /></div>
+            <p className={`${styles.hijri} ${opened ? styles.coverItem7 : styles.coverHidden}`}>24 Rejab 1448H</p>
+            <p className={`${styles.venue} ${opened ? styles.coverItem8 : styles.coverHidden}`}>Rumah Abang Jamil, Ipoh</p>
           </div>
         </div>
 

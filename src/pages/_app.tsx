@@ -16,7 +16,9 @@ export default function App({ Component, pageProps }: AppProps) {
     } else if (isEInvite) {
       document.body.removeAttribute("data-portfolio");
       document.body.removeAttribute("data-futsal");
-      document.body.style.background = "radial-gradient(ellipse at 60% 35%, #7a3a10 0%, #3d1a06 55%, #2a1005 100%)";
+      document.body.style.background = router.pathname.startsWith('/e-invite/LinAzbin')
+        ? "radial-gradient(ellipse at center, #CCD2FC 0%, #E0CCFC 50%, #DBBFFB 100%)"
+        : "radial-gradient(ellipse at 60% 35%, #7a3a10 0%, #3d1a06 55%, #2a1005 100%)";
       document.body.style.margin = "0";
     } else {
       document.body.style.background = "";
