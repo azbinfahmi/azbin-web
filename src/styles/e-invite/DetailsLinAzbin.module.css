@@ -1,0 +1,651 @@
+/* ==================
+   E-INVITE DETAILS PAGE — LinAzbin copy
+   ================== */
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #3d1a06;
+  color: #4a2508;
+  overflow-x: hidden;
+}
+
+/* ---- Brown pattern background ---- */
+.navyBg {
+  position: relative;
+  background-color: transparent;
+  padding: 0;
+}
+
+.archBg {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+/* ---- Arch / dome section ---- */
+.arch {
+  background: transparent;
+  padding: 30% 18%;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.walimatul {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(28px, 7vw, 40px);
+  color: #4a2508;
+  margin: 0 0 4px;
+}
+
+.archDivider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 200px;
+  margin: 0 auto 18px;
+}
+
+.archDivLine {
+  flex: 1;
+  height: 1px;
+  background: #4a2508;
+  opacity: 0.35;
+  display: block;
+}
+
+.archDots {
+  font-size: 6px;
+  letter-spacing: 4px;
+  color: #4a2508;
+  opacity: 0.6;
+}
+
+.parentNames {
+  font-size: clamp(13px, 3.5vw, 16px);
+  font-weight: 700;
+  color: #4a2508;
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+
+.inviteText {
+  font-size: clamp(11px, 2.8vw, 13px);
+  color: #333;
+  line-height: 1.65;
+  margin: 0 0 14px;
+}
+
+.dottedLine {
+  border: none;
+  border-top: 1.5px dotted #999;
+  margin: 14px 0;
+}
+
+.toMajlis {
+  font-size: clamp(11px, 2.8vw, 13px);
+  color: #333;
+  margin: 0 0 10px;
+}
+
+/* Gothic/blackletter font for full names */
+.groomName {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(20px, 5.2vw, 28px);
+  font-style: italic;
+  font-weight: 600;
+  color: #4a2508;
+  line-height: 1.35;
+  margin: 0 0 6px;
+}
+
+.dan {
+  font-style: italic;
+  font-size: clamp(11px, 2.8vw, 13px);
+  color: #555;
+  margin: 0 0 6px;
+}
+
+.brideName {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(20px, 5.2vw, 28px);
+  font-style: italic;
+  font-weight: 600;
+  color: #4a2508;
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* ---- Info grid ---- */
+.infoGridWrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.infoGridOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  padding: 20% 16px 24px;
+  z-index: 1;
+}
+
+.infoGrid {
+  grid-template-columns: 1fr 1fr;
+  background: transparent;
+  color: #3d1a06;
+  border-radius: 14px;
+  overflow: hidden;
+  border: none;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.infoDateRow {
+  grid-column: 1 / -1;
+  border-bottom: 1px solid rgba(90,40,8,0.15);
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.infoCol {
+  padding: 16px 14px;
+  border-right: 1px solid rgba(90,40,8,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.infoColRight {
+  border-right: none;
+}
+
+/* Left: date */
+.dayLabel {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(16px, 4.5vw, 22px);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin: 0 0 2px;
+}
+
+.dayNumber {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(72px, 20vw, 110px);
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+}
+
+.monthYear {
+  font-size: clamp(16px, 4.2vw, 22px);
+  margin: 2px 0 0;
+  opacity: 0.9;
+}
+
+.hijriSmall {
+  font-size: clamp(13px, 3.4vw, 18px);
+  opacity: 0.7;
+  margin: 2px 0 0;
+}
+
+/* Middle: aturcara + venue */
+.midTop {
+  border-bottom: 1px solid rgba(90,40,8,0.18);
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.infoLabel {
+  font-size: clamp(13px, 3.2vw, 16px);
+  opacity: 0.75;
+  margin: 0 0 4px;
+  letter-spacing: 0.05em;
+}
+
+.infoValue {
+  font-size: clamp(13px, 3.4vw, 16px);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.infoValueBold {
+  font-weight: 700;
+}
+
+.venuePin {
+  font-size: 12px;
+  margin-right: 2px;
+}
+
+.venueName {
+  font-weight: 700;
+  font-size: clamp(15px, 3.8vw, 18px);
+}
+
+.venueAddr {
+  font-size: clamp(13px, 3.2vw, 15px);
+  opacity: 0.8;
+  margin: 2px 0 0;
+  line-height: 1.4;
+}
+
+/* Right: contact */
+.contactLabel {
+  font-size: clamp(10px, 2.4vw, 12px);
+  opacity: 0.75;
+  margin: 0 0 6px;
+  letter-spacing: 0.05em;
+}
+
+.contactLine {
+  font-size: clamp(10px, 2.4vw, 11.5px);
+  margin: 0 0 3px;
+  line-height: 1.45;
+}
+
+/* ---- Countdown ---- */
+.countdownRow {
+  grid-column: 1 / -1;
+  border-top: 1px solid rgba(90,40,8,0.15);
+  padding: 14px 8px 16px;
+}
+
+.countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: #3d1a06;
+}
+
+.countdownItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.countdownNum {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(24px, 6.5vw, 40px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.countdownLabel {
+  font-size: clamp(8px, 1.9vw, 10px);
+  letter-spacing: 0.15em;
+  opacity: 0.7;
+  font-family: system-ui, sans-serif;
+}
+
+.countdownSep {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(18px, 5vw, 28px);
+  font-weight: 700;
+  opacity: 0.4;
+  padding-bottom: 14px;
+}
+
+/* ---- Map section ---- */
+.mapSection {
+  background: #ffffff;
+  padding: 0;
+}
+
+.mapSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.mapImg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---- Doa section ---- */
+.doaSection {
+  padding: 25% 50px 48px;
+  text-align: center;
+  position: relative;
+  aspect-ratio: 979 / 1606;
+}
+
+.doaContainer {
+  background: rgba(90,40,8,0.05);
+  border: 1px solid rgba(90,40,8,0.18);
+  border-radius: 14px;
+  padding: 28px 24px 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.bismillah {
+  width: clamp(180px, 55vw, 280px);
+  height: auto;
+  display: block;
+  margin: 0 auto 20px;
+  opacity: 0.85;
+  filter: invert(1) sepia(1) saturate(2) hue-rotate(340deg) brightness(0.3);
+}
+
+.doaArabic {
+  font-size: clamp(14px, 3.8vw, 18px);
+  color: rgba(61,26,6,0.9);
+  line-height: 2.2;
+  direction: rtl;
+  margin: 0 0 14px;
+}
+
+.doaText {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(13px, 3.5vw, 16px);
+  font-style: italic;
+  color: rgba(61,26,6,0.85);
+  line-height: 1.9;
+  margin: 0;
+  max-width: 360px;
+  display: inline-block;
+}
+
+.doaSource {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: clamp(10px, 2.6vw, 13px);
+  color: rgba(61,26,6,0.6);
+  letter-spacing: 0.08em;
+  margin: 8px 0 0;
+}
+
+/* ---- Buku Tetamu section ---- */
+.bukuSection {
+  padding: 19% 12% 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  text-align: center;
+}
+
+.bukuSection > *:not(img) {
+  position: relative;
+  z-index: 1;
+}
+
+.bukuTitle {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(32px, 8vw, 44px);
+  color: #3d1a06;
+  margin: 0;
+  text-align: center;
+}
+
+.bukuSubtitle {
+  font-size: clamp(11px, 2.8vw, 13px);
+  color: rgba(61,26,6,0.6);
+  font-family: system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  margin: 0;
+  text-align: center;
+}
+
+@keyframes bukuScroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(0, -50%, 0); }
+}
+
+.bukuListWrap {
+  width: 100%;
+  height: 272px;
+  overflow: hidden;
+  margin: 8px 0;
+  position: relative;
+}
+
+.bukuListWrapStatic {
+  height: auto;
+  overflow: visible;
+}
+
+.bukuList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+.bukuListScroll {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.bukuEmpty {
+  font-size: clamp(12px, 3vw, 14px);
+  color: rgba(61,26,6,0.45);
+  font-family: system-ui, sans-serif;
+  font-style: italic;
+  text-align: center;
+  padding: 24px 0;
+  margin: 0;
+}
+
+.bukuCard {
+  background: rgba(90,40,8,0.06);
+  border: 1px solid rgba(90,40,8,0.15);
+  border-radius: 10px;
+  padding: 14px 16px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.bukuCardName {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(12px, 3vw, 14px);
+  font-weight: 700;
+  color: #3d1a06;
+  margin: 0 0 6px;
+}
+
+.bukuCardMsg {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(13px, 3.2vw, 15px);
+  font-style: italic;
+  color: rgba(61,26,6,0.85);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.bukuBtn {
+  margin-top: 8px;
+  padding: 12px 36px;
+  background: #3d1a06;
+  color: #e6ccaa;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(12px, 3vw, 14px);
+  letter-spacing: 0.15em;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.bukuBtn:active {
+  transform: scale(0.97);
+  background: #5a2508;
+}
+
+/* ---- Ucapan modal ---- */
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(0);    opacity: 1; }
+  to   { transform: translateY(100%); opacity: 0; }
+}
+
+.ucapanOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 200;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.ucapanModal {
+  background: #ecdcb8;
+  width: 100%;
+  max-width: 480px;
+  padding: 28px 24px 36px;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: slideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+}
+
+.ucapanModalClose {
+  animation: slideDown 0.3s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.ucapanClose {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: rgba(61,26,6,0.1);
+  border: none;
+  color: #3d1a06;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.ucapanModalTitle {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(12px, 3vw, 14px);
+  letter-spacing: 0.2em;
+  color: rgba(61,26,6,0.55);
+  margin: 0;
+  text-align: center;
+}
+
+.ucapanInput,
+.ucapanTextarea {
+  width: 100%;
+  background: rgba(90,40,8,0.06);
+  border: 1px solid rgba(90,40,8,0.2);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-family: system-ui, sans-serif;
+  font-size: clamp(13px, 3.2vw, 15px);
+  color: #3d1a06;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.ucapanInput::placeholder,
+.ucapanTextarea::placeholder {
+  color: rgba(61,26,6,0.4);
+}
+
+.ucapanInput:focus,
+.ucapanTextarea:focus {
+  border-color: rgba(90,40,8,0.45);
+}
+
+.ucapanTextareaWrap {
+  position: relative;
+  width: 100%;
+}
+
+.ucapanTextarea {
+  resize: none;
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 24px;
+}
+
+.ucapanCounter {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 11px;
+  font-family: system-ui, sans-serif;
+  color: rgba(61,26,6,0.4);
+  pointer-events: none;
+}
+
+.ucapanCounterFull {
+  color: #c0392b;
+}
+
+.ucapanSubmit {
+  padding: 12px;
+  background: #3d1a06;
+  color: #e6ccaa;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(12px, 3vw, 14px);
+  letter-spacing: 0.15em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.ucapanSubmit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ucapanSubmit:not(:disabled):active {
+  background: #5a2508;
+}
+
+/* ---- Flower corner ---- */
+.flowerCorner {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.flowerTL { top: 0;    left: 0; }
+.flowerTR { top: 0;    right: 0; }
+.flowerBL { bottom: 0; left: 0; }
+.flowerBR { bottom: 0; right: 0; }

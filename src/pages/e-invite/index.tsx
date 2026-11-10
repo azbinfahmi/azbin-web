@@ -742,7 +742,7 @@ export default function EInvitePage() {
         {/* ── SECTION 2: details ── */}
         <div className={d.navyBg}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/e-invite/template_bunga/2_.png" alt="" className={d.archBg} aria-hidden="true" />
+          <img src="/e-invite/template_bunga/2.png" alt="" className={d.archBg} aria-hidden="true" />
           <div className={d.arch}>
             <Reveal><p className={d.walimatul}>Walimatul Urus</p></Reveal>
             <Reveal delay={100}><ArchDivider /></Reveal>
@@ -768,7 +768,7 @@ export default function EInvitePage() {
         {/* ── SECTION 3: info grid ── */}
         <div className={d.infoGridWrapper}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/e-invite/template_bunga/3_.png" alt="" aria-hidden="true" style={{ display: 'block', width: '100%', pointerEvents: 'none' }} />
+          <img src="/e-invite/template_bunga/3.png" alt="" aria-hidden="true" style={{ display: 'block', width: '100%', pointerEvents: 'none' }} />
           <div className={d.infoGridOverlay}>
             <div className={d.infoGrid}>
               {/* Row 1: Date — full width */}
