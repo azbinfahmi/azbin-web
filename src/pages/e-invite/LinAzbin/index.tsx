@@ -227,10 +227,8 @@ function SlotDate() {
 
 /* ── footer ── */
 const CONTACTS = [
-  { name: 'Hairul', tel: '+60134534504', display: '013-453 4504' },
-  { name: 'Rosidah', tel: '+60134334504', display: '013-433 4504' },
-  { name: 'Faiz', tel: '+60149254755', display: '014-925 4755' },
-  { name: 'Fahmi', tel: '+601156516348', display: '011-565 16348' },
+  { name: 'Fauzan', tel: '+601117192027' },
+  { name: 'Faizul', tel: '+60189445714' },
 ];
 
 function Footer({ audioRef, opened, showMap, setShowMap }: { audioRef: React.RefObject<HTMLAudioElement | null>; opened: boolean; showMap: boolean; setShowMap: (v: boolean) => void }) {
@@ -264,17 +262,16 @@ function Footer({ audioRef, opened, showMap, setShowMap }: { audioRef: React.Ref
     if (isPlaying) { audio.pause(); } else { audio.play().catch(() => {}); }
   };
 
-  const VENUE_QUERY = 'Damai+Homestay+Sungai+Petani';
-  const wazeUrl = `https://waze.com/ul?q=${VENUE_QUERY}&navigate=yes`;
-  const googleMapsUrl = `https://maps.google.com/?q=${VENUE_QUERY}`;
+  const wazeUrl = 'https://www.waze.com/live-map/directions?q=Rumah+Abang+Jamil+IPOH%2C+Jalan+Raja+Dihilir%2C+Ipoh%2C+Perak%2C+Malaysia&navigate=yes&to=ll.4.5955864%2C101.1004774';
+  const googleMapsUrl = 'https://www.google.com/maps/place/Rumah+Abang+Jamil+IPOH/@4.5955864,101.0979025,17z/data=!3m1!4b1!4m6!3m5!1s0x31caed222f56a7ed:0x7174d8df80aa3166!8m2!3d4.5955864!4d101.1004774!16s%2Fg%2F11pdw35k52?entry=ttu&g_ep=EgoyMDI2MTEwNC4wIKXMDSoASAFQAw%3D%3D';
 
   const handleApple = () => {
     const ics = [
       'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Majlis Perkahwinan//EN',
       'BEGIN:VEVENT',
-      'DTSTART:20270109T110000', 'DTEND:20270109T170000',
-      'SUMMARY:Majlis Perkahwinan Azbin & Lin',
-      'LOCATION:Damai Homestay\\, Lot 843\\, Jalan Sg Jagong\\, Sg Layar\\, Sungai Petani',
+      'DTSTART:20270103T110000', 'DTEND:20270103T170000',
+      'SUMMARY:Majlis Perkahwinan Lin & Azbin',
+      'LOCATION:Rumah Abang Jamil\\, 29 Jalan Raja Dihilir\\, 30350 Ipoh\\, Perak',
       'DESCRIPTION:Majlis Perkahwinan Muhammad Azbin Fahmi & Norfadlin Nasoha',
       'END:VEVENT', 'END:VCALENDAR',
     ].join('\r\n');
@@ -289,9 +286,9 @@ function Footer({ audioRef, opened, showMap, setShowMap }: { audioRef: React.Ref
   const handleGoogle = () => {
     window.open(
       'https://calendar.google.com/calendar/render?action=TEMPLATE' +
-      '&text=Majlis+Perkahwinan+Azbin+%26+Lin' +
-      '&dates=20270109T110000/20270109T170000' +
-      '&location=Damai+Homestay%2C+Sungai+Petani',
+      '&text=Majlis+Perkahwinan+Lin+%26+Azbin' +
+      '&dates=20270103T110000/20270103T170000' +
+      '&location=29+Jalan+Raja+Dihilir%2C+30350+Ipoh%2C+Perak',
       '_blank'
     );
     closeCal();
@@ -369,15 +366,21 @@ function Footer({ audioRef, opened, showMap, setShowMap }: { audioRef: React.Ref
             <p className={styles.calModalTitle}>HUBUNGI KAMI</p>
             <div className={styles.callList}>
               {CONTACTS.map(c => (
-                <a key={c.tel} href={`tel:${c.tel}`} className={styles.callItem}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.48 2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-                  </svg>
-                  <div className={styles.callItemInfo}>
-                    <span className={styles.callItemName}>{c.name}</span>
-                    <span className={styles.callItemNum}>{c.display}</span>
+                <div key={c.tel} className={styles.callItem}>
+                  <span className={styles.callItemName}>{c.name}</span>
+                  <div className={styles.callItemActions}>
+                    <a href={`tel:${c.tel}`} className={styles.callIconBtn} aria-label={`Call ${c.name}`}>
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.48 2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                      </svg>
+                    </a>
+                    <a href={`https://wa.me/${c.tel.replace('+', '')}`} target="_blank" rel="noreferrer" className={styles.callIconBtn} aria-label={`WhatsApp ${c.name}`}>
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+                      </svg>
+                    </a>
                   </div>
-                </a>
+                </div>
               ))}
             </div>
           </div>
@@ -669,7 +672,7 @@ export default function EInvitePage() {
     if (knobPressed) return;
     setKnobPressed(true);
     const audio = audioRef.current;
-    if (audio) { audio.currentTime = 4; audio.play().catch(() => {}); }
+    if (audio) { audio.currentTime = 21; audio.play().catch(() => {}); }
     setTimeout(() => setHiding(true), 1000);
     setTimeout(() => setOpened(true), 1000 + 800);
   };
@@ -687,7 +690,7 @@ export default function EInvitePage() {
         />
       </Head>
 
-      <audio ref={audioRef} src="/e-invite/fall in love.mp3" loop preload="auto" />
+      <audio ref={audioRef} src="/e-invite/Bersama Aku Setia Selamanya.mp3" loop preload="auto" />
       <audio ref={knockRef} src="/e-invite/knock.mp3" preload="auto" />
 
       {!opened && (
@@ -726,24 +729,17 @@ export default function EInvitePage() {
             <h2 className={`${styles.majlis} ${opened ? styles.coverItem1 : styles.coverHidden}`}>MAJLIS</h2>
             <h2 className={`${styles.perkahwinan} ${opened ? styles.coverItem2 : styles.coverHidden}`}>PERKAHWINAN</h2>
             <div className={opened ? styles.coverItem3 : styles.coverHidden}><Divider /></div>
-
-            <div className={`${styles.monoNamesRow} ${opened ? styles.coverItem4 : styles.coverHidden}`}>
-              <div className={styles.monoGroup}>
-                <span className={styles.monoFirst}>L</span>
-                <span className={styles.monoSecond}>A</span>
-              </div>
-              <div className={styles.monoNamesDivider} />
-              <div className={styles.monoNamesStack}>
-                <span className={styles.monoNameBig}>Lin</span>
-                <span className={styles.monoNameAmp}>&amp;</span>
-                <span className={styles.monoNameBig}>Azbin</span>
-              </div>
+            <span className={`${styles.monogramWrap} ${opened ? styles.coverItem4 : styles.coverHidden}`}>
+              <span className={styles.monoFirst}>L</span>
+              <span className={styles.monoSecond}>A</span>
+            </span>
+            <div className={`${styles.namesRow} ${opened ? styles.coverItem5 : styles.coverHidden}`}>
+              <h1 className={styles.names}>LIN &amp; AZBIN</h1>
             </div>
-
-            <div className={opened ? styles.coverItem5 : styles.coverHidden}><Divider /></div>
-            <div className={opened ? styles.coverItem6 : styles.coverHidden}><SlotDate /></div>
-            <p className={`${styles.hijri} ${opened ? styles.coverItem7 : styles.coverHidden}`}>24 Rejab 1448H</p>
-            <p className={`${styles.venue} ${opened ? styles.coverItem8 : styles.coverHidden}`}>Rumah Abang Jamil, Ipoh</p>
+            <div className={opened ? styles.coverItem6 : styles.coverHidden}><Divider /></div>
+            <div className={opened ? styles.coverItem7 : styles.coverHidden}><SlotDate /></div>
+            <p className={`${styles.hijri} ${opened ? styles.coverItem8 : styles.coverHidden}`}>24 Rejab 1448H</p>
+            <p className={`${styles.venue} ${opened ? styles.coverItem9 : styles.coverHidden}`}>Rumah Abang Jamil, Ipoh</p>
           </div>
         </div>
 
@@ -756,20 +752,20 @@ export default function EInvitePage() {
             <Reveal delay={100}><ArchDivider /></Reveal>
             <Reveal delay={150}>
               <p className={d.parentNames}>
-                Hairul Faizal Bin Osmat<br />&amp;<br />Rosidah Binti Che Me
+                Muhammad Zain Bin Mukhtar<br />&amp;<br />Jamnahayati Bt Kadri (Allahyarhamah)
               </p>
             </Reveal>
             <Reveal delay={200}>
               <p className={d.inviteText}>
-                Dengan segala hormatnya kami ingin mempersilakan<br />
-                Dato&apos;/Datin/Tuan/Puan/Encik/Cik sekeluarga
+                Dengan segala hormatnya menjemput<br />
+                Dato&apos;/Datin/Tuan/Puan/Encik/Cik sekeluarga ke Majlis Perkahwinan
               </p>
             </Reveal>
             <Reveal delay={250}><hr className={d.dottedLine} /></Reveal>
-            <Reveal delay={300}><p className={d.toMajlis}>ke Majlis Perkahwinan Putera kami yang disayangi</p></Reveal>
-            <Reveal delay={350}><p className={d.groomName}>Muhammad Azbin Fahmi Bin Hairul Faizal</p></Reveal>
+            {/* <Reveal delay={300}><p className={d.toMajlis}>ke Majlis Perkahwinan</p></Reveal> */}
+            <Reveal delay={350}><p className={d.groomName}>Norfadlin Nasoha Binti Muhammad Zain</p></Reveal>
             <Reveal delay={400}><p className={d.dan}>dan pasangannya</p></Reveal>
-            <Reveal delay={450}><p className={d.brideName}>Norfadlin Nasoha binti Muhammad Zain</p></Reveal>
+            <Reveal delay={450}><p className={d.brideName}>Muhammad Azbin Fahmi Bin Hairul Faizal</p></Reveal>
           </div>
         </div>
 
@@ -781,8 +777,8 @@ export default function EInvitePage() {
             <div className={d.infoGrid}>
               {/* Row 1: Date — full width */}
               <div className={d.infoDateRow}>
-                <Reveal><p className={d.dayLabel}>SABTU</p></Reveal>
-                <Reveal delay={80}><p className={d.dayNumber}>09</p></Reveal>
+                <Reveal><p className={d.dayLabel}>AHAD</p></Reveal>
+                <Reveal delay={80}><p className={d.dayNumber}>03</p></Reveal>
                 <Reveal delay={160}><p className={d.monthYear}>Januari 2027</p></Reveal>
                 <Reveal delay={220}><p className={d.hijriSmall}>24 Rejab 1448H</p></Reveal>
               </div>
@@ -791,7 +787,7 @@ export default function EInvitePage() {
                 <Reveal>
                   <p className={d.infoLabel}>Aturcara Majlis</p>
                   <p className={d.infoValue}>
-                    <span className={d.infoValueBold}>11.30 pagi</span> hingga <span className={d.infoValueBold}>5.00 petang</span>
+                    <span className={d.infoValueBold}>11.00 pagi</span> hingga <span className={d.infoValueBold}>4.00 petang</span>
                   </p>
                 </Reveal>
               </div>
@@ -799,8 +795,8 @@ export default function EInvitePage() {
                 <Reveal delay={100}><p className={d.infoLabel}>Lokasi</p></Reveal>
                 <Reveal delay={160}>
                   <div onClick={() => setShowMap(true)} style={{ cursor: 'pointer' }}>
-                    <p className={d.venueName}><span className={d.venuePin}>📍</span><span style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>Damai Homestay</span></p>
-                    <p className={d.venueAddr} style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>Lot 843, Jalan Sg Jagong,<br />Sg Layar</p>
+                    <p className={d.venueName}><span className={d.venuePin}>📍</span><span style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>Rumah Abang Jamil</span></p>
+                    <p className={d.venueAddr} style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>29, Jalan Raja Dihilir,<br />30350 Ipoh, Perak</p>
                   </div>
                 </Reveal>
               </div>
