@@ -689,9 +689,9 @@
 .coverItem10 { animation: coupleReveal 3s cubic-bezier(0.22, 1, 0.36, 1) 2.5s both; }
 
 @keyframes coupleReveal {
-  0%   { opacity: 0; clip-path: inset(0 0 100% 0); }
-  30%  { opacity: 1; }
-  100% { opacity: 1; clip-path: inset(0 0 0% 0); }
+  0%   { opacity: 0;   clip-path: inset(0 0 100% 0); }
+  30%  { opacity: 0.7; }
+  100% { opacity: 0.7; clip-path: inset(0 0 0% 0); }
 }
 
 .monoWithCouple {
@@ -705,7 +705,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scaleX(-1);
+  transform: translate(-50%, -50%);
   width: 400px;
   height: 300px;
   object-fit: contain;
