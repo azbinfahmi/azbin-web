@@ -619,6 +619,7 @@ export default function EInvitePage() {
                     </div>
                   </div>
                 </div>
+                <div className={styles.bookRibbon} />
                 <div className={styles.bookBack} />
               </div>
             </div>
