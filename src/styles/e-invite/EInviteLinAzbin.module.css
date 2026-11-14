@@ -75,7 +75,8 @@
 }
 
 .coverBgReveal {
-  animation: coverBgZoomIn 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* ---- Songket strip ---- */
@@ -752,6 +753,13 @@
   display: flex;
   align-items: stretch;
   justify-content: center;
+  background: #c4b8ec;
+  cursor: pointer;
+}
+
+.splashDone {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .splashInner {
@@ -760,201 +768,271 @@
   overflow: hidden;
 }
 
-.door {
+/* ---- Book cover ---- */
+.bookBg {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse at 40% 50%, transparent 40%, rgba(0,0,0,0.35) 100%),
-    repeating-linear-gradient(
-      92deg,
-      transparent 0px,
-      rgba(0,0,0,0.07) 1px,
-      transparent 2px,
-      transparent 6px
-    ),
-    repeating-linear-gradient(
-      89.5deg,
-      transparent 0px,
-      rgba(255,255,255,0.05) 2px,
-      transparent 3px,
-      transparent 14px
-    ),
-    repeating-linear-gradient(
-      91.8deg,
-      transparent 0px,
-      rgba(0,0,0,0.04) 1px,
-      transparent 2px,
-      transparent 28px
-    ),
-    linear-gradient(175deg,
-      #4e3220 0%,
-      #7a5a38 12%,
-      #5a3e22 28%,
-      #836040 42%,
-      #5a3e22 58%,
-      #7a5a38 74%,
-      #4e3220 100%
-    );
-  box-shadow:
-    inset 4px 0 8px rgba(255,255,255,0.12),
-    inset -6px 0 12px rgba(0,0,0,0.5),
-    inset 0 4px 8px rgba(0,0,0,0.3),
-    inset 0 -4px 8px rgba(0,0,0,0.3);
-  transform-origin: 0% 50%;
+  background-image: url('/e-invite/template_bunga_purple/1.png');
+  background-size: 100% 100%;
 }
 
-.doorPanelTop,
-.doorPanelBottom {
-  position: relative;
+.bookScene {
+  position: absolute;
+  inset: 0;
+  perspective: 1400px;
+  filter: drop-shadow(-6px 12px 32px rgba(0,0,0,0.7)) drop-shadow(0px 4px 8px rgba(0,0,0,0.5));
 }
 
-.doorPanelTop::before,
-.doorPanelBottom::before {
+@keyframes bookOpen {
+  0%   { transform: rotateY(0deg); }
+  100% { transform: rotateY(-170deg); }
+}
+
+.bookCover {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  z-index: 5;
+}
+
+.bookCoverOpen {
+  animation: bookOpen 1.1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.bookPages {
+  position: absolute;
+  right: 0;
+  top: 3px;
+  bottom: 3px;
+  width: 20px;
+  z-index: 3;
+  backface-visibility: hidden;
+  background: repeating-linear-gradient(
+    to bottom,
+    #f5f0e8 0px,
+    #f5f0e8 1.5px,
+    #ddd8d0 1.5px,
+    #ece8e0 3px
+  );
+  border-radius: 0 2px 2px 0;
+  box-shadow: 3px 0 8px rgba(0,0,0,0.35), inset -3px 0 6px rgba(0,0,0,0.12);
+}
+
+.bookSpine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 100%;
+  background: linear-gradient(to right, #1a1838 0%, #2a2858 60%, #3a3878 100%);
+  box-shadow: inset -4px 0 10px rgba(0,0,0,0.5);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bookSpineText {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  color: rgba(212,175,55,0.7);
+  white-space: nowrap;
+}
+
+.bookFront {
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 0;
+  bottom: 0;
+  backface-visibility: hidden;
+  background: none;
+  box-shadow: inset -10px 0 30px rgba(0,0,0,0.4), inset 2px 0 6px rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bookFront::before {
   content: '';
   position: absolute;
-  inset: 0;
-  border-radius: 3px;
-  background: linear-gradient(135deg,
-    rgba(255,255,255,0.08) 0%,
-    transparent 50%,
-    rgba(0,0,0,0.12) 100%
-  );
-  pointer-events: none;
+  inset: -10px;
+  background:
+    linear-gradient(rgba(30,20,60,0.45), rgba(30,20,60,0.45)),
+    url('/e-invite/template_bunga_purple/1.png');
+  background-size: calc(100% + 20px) calc(100% + 20px);
+  filter: blur(5px);
+  z-index: 0;
 }
 
-.doorHide {
-  animation: doorSwingOpen 0.75s cubic-bezier(0.4, 0, 0.8, 1) forwards;
+.bookFront > * {
+  position: relative;
+  z-index: 1;
 }
 
-/* ---- Door panels ---- */
-.doorPanels {
+.bookFrame {
   position: absolute;
-  left: 16px;
-  top: 16px;
-  right: 0;
-  bottom: 16px;
-  z-index: 2;
-  pointer-events: none;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.doorPanelTop {
-  flex: 2;
-  border-radius: 4px;
-  border-top: 2px solid rgba(0,0,0,0.5);
-  border-left: 2px solid rgba(0,0,0,0.5);
-  border-bottom: 2px solid rgba(255,255,255,0.15);
-  border-right: 2px solid rgba(255,255,255,0.15);
+  inset: 18px;
+  border: 1.5px solid rgba(212,175,55,0.7);
   box-shadow:
-    inset 3px 3px 10px rgba(0,0,0,0.45),
-    inset -2px -2px 6px rgba(255,255,255,0.1),
-    1px 1px 0 rgba(255,255,255,0.12);
-}
-
-.doorPanelBottom {
-  flex: 1;
-  border-radius: 4px;
-  border-top: 2px solid rgba(0,0,0,0.5);
-  border-left: 2px solid rgba(0,0,0,0.5);
-  border-bottom: 2px solid rgba(255,255,255,0.15);
-  border-right: 2px solid rgba(255,255,255,0.15);
-  box-shadow:
-    inset 3px 3px 10px rgba(0,0,0,0.45),
-    inset -2px -2px 6px rgba(255,255,255,0.1),
-    1px 1px 0 rgba(255,255,255,0.12);
-}
-
-/* ---- Hinges ---- */
-.hinge {
-  position: absolute;
-  left: -10px;
-  z-index: 3;
-}
-.hingeTop    { top: 12%;  }
-.hingeBottom { bottom: 12%; }
-
-/* ---- Door knob ---- */
-@keyframes leverPress {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(-90deg); }
-}
-
-.doorKnob {
-  position: absolute;
-  right: 0;
-  top: 62%;
-  transform: translateY(-50%);
-  z-index: 3;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
-  cursor: pointer;
-}
-
-.doorKnobPressed .leverArm {
-  animation: leverPress 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.leverArm {
-  transform-origin: 32px 41px;
-}
-
-.splashContent {
-  position: absolute;
-  left: 16px;
-  right: 0;
-  top: calc(16px + (100% - 32px) * 0.325);
-  transform: translateY(-50%);
-  z-index: 2;
+    inset 0 1px 2px rgba(255,255,255,0.15),
+    inset 0 -1px 2px rgba(0,0,0,0.3),
+    0 0 0 1px rgba(0,0,0,0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   text-align: center;
+  padding: 20px 14px;
+}
+
+.bookFrame::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 0.5px solid rgba(212,175,55,0.35);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -1px 1px rgba(0,0,0,0.2);
+  pointer-events: none;
+}
+
+.bookCorner {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+}
+.bookCorner_tl { top: -2px;  left: -2px;  transform: rotate(0deg); }
+.bookCorner_tr { top: -2px;  right: -2px; transform: rotate(90deg); }
+.bookCorner_bl { bottom: -2px; left: -2px;  transform: rotate(-90deg); }
+.bookCorner_br { bottom: -2px; right: -2px; transform: rotate(180deg); }
+
+.bookFrameLine {
+  width: 50%;
+  height: 1px;
+  background: rgba(212,175,55,0.45);
+  margin: 2px 0;
+}
+
+.bookBack {
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 0;
+  bottom: 0;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  background: linear-gradient(to bottom, #7888c8, #6070b0);
+}
+
+/* ---- Page 2 (cream inner page + behind_curtain back) ---- */
+@keyframes page2Open {
+  0%   { transform: rotateY(0deg); }
+  100% { transform: rotateY(-170deg); }
+}
+
+.page2Cover {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  z-index: 4;
+}
+
+.page2CoverOpen {
+  animation: page2Open 1.0s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.page2Front {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  background: radial-gradient(ellipse at 40% 35%, #faf6ee 0%, #f0e8d8 55%, #e8dcc8 100%);
+  box-shadow: inset -8px 0 24px rgba(0,0,0,0.12);
+}
+
+.innerCorner {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+}
+.innerCorner_tl { top: 10px;    left: 10px;    transform: rotate(0deg); }
+.innerCorner_tr { top: 10px;    right: 10px;   transform: rotate(90deg); }
+.innerCorner_bl { bottom: 10px; left: 10px;    transform: rotate(-90deg); }
+.innerCorner_br { bottom: 10px; right: 10px;   transform: rotate(180deg); }
+
+.page2Back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  background-image: url('/e-invite/template_bunga_purple/behind_curtain.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.splashContent { display: none; }
+.curtainContentLeft { display: none; }
+.curtainContentRight { display: none; }
+
+.tapHint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-family: system-ui, sans-serif;
+  font-size: clamp(11px, 2.8vw, 13px);
+  letter-spacing: 0.1em;
+  color: rgba(212,175,55,0.75);
+  animation: splashTapPulse 2s ease-in-out infinite;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.tapHintHide {
+  opacity: 0;
 }
 
 .splashSub {
   font-family: 'Cinzel', serif;
-  font-size: clamp(11px, 3vw, 15px);
-  letter-spacing: 0.3em;
-  color: #c8a84b;
-  text-shadow:
-    0 1px 3px rgba(0,0,0,0.9),
-    0 -1px 0 rgba(255,220,120,0.25);
-  margin: 0 0 8px;
+  font-size: clamp(13px, 3.4vw, 17px);
+  letter-spacing: 0.28em;
+  color: #D4AF37;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  margin: 0 0 4px;
 }
 
 .splashMono {
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(96px, 24vw, 140px);
-  color: #e8c86a;
+  font-size: clamp(110px, 28vw, 160px);
+  color: #D4AF37;
   line-height: 1;
   text-shadow:
-    1px 2px 6px rgba(0,0,0,0.9),
-    -1px -1px 0 rgba(255,230,130,0.2),
-    0 0 20px rgba(200,160,50,0.3);
+    1px 2px 8px rgba(0,0,0,0.7),
+    0 0 24px rgba(212,175,55,0.35);
 }
 
 .splashNames {
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(36px, 9vw, 54px);
-  color: #ddb85a;
+  font-size: clamp(40px, 10vw, 62px);
+  color: #D4AF37;
   margin: 0;
-  text-shadow:
-    1px 2px 4px rgba(0,0,0,0.85),
-    -1px -1px 0 rgba(255,220,100,0.2);
+  text-shadow: 1px 2px 6px rgba(0,0,0,0.6);
 }
 
 .splashDate {
   font-family: 'Cinzel', serif;
-  font-size: clamp(14px, 3.5vw, 20px);
-  letter-spacing: 0.2em;
-  color: #c8a84b;
-  margin: 10px 0 0;
-  text-shadow:
-    0 1px 3px rgba(0,0,0,0.9),
-    0 -1px 0 rgba(255,220,120,0.2);
+  font-size: clamp(16px, 4vw, 22px);
+  letter-spacing: 0.25em;
+  color: #D4AF37;
+  margin: 6px 0 0;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 
 .splashTap {
@@ -965,8 +1043,7 @@
   font-family: system-ui, sans-serif;
   font-size: clamp(11px, 2.8vw, 13px);
   letter-spacing: 0.1em;
-  color: rgba(200,168,75,0.7);
-  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  color: rgba(61,26,96,0.65);
   animation: splashTapPulse 2s ease-in-out infinite;
 }
 
@@ -991,7 +1068,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.6);
+  background: rgba(212,175,55,0.7);
   display: inline-block;
 }
 

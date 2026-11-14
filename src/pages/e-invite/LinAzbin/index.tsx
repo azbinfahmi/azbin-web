@@ -38,78 +38,6 @@ function Divider() {
   );
 }
 
-function DoorKnob({ pressed, onClick }: { pressed: boolean; onClick: (e: React.MouseEvent) => void }) {
-  return (
-    <div className={`${styles.doorKnob} ${pressed ? styles.doorKnobPressed : ''}`} onClick={onClick}>
-      <svg width="64" height="110" viewBox="0 0 64 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="plate" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%"   stopColor="#8a8a8a" />
-            <stop offset="25%"  stopColor="#e0e0e0" />
-            <stop offset="50%"  stopColor="#f5f5f5" />
-            <stop offset="75%"  stopColor="#d0d0d0" />
-            <stop offset="100%" stopColor="#909090" />
-          </linearGradient>
-          <linearGradient id="lever" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"   stopColor="#c8c8c8" />
-            <stop offset="30%"  stopColor="#f8f8f8" />
-            <stop offset="70%"  stopColor="#e0e0e0" />
-            <stop offset="100%" stopColor="#a0a0a0" />
-          </linearGradient>
-          <linearGradient id="leverSide" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%"   stopColor="#b0b0b0" />
-            <stop offset="50%"  stopColor="#f0f0f0" />
-            <stop offset="100%" stopColor="#b0b0b0" />
-          </linearGradient>
-        </defs>
-
-        {/* static: escutcheon / backplate + keyhole */}
-        <rect x="22" y="0" width="20" height="110" rx="4" fill="url(#plate)" stroke="rgba(0,0,0,0.25)" strokeWidth="0.8" />
-        <rect x="24" y="2" width="16" height="106" rx="3" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="0.5" />
-        <circle cx="32" cy="80" r="4.5" fill="rgba(0,0,0,0.5)" />
-        <path d="M29.8 84 L32 93 L34.2 84 Z" fill="rgba(0,0,0,0.5)" />
-
-        {/* lever — rotates around rose pivot (32,41) */}
-        <g className={styles.leverArm} style={{ transformOrigin: '32px 41px' }}>
-          <rect x="0" y="36" width="42" height="10" rx="5" fill="url(#leverSide)" stroke="rgba(0,0,0,0.2)" strokeWidth="0.5" />
-          <rect x="1" y="37.5" width="40" height="7" rx="4" fill="url(#lever)" />
-          <ellipse cx="3" cy="41" rx="3" ry="5" fill="url(#leverSide)" stroke="rgba(0,0,0,0.2)" strokeWidth="0.5" />
-          <ellipse cx="32" cy="41" rx="8" ry="8" fill="url(#plate)" stroke="rgba(0,0,0,0.2)" strokeWidth="0.8" />
-          <ellipse cx="32" cy="41" rx="5" ry="5" fill="#d8d8d8" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function DoorHinge({ position }: { position: 'top' | 'bottom' }) {
-  return (
-    <div className={`${styles.hinge} ${position === 'top' ? styles.hingeTop : styles.hingeBottom}`}>
-      <svg width="20" height="48" viewBox="0 0 20 48" fill="none">
-        <defs>
-          <linearGradient id="hg" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%"   stopColor="#8a8480" />
-            <stop offset="40%"  stopColor="#f0ede8" />
-            <stop offset="100%" stopColor="#bdb8b4" />
-          </linearGradient>
-        </defs>
-        <rect x="1" y="1" width="18" height="46" rx="2" fill="url(#hg)" stroke="rgba(0,0,0,0.3)" strokeWidth="1" />
-        <circle cx="10" cy="8"  r="3" fill="rgba(0,0,0,0.25)" />
-        <circle cx="10" cy="24" r="3" fill="rgba(0,0,0,0.25)" />
-        <circle cx="10" cy="40" r="3" fill="rgba(0,0,0,0.25)" />
-      </svg>
-    </div>
-  );
-}
-
-function DoorPanels() {
-  return (
-    <div className={styles.doorPanels}>
-      <div className={styles.doorPanelTop} />
-      <div className={styles.doorPanelBottom} />
-    </div>
-  );
-}
 
 type SongketPos = 'left' | 'right' | 'top' | 'bottom';
 
@@ -578,17 +506,8 @@ function FallingPetals() {
 export default function EInvitePage() {
   const [opened, setOpened] = useState(false);
   const [hiding, setHiding] = useState(false);
-  const [knobPressed, setKnobPressed] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const knockRef = useRef<HTMLAudioElement>(null);
-
-  const playKnock = () => {
-    const a = knockRef.current;
-    if (!a) return;
-    a.currentTime = 0;
-    a.play().catch(() => {});
-  };
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -703,12 +622,11 @@ export default function EInvitePage() {
   }, [opened]);
 
   const handleKnobClick = () => {
-    if (knobPressed) return;
-    setKnobPressed(true);
+    if (hiding) return;
     const audio = audioRef.current;
     if (audio) { audio.currentTime = 21; audio.play().catch(() => {}); }
-    setTimeout(() => setHiding(true), 1000);
-    setTimeout(() => setOpened(true), 1000 + 800);
+    setTimeout(() => setHiding(true), 200);
+    setTimeout(() => setOpened(true), 200 + 900);
   };
 
   return (
@@ -725,31 +643,43 @@ export default function EInvitePage() {
       </Head>
 
       <audio ref={audioRef} src="/e-invite/Bersama Aku Setia Selamanya.mp3" loop preload="auto" />
-      <audio ref={knockRef} src="/e-invite/knock.mp3" preload="auto" />
 
-      {!opened && (
-        <div className={styles.splash}>
+      <div className={`${styles.splash} ${opened ? styles.splashDone : ''}`} onClick={!opened ? handleKnobClick : undefined}>
           <div className={styles.splashInner}>
-          {/* door — swings inward */}
-          <div className={`${styles.door} ${hiding ? styles.doorHide : ''}`} onClick={playKnock}>
-            <DoorPanels />
-            <DoorHinge position="top" />
-            <DoorHinge position="bottom" />
-            <DoorKnob pressed={knobPressed} onClick={e => { e.stopPropagation(); handleKnobClick(); }} />
-            <div className={styles.splashContent} style={{ textAlign: 'right' }}>
-              <p className={styles.splashSub}>JEMPUTAN PERKAHWINAN</p>
-              <span className={styles.splashMono}>AL</span>
-              <p className={styles.splashNames}>Azbin &amp; Lin</p>
-              <p className={styles.splashDate}>03 . 01 . 2027</p>
-              <div className={styles.splashTap}>
-                <span className={styles.splashTapDot} />
-                tekan tombol pintu untuk masuk
+            <div className={styles.bookBg} />
+            <div className={styles.bookScene}>
+              {/* Book cover — red, flips to reveal behind_curtain.png */}
+              <div className={`${styles.bookCover} ${hiding ? styles.bookCoverOpen : ''}`}>
+                <div className={styles.bookSpine}>
+                  <span className={styles.bookSpineText}>Lin &amp; Azbin · 03.01.2027</span>
+                </div>
+                <div className={styles.bookFront}>
+                  <div className={styles.bookFrame}>
+                    {(['tl','tr','bl','br'] as const).map(c => (
+                      <svg key={c} className={`${styles.bookCorner} ${styles['bookCorner_'+c]}`} width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <path d="M4 28 C4 4 28 4 28 4" stroke="#D4AF37" strokeWidth="1.4" fill="none"/>
+                        <circle cx="4" cy="28" r="2.5" fill="#D4AF37"/>
+                        <circle cx="28" cy="4" r="2.5" fill="#D4AF37"/>
+                        <circle cx="14" cy="10" r="1.2" fill="#D4AF37" opacity="0.7"/>
+                      </svg>
+                    ))}
+                    <p className={styles.splashSub}>JEMPUTAN PERKAHWINAN</p>
+                    <div className={styles.bookFrameLine} />
+                    <span className={styles.splashMono}>LA</span>
+                    <div className={styles.bookFrameLine} />
+                    <p className={styles.splashNames}>Lin &amp; Azbin</p>
+                    <p className={styles.splashDate}>03 . 01 . 2027</p>
+                    <div className={`${styles.tapHint} ${hiding ? styles.tapHintHide : ''}`}>
+                      <span className={styles.splashTapDot} />
+                      tekan untuk buka
+                    </div>
+                  </div>
+                </div>
+                <div className={styles.bookBack} />
               </div>
             </div>
           </div>
-          </div>
-        </div>
-      )}
+      </div>
 
       <div className={styles.page}>
         {opened && <FallingPetals />}
@@ -758,7 +688,7 @@ export default function EInvitePage() {
         <div className={styles.cover}>
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/e-invite/template_bunga_purple/1.png" alt="" className={`${styles.coverBg} ${opened ? styles.coverBgReveal : styles.coverBgHidden}`} aria-hidden="true" />
+          <img src="/e-invite/template_bunga_purple/1.png" alt="" className={`${styles.coverBg} ${styles.coverBgReveal}`} aria-hidden="true" />
           <div className={styles.content}>
             <h2 className={`${styles.majlis} ${opened ? styles.coverItem1 : styles.coverHidden}`}>MAJLIS</h2>
             <h2 className={`${styles.perkahwinan} ${opened ? styles.coverItem2 : styles.coverHidden}`}>PERKAHWINAN</h2>
