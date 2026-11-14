@@ -39,64 +39,6 @@ function Divider() {
 }
 
 
-type SongketPos = 'left' | 'right' | 'top' | 'bottom';
-
-function SongketStrip({ position = 'left', className }: { position?: SongketPos; className?: string }) {
-  const posClass = {
-    left:   styles.songketLeft,
-    right:  styles.songketRight,
-    top:    styles.songketTop,
-    bottom: styles.songketBottom,
-  }[position];
-
-  const borderClass = {
-    left:   styles.songketBorderRight,
-    right:  styles.songketBorderLeft,
-    top:    styles.songketBorderBottom,
-    bottom: styles.songketBorderTop,
-  }[position];
-
-  return (
-    <div className={`${styles.songket} ${posClass} ${className ?? ''}`}>
-      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-          <pattern id="sg1" width="12" height="12" patternUnits="userSpaceOnUse">
-            <path d="M6,0 L12,6 L6,12 L0,6 Z" fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth="0.5" />
-          </pattern>
-          <pattern id="sg2" width="24" height="24" patternUnits="userSpaceOnUse">
-            <path d="M12,1 L23,12 L12,23 L1,12 Z" fill="none" stroke="rgba(255,255,255,0.28)" strokeWidth="0.8" />
-            <path d="M12,7 L17,12 L12,17 L7,12 Z" fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth="0.5" />
-            <circle cx="12" cy="12" r="1.8" fill="rgba(255,255,255,0.55)" />
-            <circle cx="12" cy="1"  r="1" fill="rgba(255,255,255,0.4)" />
-            <circle cx="23" cy="12" r="1" fill="rgba(255,255,255,0.4)" />
-            <circle cx="12" cy="23" r="1" fill="rgba(255,255,255,0.4)" />
-            <circle cx="1"  cy="12" r="1" fill="rgba(255,255,255,0.4)" />
-          </pattern>
-          <pattern id="sg3" width="48" height="48" patternUnits="userSpaceOnUse">
-            <path d="M24,3 L45,24 L24,45 L3,24 Z" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1" />
-            <line x1="24" y1="16" x2="24" y2="32" stroke="rgba(255,255,255,0.2)" strokeWidth="0.6" />
-            <line x1="16" y1="24" x2="32" y2="24" stroke="rgba(255,255,255,0.2)" strokeWidth="0.6" />
-            <circle cx="24" cy="24" r="4"   fill="rgba(255,255,255,0.5)" />
-            <circle cx="24" cy="24" r="2.2" fill="#3d1a06" />
-            <circle cx="24" cy="24" r="1"   fill="rgba(255,255,255,0.6)" />
-            <polygon points="24,6 25.5,10 24,14 22.5,10" fill="rgba(255,255,255,0.35)" />
-            <polygon points="42,24 38,25.5 34,24 38,22.5" fill="rgba(255,255,255,0.35)" />
-            <polygon points="24,42 25.5,38 24,34 22.5,38" fill="rgba(255,255,255,0.35)" />
-            <polygon points="6,24 10,25.5 14,24 10,22.5"  fill="rgba(255,255,255,0.35)" />
-            <circle cx="24" cy="3"  r="1.5" fill="rgba(255,255,255,0.5)" />
-            <circle cx="45" cy="24" r="1.5" fill="rgba(255,255,255,0.5)" />
-            <circle cx="24" cy="45" r="1.5" fill="rgba(255,255,255,0.5)" />
-            <circle cx="3"  cy="24" r="1.5" fill="rgba(255,255,255,0.5)" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#sg1)" />
-        <rect width="100%" height="100%" fill="url(#sg2)" />
-        <rect width="100%" height="100%" fill="url(#sg3)" opacity="0.85" />
-      </svg>
-      <div className={borderClass} />
-    </div>
-  );
-}
 
 /* ── slot machine date ── */
 const SLOT_TARGET = 'AHAD | 03 . 01 . 27';
@@ -474,7 +416,7 @@ const PETAL_COLORS = [
   { base: '#c8a8e8', inner: '#e0c8f8' }, // light purple
 ];
 
-const PETALS = Array.from({ length: 18 }, (_, i) => ({
+const PETALS = Array.from({ length: 32 }, (_, i) => ({
   id: i,
   left: `${(i * 5.7 + Math.sin(i * 1.3) * 8 + 50) % 100}%`,
   delay: `${(i * 0.55) % 8}s`,
@@ -654,6 +596,8 @@ export default function EInvitePage() {
                   <span className={styles.bookSpineText}>Lin &amp; Azbin · 03.01.2027</span>
                 </div>
                 <div className={styles.bookFront}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/e-invite/template_bunga_purple/image1.png" alt="" aria-hidden="true" className={styles.bookCoupleImg} />
                   <div className={styles.bookFrame}>
                     {(['tl','tr','bl','br'] as const).map(c => (
                       <svg key={c} className={`${styles.bookCorner} ${styles['bookCorner_'+c]}`} width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -743,32 +687,32 @@ export default function EInvitePage() {
           <img src="/e-invite/template_bunga_purple/3.png" alt="" aria-hidden="true" style={{ display: 'block', width: '100%', pointerEvents: 'none' }} />
           <div className={d.infoGridOverlay}>
             <div className={d.infoGrid}>
-              {/* Row 1: Date — full width */}
-              <div className={d.infoDateRow}>
+              {/* Date hero */}
+              <div className={d.dateHero}>
                 <Reveal><p className={d.dayLabel}>AHAD</p></Reveal>
                 <Reveal delay={80}><p className={d.dayNumber}>03</p></Reveal>
                 <Reveal delay={160}><p className={d.monthYear}>Januari 2027</p></Reveal>
                 <Reveal delay={220}><p className={d.hijriSmall}>24 Rejab 1448H</p></Reveal>
               </div>
-              {/* Row 2: Aturcara | Lokasi */}
-              <div className={d.infoCol}>
+              <div className={d.heroDivider} />
+              {/* Glass cards */}
+              <div className={d.infoCards}>
                 <Reveal>
-                  <p className={d.infoLabel}>Aturcara Majlis</p>
-                  <p className={d.infoValue}>
-                    <span className={d.infoValueBold}>11.00 pagi</span> hingga <span className={d.infoValueBold}>4.00 petang</span>
-                  </p>
+                  <div className={d.infoCard}>
+                    <p className={d.infoCardIcon}>🕐</p>
+                    <p className={d.infoCardLabel}>Aturcara Majlis</p>
+                    <p className={d.infoCardValue}>11.00 pagi<br />hingga<br />4.00 petang</p>
+                  </div>
                 </Reveal>
-              </div>
-              <div className={`${d.infoCol} ${d.infoColRight}`}>
-                <Reveal delay={100}><p className={d.infoLabel}>Lokasi</p></Reveal>
-                <Reveal delay={160}>
-                  <div onClick={() => setShowMap(true)} style={{ cursor: 'pointer' }}>
-                    <p className={d.venueName}><span className={d.venuePin}>📍</span><span style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>Rumah Abang Jamil</span></p>
-                    <p className={d.venueAddr} style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>29, Jalan Raja Dihilir,<br />30350 Ipoh, Perak</p>
+                <Reveal delay={120}>
+                  <div className={d.infoCard} onClick={() => setShowMap(true)} style={{ cursor: 'pointer' }}>
+                    <p className={d.infoCardIcon}>📍</p>
+                    <p className={d.infoCardLabel}>Lokasi</p>
+                    <p className={d.infoCardValue} style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>Rumah Abang Jamil<br />29, Jalan Raja Dihilir<br />30350 Ipoh, Perak</p>
                   </div>
                 </Reveal>
               </div>
-              {/* Row 3: Countdown — full width */}
+              {/* Countdown */}
               <div className={d.countdownRow}>
                 <Reveal><Countdown /></Reveal>
               </div>

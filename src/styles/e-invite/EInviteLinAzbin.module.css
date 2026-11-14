@@ -79,45 +79,6 @@
   transform: scale(1);
 }
 
-/* ---- Songket strip ---- */
-.songket {
-  position: absolute;
-  z-index: 1;
-  overflow: hidden;
-  background: #2a1005;
-}
-
-.songketLeft   { top: 0; left: 0;   width: 18%; height: 100%; z-index: 2; }
-.songketRight  { top: 0; right: 0;  width: 18%; height: 100%; }
-.songketTop    { top: 0; left: 0;   width: 100%; height: 60px; }
-.songketBottom { bottom: 0; left: 0; width: 100%; height: 60px; }
-
-/* borders facing inward */
-.songketBorderRight {
-  position: absolute; top: 0; right: 0; width: 14px; height: 100%;
-  background: linear-gradient(to right,
-    transparent 0, rgba(255,255,255,0.15) 0, rgba(255,255,255,0.15) 1px,
-    transparent 1px, transparent 4px,
-    rgba(255,255,255,0.4) 4px, rgba(255,255,255,0.4) 6px,
-    transparent 6px, transparent 10px,
-    rgba(255,255,255,0.78) 10px, rgba(255,255,255,0.78) 13px, transparent 13px
-  );
-}
-
-.songketBorderLeft {
-  position: absolute; top: 0; left: 0; width: 14px; height: 100%;
-  background: linear-gradient(to left,
-    transparent 0, rgba(255,255,255,0.15) 0, rgba(255,255,255,0.15) 1px,
-    transparent 1px, transparent 4px,
-    rgba(255,255,255,0.4) 4px, rgba(255,255,255,0.4) 6px,
-    transparent 6px, transparent 10px,
-    rgba(255,255,255,0.78) 10px, rgba(255,255,255,0.78) 13px, transparent 13px
-  );
-}
-
-.songketBorderBottom { display: none; }
-.songketBorderTop    { display: none; }
-
 /* ---- Main content ---- */
 .content {
   position: relative;
@@ -715,15 +676,6 @@
   user-select: none;
 }
 
-/* ---- Songket reveal ---- */
-@keyframes songketFadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-.songketReveal {
-  animation: songketFadeIn 4s ease 0.2s both;
-}
 
 /* ---- Cover text hidden before open ---- */
 .coverHidden {
@@ -755,6 +707,8 @@
   justify-content: center;
   background: #c4b8ec;
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .splashDone {
@@ -780,7 +734,6 @@
   position: absolute;
   inset: 0;
   perspective: 1400px;
-  filter: drop-shadow(-6px 12px 32px rgba(0,0,0,0.7)) drop-shadow(0px 4px 8px rgba(0,0,0,0.5));
 }
 
 @keyframes bookOpen {
@@ -874,6 +827,18 @@
 .bookFront > * {
   position: relative;
   z-index: 1;
+}
+
+.bookCoupleImg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  /* height: 50%; */
+  opacity: 0.18;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .bookFrame {
