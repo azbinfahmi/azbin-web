@@ -4,6 +4,32 @@
   color: #3d1a06;
 }
 
+/* ---- Falling petals ---- */
+@keyframes petalFall {
+  0%   { transform: translateY(-40px) rotate(0deg) translateX(0); opacity: 0; }
+  10%  { opacity: 0.8; }
+  50%  { transform: translateY(50vh) rotate(180deg) translateX(18px); }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(105vh) rotate(360deg) translateX(-10px); opacity: 0; }
+}
+
+.petalsContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -30px;
+  animation: petalFall linear infinite;
+}
+
 @media (min-width: 768px) {
   .page {
     max-width: 480px;
@@ -159,6 +185,8 @@
   width: 100%;
   overflow: visible;
   margin: 10px 0;
+  position: relative;
+  z-index: 2;
 }
 
 .monoFirst {
@@ -167,7 +195,7 @@
   color: #5a2008;
   text-shadow: 1px 2px 4px rgba(255,255,255,0.4);
   position: relative;
-  z-index: 1;
+  z-index: 2;
   line-height: 1;
 }
 
@@ -177,6 +205,7 @@
   color: #5a2008;
   text-shadow: 1px 2px 4px rgba(255,255,255,0.4);
   position: relative;
+  z-index: 2;
   margin-left: clamp(-10px, -2vw, -20px);
   line-height: 1;
 }
@@ -657,6 +686,33 @@
 .coverItem7 { animation: coverFadeUp 0.6s ease 1.95s both; }
 .coverItem8 { animation: coverFadeUp 0.6s ease 2.08s both; }
 .coverItem9 { animation: coverFadeUp 0.6s ease 2.18s both; }
+.coverItem10 { animation: coupleReveal 1.6s cubic-bezier(0.22, 1, 0.36, 1) 2.5s both; }
+
+@keyframes coupleReveal {
+  0%   { opacity: 0; clip-path: inset(0 0 100% 0); }
+  30%  { opacity: 1; }
+  100% { opacity: 1; clip-path: inset(0 0 0% 0); }
+}
+
+.monoWithCouple {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.coupleImg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scaleX(-1);
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
+}
 
 /* ---- Songket reveal ---- */
 @keyframes songketFadeIn {

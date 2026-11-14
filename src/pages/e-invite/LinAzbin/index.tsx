@@ -444,7 +444,7 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 }
 
 /* ── countdown ── */
-const WEDDING_DATE = new Date('2027-01-09T11:30:00+08:00');
+const WEDDING_DATE = new Date('2027-01-03T11:00:00+08:00');
 
 function Countdown() {
   const calc = () => {
@@ -536,6 +536,40 @@ function FlowerCorner({ corner }: { corner: 'tl' | 'tr' | 'bl' | 'br' }) {
         <circle cx="6"  cy="44" r="1.5" fill="#c8a84b" opacity="0.7"/>
         <circle cx="50" cy="36" r="1.5" fill="#c8a84b" opacity="0.7"/>
       </svg>
+    </div>
+  );
+}
+
+/* ── falling petals ── */
+const PETAL_COLORS = [
+  { base: '#a8c8f0', inner: '#c8e0f8' }, // light blue
+  { base: '#c8a8e8', inner: '#e0c8f8' }, // light purple
+];
+
+const PETALS = Array.from({ length: 18 }, (_, i) => ({
+  id: i,
+  left: `${(i * 5.7 + Math.sin(i * 1.3) * 8 + 50) % 100}%`,
+  delay: `${(i * 0.55) % 8}s`,
+  duration: `${6 + (i * 0.7) % 5}s`,
+  size: 10 + (i % 4) * 3,
+  rotate: (i * 37) % 360,
+  color: PETAL_COLORS[i % 2],
+}));
+
+function FallingPetals() {
+  return (
+    <div className={styles.petalsContainer} aria-hidden="true">
+      {PETALS.map(p => (
+        <svg
+          key={p.id}
+          className={styles.petal}
+          style={{ left: p.left, animationDelay: p.delay, animationDuration: p.duration, width: p.size, height: p.size }}
+          viewBox="0 0 20 20"
+        >
+          <ellipse cx="10" cy="10" rx="5" ry="9" fill={p.color.base} opacity="0.75" transform={`rotate(${p.rotate} 10 10)`} />
+          <ellipse cx="10" cy="10" rx="4" ry="8" fill={p.color.inner} opacity="0.5" transform={`rotate(${p.rotate + 45} 10 10)`} />
+        </svg>
+      ))}
     </div>
   );
 }
@@ -718,21 +752,25 @@ export default function EInvitePage() {
       )}
 
       <div className={styles.page}>
+        {opened && <FallingPetals />}
 
         {/* ── SECTION 1: cover ── */}
         <div className={styles.cover}>
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/e-invite/template_bunga_purple/1.png" alt="" className={`${styles.coverBg} ${opened ? styles.coverBgReveal : styles.coverBgHidden}`} aria-hidden="true" />
-
           <div className={styles.content}>
             <h2 className={`${styles.majlis} ${opened ? styles.coverItem1 : styles.coverHidden}`}>MAJLIS</h2>
             <h2 className={`${styles.perkahwinan} ${opened ? styles.coverItem2 : styles.coverHidden}`}>PERKAHWINAN</h2>
             <div className={opened ? styles.coverItem3 : styles.coverHidden}><Divider /></div>
-            <span className={`${styles.monogramWrap} ${opened ? styles.coverItem4 : styles.coverHidden}`}>
-              <span className={styles.monoFirst}>L</span>
-              <span className={styles.monoSecond}>A</span>
-            </span>
+            <div className={styles.monoWithCouple}>
+              <span className={`${styles.monogramWrap} ${opened ? styles.coverItem4 : styles.coverHidden}`}>
+                <span className={styles.monoFirst}>L</span>
+                <span className={styles.monoSecond}>A</span>
+              </span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/e-invite/template_bunga_purple/image1.png" alt="" aria-hidden="true" className={`${styles.coupleImg} ${opened ? styles.coverItem10 : styles.coverHidden}`} />
+            </div>
             <div className={`${styles.namesRow} ${opened ? styles.coverItem5 : styles.coverHidden}`}>
               <h1 className={styles.names}>LIN &amp; AZBIN</h1>
             </div>
