@@ -686,7 +686,7 @@
 .coverItem7 { animation: coverFadeUp 0.6s ease 1.95s both; }
 .coverItem8 { animation: coverFadeUp 0.6s ease 2.08s both; }
 .coverItem9 { animation: coverFadeUp 0.6s ease 2.18s both; }
-.coverItem10 { animation: coupleReveal 1.6s cubic-bezier(0.22, 1, 0.36, 1) 2.5s both; }
+.coverItem10 { animation: coupleReveal 3s cubic-bezier(0.22, 1, 0.36, 1) 2.5s both; }
 
 @keyframes coupleReveal {
   0%   { opacity: 0; clip-path: inset(0 0 100% 0); }
@@ -705,7 +705,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scaleX(-1);
+  transform: translate(-50%, -50%);
   width: 400px;
   height: 400px;
   object-fit: contain;
