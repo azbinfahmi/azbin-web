@@ -822,17 +822,11 @@ export default function EInvitePage() {
             <img src="/e-invite/bismillah.png" alt="Bismillah" className={d.bismillah} />
           </Reveal>
           <Reveal delay={200}>
-            <p className={d.doaArabic}>
-              وَأَنكِحُوا الْأَيَامَىٰ مِنكُمْ وَالصَّالِحِينَ مِنْ عِبَادِكُمْ وَإِمَائِكُمْ ۚ إِن يَكُونُوا فُقَرَاءَ يُغْنِهِمُ اللَّهُ مِن فَضْلِهِ ۗ وَاللَّهُ وَاسِعٌ عَلِيمٌ
-            </p>
-          </Reveal>
-          <Reveal delay={500}>
             <p className={d.doaText}>
-              Dan kahwinkanlah orang-orang bujang (lelaki dan perempuan) dalam kalangan kamu, dan orang-orang yang soleh daripada hamba-hamba kamu, lelaki dan perempuan.
-              Jika mereka miskin, Allah akan memberi kekayaan kepada mereka daripada limpah kurnia-Nya.
-              Dan Allah Maha Luas (rahmat-Nya dan pemberian-Nya), lagi Maha Mengetahui.
+              Ya Allah, jadikanlah perkahwinan kedua mempelai ini sebagai permulaan kepada sebuah kembara cinta yang diredhai.
+              Lapangkanlah dada mereka untuk saling menerima, kuatkanlah hati mereka untuk saling setia,
+              dan jadikanlah mereka pelindung serta penyembuh buat kedukaan satu sama lain. Amin.
             </p>
-            <p className={d.doaSource}>An-Nur (24:32)</p>
           </Reveal>
         </div>
 
